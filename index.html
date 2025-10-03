@@ -65,6 +65,14 @@
             margin-bottom: 5px;
         }
         
+        .header-gif {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
         .badge {
             display: inline-block;
             background-color: rgba(255, 255, 255, 0.2);
@@ -428,6 +436,136 @@
             overflow: hidden;
         }
         
+        /* গেমস স্টাইল */
+        .game-container {
+            margin: 15px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 15px;
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .game-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .game-info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .game-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: #0a0a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .jump-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .level-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .level-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--text-muted);
+            cursor: pointer;
+        }
+        
+        .level-dot.active {
+            background-color: var(--primary-color);
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        
+        .game-stats-item {
+            text-align: center;
+        }
+        
+        .game-stats-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .game-stats-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .game-rules {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid var(--warning-color);
+            border-radius: 5px;
+        }
+        
+        .game-rules h4 {
+            margin-bottom: 5px;
+            color: var(--warning-color);
+        }
+        
+        .game-rules ul {
+            padding-left: 20px;
+            font-size: 14px;
+        }
+        
+        .game-rules li {
+            margin-bottom: 5px;
+        }
+        
         /* ওয়েবসাইট ভিজিট কার্ড স্টাইল */
         .website-card, .task-card, .bonus-card {
             margin-bottom: 15px;
@@ -455,33 +593,6 @@
         
         .website-card .reward i, .task-card .reward i, .bonus-card .reward i {
             margin-right: 5px;
-        }
-        
-        .timer-container {
-            margin-top: 15px;
-            text-align: center;
-            display: none;
-        }
-        
-        .timer {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        
-        .timer-message {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        
-        .visit-stats {
-            display: flex;
-            justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
         }
         
         .warning-box {
@@ -512,11 +623,6 @@
         
         .telegram-channel-list a:hover {
             text-decoration: underline;
-        }
-        
-        .check-balance-btn {
-            display: none;
-            margin-top: 15px;
         }
         
         /* সাপোর্ট চ্যাট স্টাইল */
@@ -772,6 +878,7 @@
             .nav-item { font-size: 10px; padding: 5px; }
             .nav-item i { font-size: 18px; }
             .chat-popup { width: 300px; right: 10px; }
+            .game-canvas-container { height: 250px; }
         }
     </style>
 </head>
@@ -779,7 +886,10 @@
     <div class="container">
         <div class="header">
             <h1>টাকা আয় করুন - বিজ্ঞাপন দেখুন</h1>
-            <p>বিজ্ঞাপন দেখে এবং ওয়েবসাইট ভিজিট করে আয় করুন</p>
+            <p>বিজ্ঞাপন দেখে এবং গেমস খেলে আয় করুন</p>
+            <div class="header-gif">
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU3bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF" style="width:100%; height:auto; border-radius:10px;">
+            </div>
             <div class="badge">সক্রিয়</div>
         </div>
         
@@ -888,7 +998,7 @@
             <div class="rate-info">
                 <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
                 <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
-                <p><i class="fas fa-globe"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
+                <p><i class="fas fa-gamepad"></i> প্রতি ১ ঘন্টা গেমস খেলা = 2 টাকা</p>
             </div>
         </div>
         
@@ -925,8 +1035,73 @@
             
             <div class="rate-info">
                 <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
-                <p><i class="fas fa-globe"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
+                <p><i class="fas fa-gamepad"></i> প্রতি ১ ঘন্টা গেমস খেলা = 2 টাকা</p>
                 <p><i class="fas fa-gift"></i> ডেইলি বোনাস = ３ টাকা (প্রতি ３ দিন পরপর)</p>
+            </div>
+        </div>
+        
+        <!-- গেমস পেজ -->
+        <div class="page-section" id="games-page">
+            <h3 class="section-title"><i class="fas fa-gamepad"></i> গেমস খেলে আয় করুন</h3>
+            
+            <div class="game-container">
+                <div class="game-header">
+                    <h3>লাফিয়ে চলা গেম</h3>
+                    <div class="game-info">
+                        <div class="game-info-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="game-timer">০০:০০:০০</span>
+                        </div>
+                        <div class="game-info-item">
+                            <i class="fas fa-coins"></i>
+                            <span id="game-earnings">0.00 টাকা</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-canvas-container">
+                    <canvas id="game-canvas"></canvas>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="jump-btn" id="jump-btn">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+                
+                <div class="level-indicator">
+                    <div class="level-dot active" data-level="1"></div>
+                    <div class="level-dot" data-level="2"></div>
+                    <div class="level-dot" data-level="3"></div>
+                    <div class="level-dot" data-level="4"></div>
+                    <div class="level-dot" data-level="5"></div>
+                </div>
+                
+                <div class="game-stats">
+                    <div class="game-stats-item">
+                        <div class="game-stats-value" id="game-score">0</div>
+                        <div class="game-stats-label">স্কোর</div>
+                    </div>
+                    <div class="game-stats-item">
+                        <div class="game-stats-value" id="game-level">1</div>
+                        <div class="game-stats-label">লেভেল</div>
+                    </div>
+                    <div class="game-stats-item">
+                        <div class="game-stats-value" id="game-playtime">0</div>
+                        <div class="game-stats-label">মিনিট</div>
+                    </div>
+                </div>
+                
+                <div class="game-rules">
+                    <h4>গেমস নিয়মাবলী:</h4>
+                    <ul>
+                        <li>লাফ বাটনে ক্লিক করুন বা স্পেস বাটন চাপুন চরিত্রকে লাফ দিতে</li>
+                        <li>রাস্তায় থাকতে হবে এবং বাধা এড়িয়ে চলতে হবে</li>
+                        <li>প্রতি ১ ঘন্টা গেম খেলার জন্য 2 টাকা পাবেন</li>
+                        <li>গেম থেকে বের হলে টাইমার থেমে যাবে</li>
+                        <li>শুধুমাত্র ১ ঘন্টা পূর্ণ করলেই টাকা পাবেন</li>
+                    </ul>
+                </div>
             </div>
         </div>
         
@@ -976,94 +1151,6 @@
             </div>
         </div>
         
-        <!-- ওয়েবসাইট ভিজিট পেজ -->
-        <div class="page-section" id="visit-page">
-            <h3 class="section-title"><i class="fas fa-globe"></i> ওয়েবসাইট ভিজিট করুন</h3>
-            
-            <div class="visit-stats">
-                <div>আজ ভিজিট: <strong id="today-visits">0</strong></div>
-                <div>মোট ভিজিট: <strong id="total-visits">0</strong></div>
-                <div>আয়: <strong id="visit-earnings">0.00</strong> টাকা</div>
-            </div>
-            
-            <div class="website-card">
-                <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট １</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
-                <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
-                </div>
-                <button class="btn btn-primary" onclick="visitWebsite('', 1)">
-                    <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
-                </button>
-                <div class="timer-container" id="timer-1">
-                    <div class="timer" id="countdown-1">৬০</div>
-                    <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
-                </div>
-                <button class="btn btn-success check-balance-btn" id="check-balance-1" onclick="checkBalance(1)">
-                    <i class="fas fa-check-circle"></i> চেক ব্যালেন্স
-                </button>
-            </div>
-            
-            <div class="website-card">
-                <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট ２</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
-                <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
-                </div>
-                <button class="btn btn-primary" onclick="visitWebsite('', 2)">
-                    <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
-                </button>
-                <div class="timer-container" id="timer-2">
-                    <div class="timer" id="countdown-2">৬০</div>
-                    <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
-                </div>
-                <button class="btn btn-success check-balance-btn" id="check-balance-2" onclick="checkBalance(2)">
-                    <i class="fas fa-check-circle"></i> চেক ব্যালেন্স
-                </button>
-            </div>
-            
-            <div class="website-card">
-                <h3>সাদিয়া পোস্ট - হোম পেজ</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
-                <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
-                </div>
-                <button class="btn btn-primary" onclick="visitWebsite('', 3)">
-                    <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
-                </button>
-                <div class="timer-container" id="timer-3">
-                    <div class="timer" id="countdown-3">৬০</div>
-                    <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
-                </div>
-                <button class="btn btn-success check-balance-btn" id="check-balance-3" onclick="checkBalance(3)">
-                    <i class="fas fa-check-circle"></i> চেক ব্যালেন্স
-                </button>
-            </div>
-            
-            <div class="website-card">
-                <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট ３</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
-                <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
-                </div>
-                <button class="btn btn-primary" onclick="visitWebsite('', 4)">
-                    <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
-                </button>
-                <div class="timer-container" id="timer-4">
-                    <div class="timer" id="countdown-4">৬০</div>
-                    <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
-                </div>
-                <button class="btn btn-success check-balance-btn" id="check-balance-4" onclick="checkBalance(4)">
-                    <i class="fas fa-check-circle"></i> চেক ব্যালেন্স
-                </button>
-            </div>
-            
-            <div class="rate-info">
-                <p><i class="fas fa-info-circle"></i> নির্দেশনা: ওয়েবসাইট ভিজিট করে ১ মিনিট পর ফিরে আসুন এবং চেক ব্যালেন্স বাটনে ক্লিক করুন</p>
-                <p><i class="fas fa-coins"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
-            </div>
-        </div>
-        
         <!-- টাস্ক পেজ -->
         <div class="page-section" id="task-page">
             <h3 class="section-title"><i class="fas fa-tasks"></i> টাস্ক সম্পন্ন করুন</h3>
@@ -1101,8 +1188,8 @@
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-link"></i> নতুন ফিচার</h3>
-                    <p>ডাইরেক্ট লিংক ক্লিক সিস্টেম চালু হয়েছে। এখন থেকে লিংক ক্লিক করে অতিরিক্ত টাকা আয় করুন।</p>
+                    <h3><i class="fas fa-gamepad"></i> নতুন ফিচার</h3>
+                    <p>গেমস সিস্টেম চালু হয়েছে। এখন থেকে গেমস খেলে প্রতি ঘন্টায় ২ টাকা আয় করতে পারবেন।</p>
                     <small>আজ</small>
                 </div>
                 
@@ -1113,8 +1200,8 @@
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-globe"></i> নতুন ফিচার</h3>
-                    <p>ওয়েবসাইট ভিজিট করে টাকা আয়ের নতুন অপশন যুক্ত করা হয়েছে। এখন থেকে ব্লগ পোস্ট ভিজিট করে অতিরিক্ত টাকা আয় করুন।</p>
+                    <h3><i class="fas fa-link"></i> নতুন ফিচার</h3>
+                    <p>ডাইরেক্ট লিংক ক্লিক সিস্টেম চালু হয়েছে। এখন থেকে লিংক ক্লিক করে অতিরিক্ত টাকা আয় করুন।</p>
                     <small>আজ</small>
                 </div>
                 
@@ -1141,9 +1228,9 @@
             <i class="fas fa-coins"></i>
             <span>আর্ন</span>
         </a>
-        <a href="#" class="nav-item" onclick="showPage('visit-page', this)">
-            <i class="fas fa-globe"></i>
-            <span>ভিজিট</span>
+        <a href="#" class="nav-item" onclick="showPage('games-page', this)">
+            <i class="fas fa-gamepad"></i>
+            <span>গেমস</span>
         </a>
         <a href="#" class="nav-item" onclick="showPage('task-page', this)">
             <i class="fas fa-tasks"></i>
@@ -1187,11 +1274,10 @@
         // Constants
         const CENTS_PER_AD = 10; // প্রতি বিজ্ঞাপনে 10 পয়সা
         const CENTS_TO_TAKA_RATE = 100; // 100 পয়সা = 1 টাকা
-        const CENTS_PER_VISIT = 50; // প্রতি ওয়েবসাইট ভিজিটে 50 পয়সা
+        const GAME_EARNING_PER_HOUR = 2.00; // প্রতি ঘন্টা গেম খেলার জন্য 2 টাকা
         const MIN_WITHDRAW_TAKA = 30; // ন্যূনতম উত্তোলন 30 টাকা
         const DAILY_BONUS_AMOUNT = 3.00; // ডেইলি বোনাস 3 টাকা
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-        const VISIT_TIME_REQUIRED = 60; // 1 minute in seconds (পরিবর্তিত)
         const AD_LIMIT = 200; // বিজ্ঞাপন দেখার লিমিট
         const AD_COOLDOWN = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
@@ -1213,11 +1299,14 @@
         let lastBonusClaimTime = 0;
         let bonusCooldownRemaining = 0;
         
-        // ওয়েবসাইট ভিজিট সম্পর্কিত ভেরিয়েবল
-        let visitedWebsites = 0;
-        let totalVisits = 0;
-        let visitEarnings = 0.00;
-        let websiteTimers = {}; // প্রতিটি ওয়েবসাইটের জন্য আলাদা টাইমার
+        // গেম সম্পর্কিত ভেরিয়েবল
+        let gameEarnings = 0.00;
+        let gamePlayTime = 0; // সেকেন্ডে
+        let gameTimer = null;
+        let isGameActive = false;
+        let gameStartTime = 0;
+        let gameLevel = 1;
+        let gameScore = 0;
         
         // বিজ্ঞাপন লিমিটেশন সম্পর্কিত ভেরিয়েবল
         let adLimitReached = false;
@@ -1230,6 +1319,28 @@
         // উত্তোলনের ইতিহাস
         let withdrawHistory = [];
 
+        // গেম ভেরিয়েবল
+        let canvas, ctx;
+        let player = {
+            x: 50,
+            y: 250,
+            width: 30,
+            height: 30,
+            speedY: 0,
+            gravity: 0.5,
+            jumpPower: -12,
+            isJumping: false
+        };
+        
+        let platforms = [];
+        let obstacles = [];
+        let gameSpeed = 3;
+        let isGameRunning = false;
+        let lastPlatformX = 0;
+        let platformGap = 200;
+        let obstacleGap = 400;
+        let lastObstacleX = 0;
+        
         // Initialize the app
         function initApp() {
             // Set user info
@@ -1244,9 +1355,6 @@
             // টাইমার শুরু করুন
             startTimers();
             
-            // Check for pending visit rewards
-            checkPendingVisitRewards();
-            
             // বোনাস সিস্টেম চেক করুন
             updateBonusButton();
             
@@ -1258,6 +1366,9 @@
             
             // উত্তোলনের ইতিহাস লোড করুন
             loadWithdrawHistory();
+            
+            // গেম ইনিশিয়ালাইজ করুন
+            initGame();
         }
 
         // পেজ দেখানোর ফাংশন
@@ -1289,11 +1400,11 @@
                 updateBonusButton();
             }
             
-            // ভিজিট পেজে গেলে ডেটা আপডেট করুন
-            if (pageId === 'visit-page') {
-                document.getElementById('today-visits').textContent = visitedWebsites;
-                document.getElementById('total-visits').textContent = totalVisits;
-                document.getElementById('visit-earnings').textContent = visitEarnings.toFixed(2);
+            // গেমস পেজে গেলে গেম শুরু করুন
+            if (pageId === 'games-page') {
+                startGame();
+            } else {
+                stopGame();
             }
         }
 
@@ -1332,16 +1443,12 @@
                 watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
             }
             
-            if (localStorage.getItem('visitedWebsites')) {
-                visitedWebsites = parseInt(localStorage.getItem('visitedWebsites'));
+            if (localStorage.getItem('gameEarnings')) {
+                gameEarnings = parseFloat(localStorage.getItem('gameEarnings'));
             }
             
-            if (localStorage.getItem('totalVisits')) {
-                totalVisits = parseInt(localStorage.getItem('totalVisits'));
-            }
-            
-            if (localStorage.getItem('visitEarnings')) {
-                visitEarnings = parseFloat(localStorage.getItem('visitEarnings'));
+            if (localStorage.getItem('gamePlayTime')) {
+                gamePlayTime = parseInt(localStorage.getItem('gamePlayTime'));
             }
             
             if (localStorage.getItem('lastBonusClaimTime')) {
@@ -1367,32 +1474,11 @@
             const today = new Date().toDateString();
             
             if (lastVisitDate !== today) {
-                visitedWebsites = 0;
                 watchedAdsCount = 0; // রিসেট বিজ্ঞাপন কাউন্টার
                 adLimitReached = false; // রিসেট বিজ্ঞাপন লিমিট
                 localStorage.setItem('lastVisitDate', today);
-                localStorage.setItem('visitedWebsites', visitedWebsites);
                 localStorage.setItem('watchedAdsCount', watchedAdsCount);
                 localStorage.setItem('adLimitReached', adLimitReached);
-            }
-            
-            // Load website visit timers
-            for (let i = 1; i <= 4; i++) {
-                const timerData = localStorage.getItem(`website_timer_${i}`);
-                if (timerData) {
-                    const { startTime, remaining } = JSON.parse(timerData);
-                    const elapsed = Date.now() - startTime;
-                    const newRemaining = Math.max(0, remaining - elapsed);
-                    
-                    if (newRemaining > 0) {
-                        // টাইমার পুনরায় শুরু করুন
-                        startWebsiteTimer(i, newRemaining);
-                    } else {
-                        // টাইমার শেষ, চেক ব্যালেন্স বাটন দেখান
-                        document.getElementById(`check-balance-${i}`).style.display = 'block';
-                        localStorage.removeItem(`website_timer_${i}`);
-                    }
-                }
             }
             
             // চ্যাট মেসেজ লোড করুন
@@ -1407,9 +1493,8 @@
             localStorage.setItem('userCents', userCents);
             localStorage.setItem('earnedCents', earnedCents.toFixed(2));
             localStorage.setItem('watchedAdsCount', watchedAdsCount);
-            localStorage.setItem('visitedWebsites', visitedWebsites);
-            localStorage.setItem('totalVisits', totalVisits);
-            localStorage.setItem('visitEarnings', visitEarnings.toFixed(2));
+            localStorage.setItem('gameEarnings', gameEarnings.toFixed(2));
+            localStorage.setItem('gamePlayTime', gamePlayTime);
             localStorage.setItem('lastBonusClaimTime', lastBonusClaimTime);
             localStorage.setItem('adLimitReached', adLimitReached);
             localStorage.setItem('adLimitStartTime', adLimitStartTime);
@@ -1422,16 +1507,17 @@
             document.getElementById('user-points').textContent = userCents;
             document.getElementById('user-balance').textContent = (userCents / CENTS_TO_TAKA_RATE).toFixed(2);
             document.getElementById('earned-money').textContent = calculateTotalEarnings().toFixed(2);
-            document.getElementById('today-visits').textContent = visitedWebsites;
-            document.getElementById('total-visits').textContent = totalVisits;
-            document.getElementById('visit-earnings').textContent = visitEarnings.toFixed(2);
             document.getElementById('ads-progress').textContent = `${watchedAdsCount}/${AD_LIMIT} বিজ্ঞাপন`;
             updateProgress();
+            
+            // গেমস আপডেট করুন
+            document.getElementById('game-earnings').textContent = gameEarnings.toFixed(2) + ' টাকা';
+            document.getElementById('game-playtime').textContent = Math.floor(gamePlayTime / 60);
         }
 
         // Calculate total earnings
         function calculateTotalEarnings() {
-            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + visitEarnings;
+            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + gameEarnings;
         }
 
         // Update progress bar and text
@@ -1695,11 +1781,11 @@
                 remainingCents -= earnedCentsDeduction;
             }
             
-            // Finally deduct from visitEarnings
-            if (visitEarnings > 0 && remainingCents > 0) {
-                const visitDeduction = Math.min(visitEarnings * CENTS_TO_TAKA_RATE, remainingCents);
-                visitEarnings -= visitDeduction / CENTS_TO_TAKA_RATE;
-                remainingCents -= visitDeduction;
+            // Finally deduct from gameEarnings
+            if (gameEarnings > 0 && remainingCents > 0) {
+                const gameDeduction = Math.min(gameEarnings * CENTS_TO_TAKA_RATE, remainingCents);
+                gameEarnings -= gameDeduction / CENTS_TO_TAKA_RATE;
+                remainingCents -= gameDeduction;
             }
             
             // Save and update UI
@@ -1727,7 +1813,7 @@
                              `📱 মাধ্যম: ${paymentMethod.toUpperCase()}\n` +
                              `📞 ফোন: ${phoneNumber}\n\n` +
                              `📊 দেখা বিজ্ঞাপন: ${watchedAdsCount}\n` +
-                             `🌐 ভিজিট করা ওয়েবসাইট: ${totalVisits}\n` +
+                             `🎮 গেম খেলা সময়: ${Math.floor(gamePlayTime / 60)} মিনিট\n` +
                              `💵 মোট আয়: ${totalEarnings.toFixed(2)} টাকা`;
             
             // Send to admin via Telegram
@@ -1776,118 +1862,6 @@
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 3000);
-        }
-
-        // ওয়েবসাইট ভিজিট ফাংশন (পরিবর্তিত)
-        function visitWebsite(url, websiteId) {
-            if (websiteTimers[websiteId]) {
-                showNotification('আপনি ইতিমধ্যে এই ওয়েবসাইট ভিজিট করছেন।', 'error');
-                return;
-            }
-            
-            // নতুন ট্যাবে ওয়েবসাইট খুলুন
-            window.open(url, '_blank');
-            
-            // টাইমার সেট করুন (১ মিনিট)
-            startWebsiteTimer(websiteId, VISIT_TIME_REQUIRED * 1000);
-            
-            showNotification('ওয়েবসাইট খোলা হয়েছে। ১ মিনিট পর ফিরে এসে চেক ব্যালেন্স বাটনে ক্লিক করুন।', 'info');
-        }
-
-        // ওয়েবসাইট টাইমার শুরু করুন (পরিবর্তিত)
-        function startWebsiteTimer(websiteId, duration) {
-            // টাইমার কন্টেইনার দেখান
-            document.getElementById(`timer-${websiteId}`).style.display = 'block';
-            document.getElementById(`check-balance-${websiteId}`).style.display = 'none';
-            
-            // টাইমার সেট করুন
-            const startTime = Date.now();
-            websiteTimers[websiteId] = {
-                startTime: startTime,
-                duration: duration,
-                timer: setInterval(() => {
-                    const elapsed = Date.now() - startTime;
-                    const remaining = Math.max(0, duration - elapsed);
-                    
-                    // কাউন্টডাউন আপডেট করুন
-                    document.getElementById(`countdown-${websiteId}`).textContent = Math.ceil(remaining / 1000);
-                    
-                    if (remaining <= 0) {
-                        // টাইমার শেষ
-                        clearInterval(websiteTimers[websiteId].timer);
-                        delete websiteTimers[websiteId];
-                        
-                        // টাইমার লুকান
-                        document.getElementById(`timer-${websiteId}`).style.display = 'none';
-                        
-                        // চেক ব্যালেন্স বাটন দেখান
-                        document.getElementById(`check-balance-${websiteId}`).style.display = 'block';
-                        
-                        // লোকাল স্টোরেজ থেকে টাইমার ডেটা মুছুন
-                        localStorage.removeItem(`website_timer_${websiteId}`);
-                        
-                        showNotification('১ মিনিট পূর্ণ হয়েছে! চেক ব্যালেন্স বাটনে ক্লিক করে পুরস্কার নিন।', 'success');
-                    } else {
-                        // টাইমার ডেটা সংরক্ষণ করুন
-                        localStorage.setItem(`website_timer_${websiteId}`, JSON.stringify({
-                            startTime: startTime,
-                            remaining: duration
-                        }));
-                    }
-                }, 1000)
-            };
-        }
-
-        // চেক ব্যালেন্স ফাংশন
-        function checkBalance(websiteId) {
-            // পুরস্কার দিন
-            visitedWebsites++;
-            totalVisits++;
-            userCents += CENTS_PER_VISIT;
-            
-            // Check if we have enough cents to convert to Taka
-            if (userCents >= CENTS_TO_TAKA_RATE) {
-                const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
-                earnedCents += takaEarned;
-                userCents %= CENTS_TO_TAKA_RATE;
-            }
-            
-            saveUserData();
-            updateUI();
-            
-            // চেক ব্যালেন্স বাটন লুকান
-            document.getElementById(`check-balance-${websiteId}`).style.display = 'none';
-            
-            // কয়েন অ্যানিমেশন দেখান
-            createCoinAnimation();
-            
-            showNotification(`৫০ পয়সা যোগ হয়েছে! ওয়েবসাইট ভিজিট সম্পূর্ণ। আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
-            
-            // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
-            if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
-                showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
-            }
-        }
-
-        // পেন্ডিং ভিজিট পুরস্কার চেক করুন
-        function checkPendingVisitRewards() {
-            for (let i = 1; i <= 4; i++) {
-                const timerData = localStorage.getItem(`website_timer_${i}`);
-                if (timerData) {
-                    const { startTime, remaining } = JSON.parse(timerData);
-                    const elapsed = Date.now() - startTime;
-                    const newRemaining = Math.max(0, remaining - elapsed);
-                    
-                    if (newRemaining > 0) {
-                        // টাইমার পুনরায় শুরু করুন
-                        startWebsiteTimer(i, newRemaining);
-                    } else {
-                        // টাইমার শেষ, চেক ব্যালেন্স বাটন দেখান
-                        document.getElementById(`check-balance-${i}`).style.display = 'block';
-                        localStorage.removeItem(`website_timer_${i}`);
-                    }
-                }
-            }
         }
 
         // সময় ফরম্যাট করার ফাংশন
@@ -2187,14 +2161,352 @@
             }
         }
 
+        // গেম ইনিশিয়ালাইজ করুন
+        function initGame() {
+            canvas = document.getElementById('game-canvas');
+            ctx = canvas.getContext('2d');
+            
+            // ক্যানভাস সাইজ সেট করুন
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // লেভেল ইন্ডিকেটর ইভেন্ট যোগ করুন
+            document.querySelectorAll('.level-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const level = parseInt(this.getAttribute('data-level'));
+                    changeLevel(level);
+                });
+            });
+            
+            // জাম্প বাটন ইভেন্ট যোগ করুন
+            document.getElementById('jump-btn').addEventListener('click', jump);
+            
+            // কীবোর্ড ইভেন্ট যোগ করুন
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' || e.key === ' ') {
+                    e.preventDefault();
+                    jump();
+                }
+            });
+            
+            // গেম লুপ শুরু করুন
+            gameLoop();
+        }
+
+        // গেম শুরু করুন
+        function startGame() {
+            if (!isGameRunning) {
+                isGameRunning = true;
+                isGameActive = true;
+                gameStartTime = Date.now();
+                player.y = canvas.height - 100;
+                player.speedY = 0;
+                platforms = [];
+                obstacles = [];
+                lastPlatformX = 0;
+                lastObstacleX = 0;
+                gameScore = 0;
+                
+                // প্রথম প্ল্যাটফর্ম তৈরি করুন
+                createPlatform(0, canvas.height - 50, canvas.width, 50);
+                
+                // গেম টাইমার শুরু করুন
+                gameTimer = setInterval(updateGameTimer, 1000);
+                
+                // UI আপডেট করুন
+                document.getElementById('game-score').textContent = gameScore;
+                document.getElementById('game-level').textContent = gameLevel;
+            }
+        }
+
+        // গেম বন্ধ করুন
+        function stopGame() {
+            if (isGameRunning) {
+                isGameRunning = false;
+                isGameActive = false;
+                
+                // গেম টাইমার বন্ধ করুন
+                if (gameTimer) {
+                    clearInterval(gameTimer);
+                    gameTimer = null;
+                }
+                
+                // গেম থেকে বের হলে আয় যোগ করবেন না
+                showNotification('গেম বন্ধ করা হয়েছে। আয় যোগ করা হবে না।', 'info');
+            }
+        }
+
+        // গেম টাইমার আপডেট করুন
+        function updateGameTimer() {
+            if (isGameActive) {
+                gamePlayTime++;
+                
+                // প্রতি 1 ঘন্টা (3600 সেকেন্ড) পর আয় যোগ করুন
+                if (gamePlayTime % 3600 === 0) {
+                    gameEarnings += GAME_EARNING_PER_HOUR;
+                    saveUserData();
+                    updateUI();
+                    
+                    showNotification(`১ ঘন্টা গেম খেলার জন্য ${GAME_EARNING_PER_HOUR} টাকা যোগ হয়েছে!`, 'success');
+                }
+                
+                // UI আপডেট করুন
+                document.getElementById('game-timer').textContent = formatTime(gamePlayTime * 1000);
+                document.getElementById('game-playtime').textContent = Math.floor(gamePlayTime / 60);
+            }
+        }
+
+        // গেম লুপ
+        function gameLoop() {
+            if (!isGameRunning) {
+                requestAnimationFrame(gameLoop);
+                return;
+            }
+            
+            // ক্যানভাস ক্লিয়ার করুন
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // ব্যাকগ্রাউন্ড আঁকুন
+            drawBackground();
+            
+            // প্ল্যাটফর্ম আপডেট এবং আঁকুন
+            updatePlatforms();
+            
+            // বাধা আপডেট এবং আঁকুন
+            updateObstacles();
+            
+            // প্লেয়ার আপডেট করুন
+            updatePlayer();
+            
+            // প্লেয়ার আঁকুন
+            drawPlayer();
+            
+            // স্কোর আপডেট করুন
+            updateScore();
+            
+            // পরবর্তী ফ্রেমের জন্য রিকোয়েস্ট করুন
+            requestAnimationFrame(gameLoop);
+        }
+
+        // ব্যাকগ্রাউন্ড আঁকুন
+        function drawBackground() {
+            // আকাশ
+            ctx.fillStyle = '#0a0a1a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // তারা
+            ctx.fillStyle = 'white';
+            for (let i = 0; i < 50; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height * 0.7;
+                const size = Math.random() * 2;
+                ctx.fillRect(x, y, size, size);
+            }
+        }
+
+        // প্লেয়ার আঁকুন
+        function drawPlayer() {
+            ctx.fillStyle = '#4a6bff';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            
+            // প্লেয়ারের চোখ
+            ctx.fillStyle = 'white';
+            ctx.fillRect(player.x + 20, player.y + 10, 5, 5);
+        }
+
+        // প্লেয়ার আপডেট করুন
+        function updatePlayer() {
+            // গ্র্যাভিটি প্রয়োগ করুন
+            player.speedY += player.gravity;
+            player.y += player.speedY;
+            
+            // মাটিতে লাগা চেক করুন
+            let onGround = false;
+            for (const platform of platforms) {
+                if (player.y + player.height >= platform.y && 
+                    player.y + player.height <= platform.y + 10 &&
+                    player.x + player.width > platform.x && 
+                    player.x < platform.x + platform.width &&
+                    player.speedY > 0) {
+                    player.y = platform.y - player.height;
+                    player.speedY = 0;
+                    onGround = true;
+                    player.isJumping = false;
+                    break;
+                }
+            }
+            
+            // স্ক্রিনের বাইরে যাওয়া চেক করুন
+            if (player.y > canvas.height) {
+                gameOver();
+            }
+            
+            // বাধার সাথে সংঘর্ষ চেক করুন
+            for (const obstacle of obstacles) {
+                if (player.x < obstacle.x + obstacle.width &&
+                    player.x + player.width > obstacle.x &&
+                    player.y < obstacle.y + obstacle.height &&
+                    player.y + player.height > obstacle.y) {
+                    gameOver();
+                    break;
+                }
+            }
+        }
+
+        // লাফ ফাংশন
+        function jump() {
+            if (!player.isJumping && isGameRunning) {
+                player.speedY = player.jumpPower;
+                player.isJumping = true;
+            }
+        }
+
+        // প্ল্যাটফর্ম আপডেট করুন
+        function updatePlatforms() {
+            // নতুন প্ল্যাটফর্ম তৈরি করুন
+            while (lastPlatformX < canvas.width + 500) {
+                const platformWidth = 100 + Math.random() * 100;
+                const platformHeight = 20;
+                const platformX = lastPlatformX + platformGap;
+                const platformY = canvas.height - 50 - Math.random() * 100;
+                
+                createPlatform(platformX, platformY, platformWidth, platformHeight);
+                lastPlatformX = platformX + platformWidth;
+            }
+            
+            // প্ল্যাটফর্ম আঁকুন এবং সরান
+            for (let i = platforms.length - 1; i >= 0; i--) {
+                const platform = platforms[i];
+                platform.x -= gameSpeed;
+                
+                // স্ক্রিনের বাইরে গেলে সরান
+                if (platform.x + platform.width < 0) {
+                    platforms.splice(i, 1);
+                    continue;
+                }
+                
+                // প্ল্যাটফর্ম আঁকুন
+                ctx.fillStyle = '#ff7d4a';
+                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+            }
+        }
+
+        // প্ল্যাটফর্ম তৈরি করুন
+        function createPlatform(x, y, width, height) {
+            platforms.push({
+                x: x,
+                y: y,
+                width: width,
+                height: height
+            });
+        }
+
+        // বাধা আপডেট করুন
+        function updateObstacles() {
+            // নতুন বাধা তৈরি করুন
+            if (lastObstacleX < canvas.width + 500) {
+                const obstacleWidth = 30;
+                const obstacleHeight = 50;
+                const obstacleX = lastObstacleX + obstacleGap;
+                const obstacleY = canvas.height - 50 - obstacleHeight;
+                
+                obstacles.push({
+                    x: obstacleX,
+                    y: obstacleY,
+                    width: obstacleWidth,
+                    height: obstacleHeight
+                });
+                
+                lastObstacleX = obstacleX + obstacleWidth;
+            }
+            
+            // বাধা আঁকুন এবং সরান
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obstacle = obstacles[i];
+                obstacle.x -= gameSpeed;
+                
+                // স্ক্রিনের বাইরে গেলে সরান
+                if (obstacle.x + obstacle.width < 0) {
+                    obstacles.splice(i, 1);
+                    continue;
+                }
+                
+                // বাধা আঁকুন
+                ctx.fillStyle = '#dc3545';
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            }
+        }
+
+        // স্কোর আপডেট করুন
+        function updateScore() {
+            gameScore += 1;
+            document.getElementById('game-score').textContent = gameScore;
+            
+            // প্রতি 1000 স্কোরে লেভেল আপ
+            if (gameScore % 1000 === 0) {
+                changeLevel(gameLevel + 1);
+            }
+        }
+
+        // লেভেল পরিবর্তন করুন
+        function changeLevel(level) {
+            gameLevel = level;
+            document.getElementById('game-level').textContent = gameLevel;
+            
+            // লেভেল ইন্ডিকেটর আপডেট করুন
+            document.querySelectorAll('.level-dot').forEach(dot => {
+                const dotLevel = parseInt(dot.getAttribute('data-level'));
+                if (dotLevel === level) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // গেম স্পিড বাড়ান
+            gameSpeed = 3 + (level - 1) * 0.5;
+            
+            showNotification(`লেভেল ${level} এ উন্নীত! গতি বেড়েছে।`, 'info');
+        }
+
+        // গেম ওভার
+        function gameOver() {
+            isGameRunning = false;
+            isGameActive = false;
+            
+            // গেম টাইমার বন্ধ করুন
+            if (gameTimer) {
+                clearInterval(gameTimer);
+                gameTimer = null;
+            }
+            
+            showNotification(`গেম ওভার! আপনার স্কোর: ${gameScore}`, 'error');
+            
+            // 3 সেকেন্ড পর গেম পুনরায় শুরু করুন
+            setTimeout(() => {
+                if (document.getElementById('games-page').classList.contains('active')) {
+                    startGame();
+                }
+            }, 3000);
+        }
+
         // Initialize the app when page loads
         window.onload = initApp;
         
         // পেজ ভিজিবিলিটি চেক করার জন্য ইভেন্ট লিসেনার
         document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'visible') {
-                // ব্যবহারকারী ফিরে এসেছেন, পেন্ডিং টাইমার চেক করুন
-                checkPendingVisitRewards();
+            if (document.visibilityState === 'hidden') {
+                // ব্যবহারকারী অন্য ট্যাবে গেলে গেম থামান
+                if (isGameActive) {
+                    isGameActive = false;
+                    showNotification('গেম থামানো হয়েছে। আয় যোগ করা হবে না।', 'info');
+                }
+            } else if (document.visibilityState === 'visible') {
+                // ব্যবহারকারী ফিরে এসেছেন
+                if (document.getElementById('games-page').classList.contains('active') && isGameRunning) {
+                    isGameActive = true;
+                    showNotification('গেম পুনরায় শুরু হয়েছে।', 'info');
+                }
             }
         });
     </script>
