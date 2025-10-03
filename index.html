@@ -75,7 +75,7 @@
             margin-top: 10px;
         }
         
-        .user-card, .stat-card, .progress-container, .direct-link-section, .rate-info, .withdraw-section, .ad-status, .website-card, .task-card, .bonus-card {
+        .user-card, .stat-card, .progress-container, .rate-info, .withdraw-section, .ad-status, .website-card, .task-card, .bonus-card {
             background-color: var(--card-bg);
             margin: 15px;
             padding: 15px;
@@ -86,6 +86,7 @@
         .user-card {
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
         
         .user-avatar {
@@ -241,15 +242,6 @@
         .section-title i {
             margin-right: 10px;
             color: var(--secondary-color);
-        }
-        
-        .direct-link-stats {
-            display: flex;
-            justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
         }
         
         .withdraw-section { 
@@ -492,40 +484,6 @@
             margin-bottom: 15px;
         }
         
-        .direct-link-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .direct-link-info {
-            flex: 1;
-        }
-        
-        .direct-link-name {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .direct-link-url {
-            font-size: 12px;
-            color: var(--text-muted);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 200px;
-        }
-        
-        .cooldown-timer {
-            font-size: 12px;
-            color: var(--warning-color);
-            margin-top: 5px;
-        }
-        
         .warning-box {
             background-color: rgba(255, 193, 7, 0.2);
             border-left: 4px solid var(--warning-color);
@@ -733,13 +691,86 @@
             display: none;
         }
         
+        /* উত্তোলন ইতিহাস স্টাইল */
+        .withdraw-history {
+            margin: 15px;
+        }
+        
+        .withdraw-history-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .withdraw-history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .withdraw-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .withdraw-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .status-paid {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: var(--success-color);
+        }
+        
+        .withdraw-details {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        
+        .withdraw-timer {
+            font-size: 14px;
+            color: var(--warning-color);
+            font-weight: bold;
+        }
+        
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            transform: rotate(180deg);
+        }
+        
+        .balance-container {
+            display: flex;
+            align-items: center;
+        }
+        
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
             .btn { padding: 12px; font-size: 14px; }
             .nav-item { font-size: 10px; padding: 5px; }
             .nav-item i { font-size: 18px; }
-            .direct-link-url { max-width: 150px; }
             .chat-popup { width: 300px; right: 10px; }
         }
     </style>
@@ -776,10 +807,21 @@
         <!-- হোম পেজ -->
         <div class="page-section active" id="home-page">
             <div class="user-card">
-                <div class="user-avatar" id="user-avatar">U</div>
-                <div class="user-info">
-                    <h3 id="user-name">ব্যবহারকারী</h3>
-                    <p>আইডি: <span id="user-id">12345</span></p>
+                <div class="user-info-container">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <h3 id="user-name">ব্যবহারকারী</h3>
+                        <p>আইডি: <span id="user-id">12345</span></p>
+                    </div>
+                </div>
+                <div class="balance-container">
+                    <div class="user-info">
+                        <h3>ব্যালেন্স</h3>
+                        <p id="user-balance">0.00 <small>টাকা</small></p>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshBalance()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
                 </div>
             </div>
             
@@ -804,7 +846,7 @@
                 </div>
                 <div class="progress-text">
                     <span>0 টাকা</span>
-                    <span>50 টাকা</span>
+                    <span>30 টাকা</span>
                 </div>
             </div>
             
@@ -814,7 +856,7 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" id="watch-ad-btn" onclick="watchAd()">
-                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়েন্ট)
+                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়সা)
                 </button>
                 <button class="btn btn-success" id="auto-ad-btn" onclick="startAutoAds()">
                     <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
@@ -843,22 +885,10 @@
                 </center>
             </div>
             
-            <div class="direct-link-section">
-                <h3 class="section-title"><i class="fas fa-link"></i> ডাইরেক্ট লিংক</h3>
-                <div class="direct-link-stats">
-                    <div>আজ ক্লিক: <strong id="today-clicks">0</strong></div>
-                    <div>আয়: <strong id="click-earnings">0.00</strong> টাকা</div>
-                </div>
-                <p style="font-size: 14px; margin-bottom: 10px;">নিচের লিংকগুলো ভিজিট করুন এবং প্রতিটিতে ১ টাকা করে আয় করুন</p>
-                <div id="direct-links-container">
-                    <!-- ডাইরেক্ট লিংকগুলো JavaScript দিয়ে যোগ করা হবে -->
-                </div>
-            </div>
-            
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়েন্ট (10 বিজ্ঞাপন = 1 টাকা)</p>
-                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৫০ টাকা</p>
-                <p><i class="fas fa-link"></i> প্রতি ডাইরেক্ট লিংক = ১ টাকা</p>
+                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
+                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
+                <p><i class="fas fa-globe"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
             </div>
         </div>
         
@@ -868,7 +898,7 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="watchAd()">
-                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়েন্ট)
+                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়সা)
                 </button>
                 <button class="btn btn-success" id="auto-ad-btn-earn" onclick="startAutoAds()">
                     <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
@@ -876,18 +906,6 @@
                 <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="stopAutoAds()" disabled>
                     <i class="fas fa-stop"></i> বন্ধ করুন
                 </button>
-            </div>
-            
-            <div class="direct-link-section">
-                <h3 class="section-title"><i class="fas fa-link"></i> ডাইরেক্ট লিংক</h3>
-                <div class="direct-link-stats">
-                    <div>আজ ক্লিক: <strong id="today-clicks-earn">0</strong></div>
-                    <div>আয়: <strong id="click-earnings-earn">0.00</strong> টাকা</div>
-                </div>
-                <p style="font-size: 14px; margin-bottom: 10px;">নিচের লিংকগুলো ভিজিট করুন এবং প্রতিটিতে ১ টাকা করে আয় করুন</p>
-                <div id="direct-links-container-earn">
-                    <!-- ডাইরেক্ট লিংকগুলো JavaScript দিয়ে যোগ করা হবে -->
-                </div>
             </div>
             
             <div class="bonus-card">
@@ -906,8 +924,8 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়েন্ট (10 বিজ্ঞাপন = 1 টাকা)</p>
-                <p><i class="fas fa-link"></i> প্রতি ডাইরেক্ট লিংক = １ টাকা</p>
+                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
+                <p><i class="fas fa-globe"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
                 <p><i class="fas fa-gift"></i> ডেইলি বোনাস = ３ টাকা (প্রতি ３ দিন পরপর)</p>
             </div>
         </div>
@@ -924,7 +942,7 @@
             <div class="withdraw-section" id="withdraw-section">
                 <div class="form-group">
                     <label for="withdraw-amount">পরিমাণ (টাকা)</label>
-                    <input type="number" id="withdraw-amount" class="form-control" placeholder="টাকার পরিমাণ লিখুন" min="50">
+                    <input type="number" id="withdraw-amount" class="form-control" placeholder="টাকার পরিমাণ লিখুন" min="30">
                 </div>
                 <div class="form-group">
                     <label for="payment-method">পেমেন্ট মাধ্যম</label>
@@ -945,9 +963,16 @@
                 <div id="withdraw-status"></div>
             </div>
             
+            <div class="withdraw-history" id="withdraw-history">
+                <h3 class="section-title"><i class="fas fa-history"></i> উত্তোলনের ইতিহাস</h3>
+                <div id="withdraw-history-list">
+                    <!-- উত্তোলনের ইতিহাস এখানে যোগ হবে -->
+                </div>
+            </div>
+            
             <div class="rate-info">
-                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৫০ টাকা</p>
-                <p><i class="fas fa-clock"></i> উত্তোলন প্রসেসিং সময়: ２４-４８ ঘন্টা</p>
+                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
+                <p><i class="fas fa-clock"></i> উত্তোলন প্রসেসিং সময়: ২৪-৪৮ ঘন্টা</p>
             </div>
         </div>
         
@@ -963,15 +988,15 @@
             
             <div class="website-card">
                 <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট １</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ৪ ঘন্টা পর ফিরে এসে ১ টাকা পুরস্কার পান।</p>
+                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: １ টাকা
+                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
                 </div>
-                <button class="btn btn-primary" onclick="visitWebsite('https://sadiyapost.blogspot.com/2025/09/blog-post_4.html', 1)">
+                <button class="btn btn-primary" onclick="visitWebsite('', 1)">
                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
                 </button>
                 <div class="timer-container" id="timer-1">
-                    <div class="timer" id="countdown-1">১৪৪০০</div>
+                    <div class="timer" id="countdown-1">৬০</div>
                     <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
                 </div>
                 <button class="btn btn-success check-balance-btn" id="check-balance-1" onclick="checkBalance(1)">
@@ -981,15 +1006,15 @@
             
             <div class="website-card">
                 <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট ２</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ৪ ঘন্টা পর ফিরে এসে １ টাকা পুরস্কার পান।</p>
+                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: １ টাকা
+                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
                 </div>
-                <button class="btn btn-primary" onclick="visitWebsite('https://sadiyapost.blogspot.com/2025/09/bangla-new-natok-2025-parboki-ami-vulte.html', 2)">
+                <button class="btn btn-primary" onclick="visitWebsite('', 2)">
                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
                 </button>
                 <div class="timer-container" id="timer-2">
-                    <div class="timer" id="countdown-2">১৪৪০০</div>
+                    <div class="timer" id="countdown-2">৬০</div>
                     <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
                 </div>
                 <button class="btn btn-success check-balance-btn" id="check-balance-2" onclick="checkBalance(2)">
@@ -999,15 +1024,15 @@
             
             <div class="website-card">
                 <h3>সাদিয়া পোস্ট - হোম পেজ</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ৪ ঘন্টা পর ফিরে এসে １ টাকা পুরস্কার পান।</p>
+                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: １ টাকা
+                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
                 </div>
-                <button class="btn btn-primary" onclick="visitWebsite('https://sadiyapost.blogspot.com/', 3)">
+                <button class="btn btn-primary" onclick="visitWebsite('', 3)">
                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
                 </button>
                 <div class="timer-container" id="timer-3">
-                    <div class="timer" id="countdown-3">১৪৪০০</div>
+                    <div class="timer" id="countdown-3">৬০</div>
                     <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
                 </div>
                 <button class="btn btn-success check-balance-btn" id="check-balance-3" onclick="checkBalance(3)">
@@ -1017,15 +1042,15 @@
             
             <div class="website-card">
                 <h3>সাদিয়া পোস্ট - ব্লগ পোস্ট ３</h3>
-                <p>এই ব্লগ পোস্টটি পড়ুন এবং ৪ ঘন্টা পর ফিরে এসে １ টাকা পুরস্কার পান।</p>
+                <p>এই ব্লগ পোস্টটি পড়ুন এবং ১ মিনিট পর ফিরে এসে ৫০ পয়সা পুরস্কার পান।</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: １ টাকা
+                    <i class="fas fa-coins"></i> পুরস্কার: ৫০ পয়সা
                 </div>
-                <button class="btn btn-primary" onclick="visitWebsite('https://sadiyapost.blogspot.com/2025/09/blog-post_17.html', 4)">
+                <button class="btn btn-primary" onclick="visitWebsite('', 4)">
                     <i class="fas fa-external-link-alt"></i> ওয়েবসাইট ভিজিট করুন
                 </button>
                 <div class="timer-container" id="timer-4">
-                    <div class="timer" id="countdown-4">১৪৪০০</div>
+                    <div class="timer" id="countdown-4">৬০</div>
                     <div class="timer-message">সেকেন্ড পরে ফিরে আসুন এবং পুরস্কার পান</div>
                 </div>
                 <button class="btn btn-success check-balance-btn" id="check-balance-4" onclick="checkBalance(4)">
@@ -1034,8 +1059,8 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-info-circle"></i> নির্দেশনা: ওয়েবসাইট ভিজিট করে ৪ ঘন্টা পর ফিরে আসুন এবং চেক ব্যালেন্স বাটনে ক্লিক করুন</p>
-                <p><i class="fas fa-coins"></i> প্রতি ওয়েবসাইট ভিজিট = １ টাকা</p>
+                <p><i class="fas fa-info-circle"></i> নির্দেশনা: ওয়েবসাইট ভিজিট করে ১ মিনিট পর ফিরে আসুন এবং চেক ব্যালেন্স বাটনে ক্লিক করুন</p>
+                <p><i class="fas fa-coins"></i> প্রতি ওয়েবসাইট ভিজিট = ৫০ পয়সা</p>
             </div>
         </div>
         
@@ -1083,7 +1108,7 @@
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
-                    <p>উত্তোলনের জন্য ন্যূনতম ৫০ টাকা প্রয়োজন। দয়া করে উত্তোলন করার আগে নিশ্চিত হয়ে নিন।</p>
+                    <p>উত্তোলনের জন্য ন্যূনতম ৩০ টাকা প্রয়োজন। দয়া করে উত্তোলন করার আগে নিশ্চিত হয়ে নিন।</p>
                     <small>১ সপ্তাহ আগে</small>
                 </div>
                 
@@ -1160,37 +1185,24 @@
 
     <script>
         // Constants
-        const POINTS_PER_AD = 10; // প্রতি বিজ্ঞাপনে 10 পয়েন্ট
-        const POINTS_TO_TAKA_RATE = 100; // 100 পয়েন্ট = 1 টাকা
-        const POINTS_PER_VISIT = 1.00; // প্রতি ওয়েবসাইট ভিজিটে 1 টাকা
-        const POINTS_PER_CLICK = 1.00; // প্রতি ডাইরেক্ট লিংক ক্লিকে １ টাকা
-        const MIN_WITHDRAW_TAKA = 50; // ন্যূনতম উত্তোলন ５০ টাকা
-        const DAILY_BONUS_AMOUNT = 3.00; // ডেইলি বোনাস ３ টাকা
+        const CENTS_PER_AD = 10; // প্রতি বিজ্ঞাপনে 10 পয়সা
+        const CENTS_TO_TAKA_RATE = 100; // 100 পয়সা = 1 টাকা
+        const CENTS_PER_VISIT = 50; // প্রতি ওয়েবসাইট ভিজিটে 50 পয়সা
+        const MIN_WITHDRAW_TAKA = 30; // ন্যূনতম উত্তোলন 30 টাকা
+        const DAILY_BONUS_AMOUNT = 3.00; // ডেইলি বোনাস 3 টাকা
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-        const VISIT_TIME_REQUIRED = 4 * 60 * 60; // 4 hours in seconds (পরিবর্তিত)
-        const DIRECT_LINK_COOLDOWN = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
-        const AD_LIMIT = 200; // বিজ্ঞাপন দেখার লিমিট (নতুন)
-        const AD_COOLDOWN = 2 * 60 * 60 * 1000; // 2 hours in milliseconds (নতুন)
+        const VISIT_TIME_REQUIRED = 60; // 1 minute in seconds (পরিবর্তিত)
+        const AD_LIMIT = 200; // বিজ্ঞাপন দেখার লিমিট
+        const AD_COOLDOWN = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+        const WITHDRAW_PROCESSING_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         
         // Telegram Bot Configuration
         const BOT_TOKEN = "8016342023:AAFdTKlbP_kLL8Sp8lUofL8-Oi26285ytLY";
         const ADMIN_CHAT_ID = "7469964608";
         
-        // Direct Links
-        const DIRECT_LINKS = [
-            { id: 1, name: "Direct Link 1", url: "https://wwp.giriuweb.com/redirect-zone/f268d4b0" },
-            { id: 2, name: "Direct Link 2", url: "https://otieu.com/4/9901321" },
-            { id: 3, name: "Direct Link 3", url: "https://otieu.com/4/9901320" },
-            { id: 4, name: "Direct Link 4", url: "https://wwp.giriuweb.com/redirect-zone/f268d4b0" },
-            { id: 5, name: "Direct Link 5", url: "https://otieu.com/4/9140275" },
-            { id: 6, name: "Direct Link 6", url: "https://hourspaltrypointed.com/mnes2muij?key=9a12792eb983adfde924bab839f9167d" },
-            { id: 7, name: "Direct Link 7", url: "https://wwp.giriuweb.com/redirect-zone/f268d4b0" },
-            { id: 8, name: "Direct Link 8", url: "https://hourspaltrypointed.com/gcwdw20yj?key=fe33935bc9b20e0835c7c0234ccc41ab" }
-        ];
-        
         // Variables
-        let userPoints = 0; // পয়েন্ট
-        let earnedPoints = 0.00; // টাকা (পয়েন্ট থেকে কনভার্ট করা)
+        let userCents = 0; // পয়সা
+        let earnedCents = 0.00; // টাকা (পয়সা থেকে কনভার্ট করা)
         let watchedAdsCount = 0;
         let userId = generateUserId();
         let autoAdInterval;
@@ -1205,25 +1217,18 @@
         let visitedWebsites = 0;
         let totalVisits = 0;
         let visitEarnings = 0.00;
-        let activeVisitTimer = null;
-        let currentVisitUrl = null;
-        let currentVisitTimerId = null;
         let websiteTimers = {}; // প্রতিটি ওয়েবসাইটের জন্য আলাদা টাইমার
         
-        // ডাইরেক্ট লিংক সম্পর্কিত ভেরিয়েবল
-        let clickedLinks = 0;
-        let todayClicks = 0;
-        let clickEarnings = 0.00;
-        let linkCooldownTime = DIRECT_LINK_COOLDOWN;
-        let linkChangeCooldown = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
-
-        // বিজ্ঞাপন লিমিটেশন সম্পর্কিত ভেরিয়েবল (নতুন)
+        // বিজ্ঞাপন লিমিটেশন সম্পর্কিত ভেরিয়েবল
         let adLimitReached = false;
         let adLimitStartTime = 0;
         
-        // চ্যাট সিস্টেম সম্পর্কিত ভেরিয়েবল (নতুন)
+        // চ্যাট সিস্টেম সম্পর্কিত ভেরিয়েবল
         let chatMessages = [];
         let currentUser = null;
+        
+        // উত্তোলনের ইতিহাস
+        let withdrawHistory = [];
 
         // Initialize the app
         function initApp() {
@@ -1236,10 +1241,6 @@
             updateUI();
             checkAdReady();
             
-            // ডাইরেক্ট লিংক লোড করুন
-            loadDirectLinks();
-            loadDirectLinksEarnPage();
-            
             // টাইমার শুরু করুন
             startTimers();
             
@@ -1249,11 +1250,14 @@
             // বোনাস সিস্টেম চেক করুন
             updateBonusButton();
             
-            // বিজ্ঞাপন লিমিটেশন চেক করুন (নতুন)
+            // বিজ্ঞাপন লিমিটেশন চেক করুন
             checkAdLimit();
             
-            // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন (নতুন)
+            // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন
             initChatSystem();
+            
+            // উত্তোলনের ইতিহাস লোড করুন
+            loadWithdrawHistory();
         }
 
         // পেজ দেখানোর ফাংশন
@@ -1276,13 +1280,12 @@
             
             // উত্তোলন পেজে গেলে মোট আয় আপডেট করুন
             if (pageId === 'withdraw-page') {
-                document.getElementById('total-earned-withdraw').textContent = (earnedPoints + visitEarnings + clickEarnings).toFixed(2);
+                document.getElementById('total-earned-withdraw').textContent = calculateTotalEarnings().toFixed(2);
+                loadWithdrawHistory();
             }
             
             // আর্ন পেজে গেলে ডেটা আপডেট করুন
             if (pageId === 'earn-page') {
-                document.getElementById('today-clicks-earn').textContent = todayClicks;
-                document.getElementById('click-earnings-earn').textContent = clickEarnings.toFixed(2);
                 updateBonusButton();
             }
             
@@ -1317,12 +1320,12 @@
 
         // Load user data from localStorage
         function loadUserData() {
-            if (localStorage.getItem('userPoints')) {
-                userPoints = parseInt(localStorage.getItem('userPoints'));
+            if (localStorage.getItem('userCents')) {
+                userCents = parseInt(localStorage.getItem('userCents'));
             }
             
-            if (localStorage.getItem('earnedPoints')) {
-                earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
+            if (localStorage.getItem('earnedCents')) {
+                earnedCents = parseFloat(localStorage.getItem('earnedCents'));
             }
             
             if (localStorage.getItem('watchedAdsCount')) {
@@ -1341,23 +1344,11 @@
                 visitEarnings = parseFloat(localStorage.getItem('visitEarnings'));
             }
             
-            if (localStorage.getItem('clickedLinks')) {
-                clickedLinks = parseInt(localStorage.getItem('clickedLinks'));
-            }
-            
-            if (localStorage.getItem('todayClicks')) {
-                todayClicks = parseInt(localStorage.getItem('todayClicks'));
-            }
-            
-            if (localStorage.getItem('clickEarnings')) {
-                clickEarnings = parseFloat(localStorage.getItem('clickEarnings'));
-            }
-            
             if (localStorage.getItem('lastBonusClaimTime')) {
                 lastBonusClaimTime = parseInt(localStorage.getItem('lastBonusClaimTime'));
             }
             
-            // বিজ্ঞাপন লিমিটেশন ডেটা লোড করুন (নতুন)
+            // বিজ্ঞাপন লিমিটেশন ডেটা লোড করুন
             if (localStorage.getItem('adLimitReached')) {
                 adLimitReached = localStorage.getItem('adLimitReached') === 'true';
             }
@@ -1366,29 +1357,24 @@
                 adLimitStartTime = parseInt(localStorage.getItem('adLimitStartTime'));
             }
             
+            // উত্তোলনের ইতিহাস লোড করুন
+            if (localStorage.getItem('withdrawHistory')) {
+                withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory'));
+            }
+            
             // Reset daily visits and clicks if it's a new day
             const lastVisitDate = localStorage.getItem('lastVisitDate');
             const today = new Date().toDateString();
             
             if (lastVisitDate !== today) {
                 visitedWebsites = 0;
-                todayClicks = 0;
-                watchedAdsCount = 0; // রিসেট বিজ্ঞাপন কাউন্টার (নতুন)
-                adLimitReached = false; // রিসেট বিজ্ঞাপন লিমিট (নতুন)
+                watchedAdsCount = 0; // রিসেট বিজ্ঞাপন কাউন্টার
+                adLimitReached = false; // রিসেট বিজ্ঞাপন লিমিট
                 localStorage.setItem('lastVisitDate', today);
                 localStorage.setItem('visitedWebsites', visitedWebsites);
-                localStorage.setItem('todayClicks', todayClicks);
                 localStorage.setItem('watchedAdsCount', watchedAdsCount);
                 localStorage.setItem('adLimitReached', adLimitReached);
             }
-            
-            // Load link click times
-            DIRECT_LINKS.forEach(link => {
-                const clickTime = localStorage.getItem(`link_${link.id}_clicked`);
-                if (clickTime) {
-                    link.lastClicked = parseInt(clickTime);
-                }
-            });
             
             // Load website visit timers
             for (let i = 1; i <= 4; i++) {
@@ -1409,7 +1395,7 @@
                 }
             }
             
-            // চ্যাট মেসেজ লোড করুন (নতুন)
+            // চ্যাট মেসেজ লোড করুন
             if (localStorage.getItem('chatMessages')) {
                 chatMessages = JSON.parse(localStorage.getItem('chatMessages'));
                 displayChatMessages();
@@ -1418,43 +1404,45 @@
 
         // Save user data to localStorage
         function saveUserData() {
-            localStorage.setItem('userPoints', userPoints);
-            localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
+            localStorage.setItem('userCents', userCents);
+            localStorage.setItem('earnedCents', earnedCents.toFixed(2));
             localStorage.setItem('watchedAdsCount', watchedAdsCount);
             localStorage.setItem('visitedWebsites', visitedWebsites);
             localStorage.setItem('totalVisits', totalVisits);
             localStorage.setItem('visitEarnings', visitEarnings.toFixed(2));
-            localStorage.setItem('clickedLinks', clickedLinks);
-            localStorage.setItem('todayClicks', todayClicks);
-            localStorage.setItem('clickEarnings', clickEarnings.toFixed(2));
             localStorage.setItem('lastBonusClaimTime', lastBonusClaimTime);
-            localStorage.setItem('adLimitReached', adLimitReached); // নতুন
-            localStorage.setItem('adLimitStartTime', adLimitStartTime); // নতুন
-            localStorage.setItem('chatMessages', JSON.stringify(chatMessages)); // নতুন
+            localStorage.setItem('adLimitReached', adLimitReached);
+            localStorage.setItem('adLimitStartTime', adLimitStartTime);
+            localStorage.setItem('withdrawHistory', JSON.stringify(withdrawHistory));
+            localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
         }
 
         // Update all UI elements
         function updateUI() {
-            document.getElementById('user-points').textContent = userPoints;
-            document.getElementById('earned-money').textContent = (earnedPoints + visitEarnings + clickEarnings).toFixed(2);
-            document.getElementById('today-clicks').textContent = todayClicks;
-            document.getElementById('click-earnings').textContent = clickEarnings.toFixed(2);
+            document.getElementById('user-points').textContent = userCents;
+            document.getElementById('user-balance').textContent = (userCents / CENTS_TO_TAKA_RATE).toFixed(2);
+            document.getElementById('earned-money').textContent = calculateTotalEarnings().toFixed(2);
             document.getElementById('today-visits').textContent = visitedWebsites;
             document.getElementById('total-visits').textContent = totalVisits;
             document.getElementById('visit-earnings').textContent = visitEarnings.toFixed(2);
-            document.getElementById('ads-progress').textContent = `${watchedAdsCount}/${AD_LIMIT} বিজ্ঞাপন`; // পরিবর্তিত
+            document.getElementById('ads-progress').textContent = `${watchedAdsCount}/${AD_LIMIT} বিজ্ঞাপন`;
             updateProgress();
+        }
+
+        // Calculate total earnings
+        function calculateTotalEarnings() {
+            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + visitEarnings;
         }
 
         // Update progress bar and text
         function updateProgress() {
-            const totalEarnings = earnedPoints + visitEarnings + clickEarnings;
+            const totalEarnings = calculateTotalEarnings();
             const progressPercent = (totalEarnings / MIN_WITHDRAW_TAKA) * 100;
             
             document.getElementById('progress-fill').style.width = `${Math.min(progressPercent, 100)}%`;
         }
 
-        // বিজ্ঞাপন লিমিটেশন চেক করুন (নতুন)
+        // বিজ্ঞাপন লিমিটেশন চেক করুন
         function checkAdLimit() {
             const adLimitInfo = document.getElementById('ad-limit-info');
             
@@ -1486,11 +1474,11 @@
             }
         }
 
-        // Function to watch an ad and earn points
+        // Function to watch an ad and earn cents
         function watchAd() {
             if (isAdLoading) return;
             
-            // বিজ্ঞাপন লিমিটেশন চেক করুন (নতুন)
+            // বিজ্ঞাপন লিমিটেশন চেক করুন
             if (watchedAdsCount >= AD_LIMIT) {
                 showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
                 return;
@@ -1511,16 +1499,16 @@
                 window.show_9472189().then(() => {
                     // Ad watched successfully
                     watchedAdsCount++;
-                    userPoints += POINTS_PER_AD;
+                    userCents += CENTS_PER_AD;
                     
-                    // Check if we have enough points to convert to Taka
-                    if (userPoints >= POINTS_TO_TAKA_RATE) {
-                        const takaEarned = Math.floor(userPoints / POINTS_TO_TAKA_RATE);
-                        earnedPoints += takaEarned;
-                        userPoints %= POINTS_TO_TAKA_RATE;
+                    // Check if we have enough cents to convert to Taka
+                    if (userCents >= CENTS_TO_TAKA_RATE) {
+                        const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
+                        earnedCents += takaEarned;
+                        userCents %= CENTS_TO_TAKA_RATE;
                     }
                     
-                    // বিজ্ঞাপন লিমিটেশন চেক করুন (নতুন)
+                    // বিজ্ঞাপন লিমিটেশন চেক করুন
                     if (watchedAdsCount >= AD_LIMIT) {
                         adLimitReached = true;
                         adLimitStartTime = Date.now();
@@ -1535,10 +1523,10 @@
                     createCoinAnimation();
                     
                     // Show success notification
-                    showNotification(`${POINTS_PER_AD} পয়েন্ট যোগ হয়েছে! আপনার ব্যালেন্স: ${(earnedPoints + visitEarnings + clickEarnings).toFixed(2)} টাকা`, 'success');
+                    showNotification(`${CENTS_PER_AD} পয়সা যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
                     
                     // Check if earned enough for withdrawal
-                    if (earnedPoints + visitEarnings + clickEarnings >= MIN_WITHDRAW_TAKA) {
+                    if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
                         showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
                     }
                     
@@ -1596,7 +1584,7 @@
 
         // Start auto ads mode
         function startAutoAds() {
-            // বিজ্ঞাপন লিমিটেশন চেক করুন (নতুন)
+            // বিজ্ঞাপন লিমিটেশন চেক করুন
             if (watchedAdsCount >= AD_LIMIT) {
                 showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
                 return;
@@ -1631,7 +1619,7 @@
             // উত্তোলন পেজ দেখান
             showPage('withdraw-page', document.querySelector('.nav-item:nth-child(5)'));
             
-            const totalEarnings = earnedPoints + visitEarnings + clickEarnings;
+            const totalEarnings = calculateTotalEarnings();
             
             if (totalEarnings < MIN_WITHDRAW_TAKA) {
                 document.getElementById('withdraw-status').textContent = 
@@ -1655,7 +1643,7 @@
             const amount = parseFloat(document.getElementById('withdraw-amount').value);
             const paymentMethod = document.getElementById('payment-method').value;
             const phoneNumber = document.getElementById('withdraw-phone').value;
-            const totalEarnings = earnedPoints + visitEarnings + clickEarnings;
+            const totalEarnings = calculateTotalEarnings();
             const withdrawStatus = document.getElementById('withdraw-status');
             
             // Validate inputs
@@ -1689,29 +1677,48 @@
                 return;
             }
             
-            // Calculate points to deduct
-            let remainingAmount = amount;
+            // Calculate cents to deduct
+            const centsToDeduct = amount * CENTS_TO_TAKA_RATE;
+            let remainingCents = centsToDeduct;
             
-            if (clickEarnings > 0) {
-                const clickDeduction = Math.min(clickEarnings, remainingAmount);
-                clickEarnings -= clickDeduction;
-                remainingAmount -= clickDeduction;
+            // First deduct from userCents
+            if (userCents > 0) {
+                const userCentsDeduction = Math.min(userCents, remainingCents);
+                userCents -= userCentsDeduction;
+                remainingCents -= userCentsDeduction;
             }
             
-            if (visitEarnings > 0 && remainingAmount > 0) {
-                const visitDeduction = Math.min(visitEarnings, remainingAmount);
-                visitEarnings -= visitDeduction;
-                remainingAmount -= visitDeduction;
+            // Then deduct from earnedCents
+            if (earnedCents > 0 && remainingCents > 0) {
+                const earnedCentsDeduction = Math.min(earnedCents * CENTS_TO_TAKA_RATE, remainingCents);
+                earnedCents -= earnedCentsDeduction / CENTS_TO_TAKA_RATE;
+                remainingCents -= earnedCentsDeduction;
             }
             
-            if (remainingAmount > 0) {
-                earnedPoints -= remainingAmount;
-                if (earnedPoints < 0) earnedPoints = 0;
+            // Finally deduct from visitEarnings
+            if (visitEarnings > 0 && remainingCents > 0) {
+                const visitDeduction = Math.min(visitEarnings * CENTS_TO_TAKA_RATE, remainingCents);
+                visitEarnings -= visitDeduction / CENTS_TO_TAKA_RATE;
+                remainingCents -= visitDeduction;
             }
             
             // Save and update UI
             saveUserData();
             updateUI();
+            
+            // Add to withdraw history
+            const withdrawRequest = {
+                id: Date.now(),
+                amount: amount,
+                paymentMethod: paymentMethod,
+                phoneNumber: phoneNumber,
+                status: 'pending',
+                timestamp: Date.now(),
+                processingTime: WITHDRAW_PROCESSING_TIME
+            };
+            
+            withdrawHistory.unshift(withdrawRequest);
+            saveUserData();
             
             // Prepare withdrawal message
             const message = `📌 নতুন উত্তোলন অনুরোধ 📌\n\n` +
@@ -1721,7 +1728,6 @@
                              `📞 ফোন: ${phoneNumber}\n\n` +
                              `📊 দেখা বিজ্ঞাপন: ${watchedAdsCount}\n` +
                              `🌐 ভিজিট করা ওয়েবসাইট: ${totalVisits}\n` +
-                             `🔗 ক্লিক করা লিংক: ${clickedLinks}\n` +
                              `💵 মোট আয়: ${totalEarnings.toFixed(2)} টাকা`;
             
             // Send to admin via Telegram
@@ -1737,6 +1743,7 @@
             // Reset form after 3 seconds
             setTimeout(() => {
                 document.getElementById('withdraw-section').style.display = 'none';
+                loadWithdrawHistory();
             }, 3000);
         }
 
@@ -1781,10 +1788,10 @@
             // নতুন ট্যাবে ওয়েবসাইট খুলুন
             window.open(url, '_blank');
             
-            // টাইমার সেট করুন (৪ ঘন্টা)
+            // টাইমার সেট করুন (১ মিনিট)
             startWebsiteTimer(websiteId, VISIT_TIME_REQUIRED * 1000);
             
-            showNotification('ওয়েবসাইট খোলা হয়েছে। ৪ ঘন্টা পর ফিরে এসে চেক ব্যালেন্স বাটনে ক্লিক করুন।', 'info');
+            showNotification('ওয়েবসাইট খোলা হয়েছে। ১ মিনিট পর ফিরে এসে চেক ব্যালেন্স বাটনে ক্লিক করুন।', 'info');
         }
 
         // ওয়েবসাইট টাইমার শুরু করুন (পরিবর্তিত)
@@ -1819,7 +1826,7 @@
                         // লোকাল স্টোরেজ থেকে টাইমার ডেটা মুছুন
                         localStorage.removeItem(`website_timer_${websiteId}`);
                         
-                        showNotification('৪ ঘন্টা পূর্ণ হয়েছে! চেক ব্যালেন্স বাটনে ক্লিক করে পুরস্কার নিন।', 'success');
+                        showNotification('১ মিনিট পূর্ণ হয়েছে! চেক ব্যালেন্স বাটনে ক্লিক করে পুরস্কার নিন।', 'success');
                     } else {
                         // টাইমার ডেটা সংরক্ষণ করুন
                         localStorage.setItem(`website_timer_${websiteId}`, JSON.stringify({
@@ -1836,7 +1843,14 @@
             // পুরস্কার দিন
             visitedWebsites++;
             totalVisits++;
-            visitEarnings += POINTS_PER_VISIT;
+            userCents += CENTS_PER_VISIT;
+            
+            // Check if we have enough cents to convert to Taka
+            if (userCents >= CENTS_TO_TAKA_RATE) {
+                const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
+                earnedCents += takaEarned;
+                userCents %= CENTS_TO_TAKA_RATE;
+            }
             
             saveUserData();
             updateUI();
@@ -1847,10 +1861,10 @@
             // কয়েন অ্যানিমেশন দেখান
             createCoinAnimation();
             
-            showNotification(`১ টাকা যোগ হয়েছে! ওয়েবসাইট ভিজিট সম্পূর্ণ। আপনার ব্যালেন্স: ${(earnedPoints + visitEarnings + clickEarnings).toFixed(2)} টাকা`, 'success');
+            showNotification(`৫০ পয়সা যোগ হয়েছে! ওয়েবসাইট ভিজিট সম্পূর্ণ। আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
             
             // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
-            if (earnedPoints + visitEarnings + clickEarnings >= MIN_WITHDRAW_TAKA) {
+            if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
                 showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
             }
         }
@@ -1876,94 +1890,6 @@
             }
         }
 
-        // ডাইরেক্ট লিংক লোড করুন
-        function loadDirectLinks() {
-            const container = document.getElementById('direct-links-container');
-            container.innerHTML = '';
-            
-            DIRECT_LINKS.forEach(link => {
-                const lastClicked = localStorage.getItem(`link_${link.id}_clicked`);
-                const isCooldown = lastClicked && (Date.now() - parseInt(lastClicked)) < linkCooldownTime;
-                const cooldownRemaining = lastClicked ? Math.max(0, linkCooldownTime - (Date.now() - parseInt(lastClicked))) : 0;
-                
-                const linkElement = document.createElement('div');
-                linkElement.className = 'direct-link-item';
-                linkElement.innerHTML = `
-                    <div class="direct-link-info">
-                        <div class="direct-link-name">${link.name}</div>
-                        <div class="direct-link-url">${link.url}</div>
-                        ${isCooldown ? `<div class="cooldown-timer">কুলডাউন: ${formatTime(cooldownRemaining)}</div>` : ''}
-                    </div>
-                    <button class="btn btn-primary" onclick="clickDirectLink(${link.id})" ${isCooldown ? 'disabled' : ''}>
-                        ${isCooldown ? 'কুলডাউন' : 'ক্লিক করুন'}
-                    </button>
-                `;
-                
-                container.appendChild(linkElement);
-            });
-        }
-
-        // আর্ন পেজের জন্য ডাইরেক্ট লিংক লোড করুন
-        function loadDirectLinksEarnPage() {
-            const container = document.getElementById('direct-links-container-earn');
-            if (!container) return;
-            
-            container.innerHTML = '';
-            
-            DIRECT_LINKS.forEach(link => {
-                const lastClicked = localStorage.getItem(`link_${link.id}_clicked`);
-                const isCooldown = lastClicked && (Date.now() - parseInt(lastClicked)) < linkCooldownTime;
-                const cooldownRemaining = lastClicked ? Math.max(0, linkCooldownTime - (Date.now() - parseInt(lastClicked))) : 0;
-                
-                const linkElement = document.createElement('div');
-                linkElement.className = 'direct-link-item';
-                linkElement.innerHTML = `
-                    <div class="direct-link-info">
-                        <div class="direct-link-name">${link.name}</div>
-                        <div class="direct-link-url">${link.url}</div>
-                        ${isCooldown ? `<div class="cooldown-timer">কুলডাউন: ${formatTime(cooldownRemaining)}</div>` : ''}
-                    </div>
-                    <button class="btn btn-primary" onclick="clickDirectLink(${link.id})" ${isCooldown ? 'disabled' : ''}>
-                        ${isCooldown ? 'কুলডাউন' : 'ক্লিক করুন'}
-                    </button>
-                `;
-                
-                container.appendChild(linkElement);
-            });
-        }
-
-        // ডাইরেক্ট লিংক ক্লিক করার ফাংশন
-        function clickDirectLink(linkId) {
-            const link = DIRECT_LINKS.find(l => l.id === linkId);
-            if (!link) return;
-            
-            // লিংক খুলুন
-            window.open(link.url, '_blank');
-            
-            // পুরস্কার দিন
-            clickedLinks++;
-            todayClicks++;
-            clickEarnings += POINTS_PER_CLICK;
-            
-            // ক্লিকের সময় সংরক্ষণ করুন
-            localStorage.setItem(`link_${linkId}_clicked`, Date.now().toString());
-            
-            saveUserData();
-            updateUI();
-            loadDirectLinks();
-            loadDirectLinksEarnPage();
-            
-            // কয়েন অ্যানিমেশন দেখান
-            createCoinAnimation();
-            
-            showNotification(`১ টাকা যোগ হয়েছে! লিংক ক্লিক সম্পূর্ণ। আপনার ব্যালেন্স: ${(earnedPoints + visitEarnings + clickEarnings).toFixed(2)} টাকা`, 'success');
-            
-            // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
-            if (earnedPoints + visitEarnings + clickEarnings >= MIN_WITHDRAW_TAKA) {
-                showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
-            }
-        }
-
         // সময় ফরম্যাট করার ফাংশন
         function formatTime(milliseconds) {
             const hours = Math.floor(milliseconds / (1000 * 60 * 60));
@@ -1984,7 +1910,7 @@
             }
             
             // বোনাস দিন
-            earnedPoints += DAILY_BONUS_AMOUNT;
+            earnedCents += DAILY_BONUS_AMOUNT;
             lastBonusClaimTime = now;
             
             saveUserData();
@@ -1994,10 +1920,10 @@
             // কয়েন অ্যানিমেশন দেখান
             createCoinAnimation();
             
-            showNotification(`৩ টাকা বোনাস যোগ হয়েছে! আপনার ব্যালেন্স: ${(earnedPoints + visitEarnings + clickEarnings).toFixed(2)} টাকা`, 'success');
+            showNotification(`৩ টাকা বোনাস যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
             
             // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
-            if (earnedPoints + visitEarnings + clickEarnings >= MIN_WITHDRAW_TAKA) {
+            if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
                 showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
             }
         }
@@ -2026,7 +1952,7 @@
             }
         }
 
-        // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন (নতুন)
+        // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন
         function initChatSystem() {
             currentUser = {
                 id: userId,
@@ -2039,13 +1965,13 @@
             }
         }
 
-        // চ্যাট টগল করুন (নতুন)
+        // চ্যাট টগল করুন
         function toggleChat() {
             const chatPopup = document.getElementById('chat-popup');
             chatPopup.classList.toggle('active');
         }
 
-        // মেসেজ পাঠান (নতুন)
+        // মেসেজ পাঠান
         function sendMessage() {
             const chatInput = document.getElementById('chat-input');
             const message = chatInput.value.trim();
@@ -2071,7 +1997,7 @@
             }, 2000);
         }
 
-        // মেসেজ যোগ করুন (নতুন)
+        // মেসেজ যোগ করুন
         function addMessage(sender, text, isSent) {
             const message = {
                 id: Date.now(),
@@ -2087,7 +2013,7 @@
             displayChatMessages();
         }
 
-        // চ্যাট মেসেজ ডিসপ্লে করুন (নতুন)
+        // চ্যাট মেসেজ ডিসপ্লে করুন
         function displayChatMessages() {
             const chatMessagesContainer = document.getElementById('chat-messages');
             chatMessagesContainer.innerHTML = '';
@@ -2114,7 +2040,7 @@
             chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
         }
 
-        // রিয়েকশন যোগ করুন (নতুন)
+        // রিয়েকশন যোগ করুন
         function addReaction(messageId, reaction) {
             const message = chatMessages.find(m => m.id === messageId);
             if (message) {
@@ -2136,7 +2062,7 @@
             }
         }
 
-        // Enter কী দিয়ে মেসেজ পাঠান (নতুন)
+        // Enter কী দিয়ে মেসেজ পাঠান
         document.getElementById('chat-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -2145,12 +2071,6 @@
 
         // টাইমার শুরু করুন
         function startTimers() {
-            // লিংক কুলডাউন টাইমার
-            setInterval(() => {
-                loadDirectLinks();
-                loadDirectLinksEarnPage();
-            }, 1000);
-            
             // লিংক পরিবর্তন টাইমার
             setInterval(() => {
                 updateLinkChangeTimer();
@@ -2161,9 +2081,14 @@
                 updateBonusButton();
             }, 1000);
             
-            // বিজ্ঞাপন লিমিটেশন টাইমার (নতুন)
+            // বিজ্ঞাপন লিমিটেশন টাইমার
             setInterval(() => {
                 checkAdLimit();
+            }, 1000);
+            
+            // উত্তোলনের ইতিহাস টাইমার
+            setInterval(() => {
+                updateWithdrawHistoryTimers();
             }, 1000);
         }
 
@@ -2175,6 +2100,91 @@
             
             const timeRemaining = nextChange - now;
             document.getElementById('link-change-timer').textContent = formatTime(timeRemaining);
+        }
+
+        // উত্তোলনের ইতিহাস লোড করুন
+        function loadWithdrawHistory() {
+            const historyList = document.getElementById('withdraw-history-list');
+            historyList.innerHTML = '';
+            
+            if (withdrawHistory.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: var(--text-muted);">কোন উত্তোলনের ইতিহাস নেই</p>';
+                return;
+            }
+            
+            withdrawHistory.forEach(withdraw => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'withdraw-history-item';
+                
+                const timeElapsed = Date.now() - withdraw.timestamp;
+                const timeRemaining = Math.max(0, withdraw.processingTime - timeElapsed);
+                const isPaid = timeRemaining <= 0;
+                
+                historyItem.innerHTML = `
+                    <div class="withdraw-history-header">
+                        <div class="withdraw-amount">${withdraw.amount} টাকা</div>
+                        <div class="withdraw-status ${isPaid ? 'status-paid' : 'status-pending'}">
+                            ${isPaid ? 'পেইড' : 'পেন্ডিং'}
+                        </div>
+                    </div>
+                    <div class="withdraw-details">
+                        মাধ্যম: ${withdraw.paymentMethod.toUpperCase()} | ফোন: ${withdraw.phoneNumber}
+                    </div>
+                    ${!isPaid ? `
+                        <div class="withdraw-timer">
+                            পেমেন্ট পর্যন্ত সময়: <span id="withdraw-timer-${withdraw.id}">${formatTime(timeRemaining)}</span>
+                        </div>
+                    ` : ''}
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        // উত্তোলনের ইতিহাস টাইমার আপডেট করুন
+        function updateWithdrawHistoryTimers() {
+            const now = Date.now();
+            let needsUpdate = false;
+            
+            withdrawHistory.forEach(withdraw => {
+                const timeElapsed = now - withdraw.timestamp;
+                const timeRemaining = Math.max(0, withdraw.processingTime - timeElapsed);
+                const isPaid = timeRemaining <= 0;
+                
+                if (!isPaid && withdraw.status !== 'paid') {
+                    const timerElement = document.getElementById(`withdraw-timer-${withdraw.id}`);
+                    if (timerElement) {
+                        timerElement.textContent = formatTime(timeRemaining);
+                    }
+                    
+                    if (timeRemaining <= 0) {
+                        withdraw.status = 'paid';
+                        needsUpdate = true;
+                    }
+                }
+            });
+            
+            if (needsUpdate) {
+                saveUserData();
+                loadWithdrawHistory();
+            }
+        }
+
+        // ব্যালেন্স রিফ্রেশ করুন
+        function refreshBalance() {
+            // Check if we have enough cents to convert to Taka
+            if (userCents >= CENTS_TO_TAKA_RATE) {
+                const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
+                earnedCents += takaEarned;
+                userCents %= CENTS_TO_TAKA_RATE;
+                
+                saveUserData();
+                updateUI();
+                
+                showNotification(`${takaEarned} টাকা যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
+            } else {
+                showNotification('রিফ্রেশ করার জন্য পর্যাপ্ত পয়সা নেই।', 'info');
+            }
         }
 
         // Initialize the app when page loads
@@ -2190,4 +2200,3 @@
     </script>
 </body>
 </html>
-
