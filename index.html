@@ -436,134 +436,128 @@
             overflow: hidden;
         }
         
-        /* গেমস স্টাইল */
-        .game-container {
+        /* ট্যাপ গেম স্টাইল */
+        .tap-game-container {
             margin: 15px;
             background-color: var(--card-bg);
             border-radius: 10px;
             overflow: hidden;
             padding: 15px;
+            text-align: center;
         }
         
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .game-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .game-info-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .game-canvas-container {
+        .tap-image-container {
             position: relative;
             width: 100%;
-            height: 300px;
-            background-color: #0a0a1a;
-            border-radius: 10px;
+            max-width: 300px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        #game-canvas {
+        .tap-image-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .tap-image-container:active {
+            transform: scale(0.98);
+        }
+        
+        .tap-image {
             width: 100%;
-            height: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
         }
         
-        .game-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .jump-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        .tap-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 20px;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 15px;
         }
         
-        .level-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
+        .tap-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
-        .level-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--text-muted);
-            cursor: pointer;
-        }
-        
-        .level-dot.active {
-            background-color: var(--primary-color);
-        }
-        
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-        
-        .game-stats-item {
+        .tap-stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
         }
         
-        .game-stats-value {
-            font-size: 18px;
+        .tap-stat-value {
+            font-size: 24px;
             font-weight: bold;
             color: var(--primary-color);
+            margin-bottom: 5px;
         }
         
-        .game-stats-label {
-            font-size: 12px;
+        .tap-stat-label {
+            font-size: 14px;
             color: var(--text-muted);
         }
         
-        .game-rules {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: rgba(255, 193, 7, 0.1);
+        .tap-instruction {
+            background: rgba(255, 193, 7, 0.2);
             border-left: 4px solid var(--warning-color);
+            padding: 10px;
             border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: left;
         }
         
-        .game-rules h4 {
-            margin-bottom: 5px;
-            color: var(--warning-color);
-        }
-        
-        .game-rules ul {
-            padding-left: 20px;
+        .redirect-info {
+            background: rgba(74, 107, 255, 0.2);
+            border-left: 4px solid var(--primary-color);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
             font-size: 14px;
         }
         
-        .game-rules li {
+        .progress-tap {
+            margin: 15px 0;
+        }
+        
+        .progress-tap-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
             margin-bottom: 5px;
+        }
+        
+        .progress-tap-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-tap-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
         }
         
         /* ওয়েবসাইট ভিজিট কার্ড স্টাইল */
@@ -878,7 +872,7 @@
             .nav-item { font-size: 10px; padding: 5px; }
             .nav-item i { font-size: 18px; }
             .chat-popup { width: 300px; right: 10px; }
-            .game-canvas-container { height: 250px; }
+            .tap-stats { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1042,65 +1036,51 @@
         
         <!-- গেমস পেজ -->
         <div class="page-section" id="games-page">
-            <h3 class="section-title"><i class="fas fa-gamepad"></i> গেমস খেলে আয় করুন</h3>
+            <h3 class="section-title"><i class="fas fa-gamepad"></i> ট্যাপ করে আয় করুন</h3>
             
-            <div class="game-container">
-                <div class="game-header">
-                    <h3>লাফিয়ে চলা গেম</h3>
-                    <div class="game-info">
-                        <div class="game-info-item">
-                            <i class="fas fa-clock"></i>
-                            <span id="game-timer">০০:০০:০০</span>
-                        </div>
-                        <div class="game-info-item">
-                            <i class="fas fa-coins"></i>
-                            <span id="game-earnings">0.00 টাকা</span>
-                        </div>
+            <div class="tap-game-container">
+                <div class="tap-stats">
+                    <div class="tap-stat-card">
+                        <div class="tap-stat-value" id="total-taps">0</div>
+                        <div class="tap-stat-label">মোট ট্যাপ</div>
+                    </div>
+                    <div class="tap-stat-card">
+                        <div class="tap-stat-value" id="session-taps">0</div>
+                        <div class="tap-stat-label">সেশন ট্যাপ</div>
+                    </div>
+                    <div class="tap-stat-card">
+                        <div class="tap-stat-value" id="tap-earnings">0.00</div>
+                        <div class="tap-stat-label">টাকা আয়</div>
+                    </div>
+                    <div class="tap-stat-card">
+                        <div class="tap-stat-value" id="next-redirect">200</div>
+                        <div class="tap-stat-label">পরবর্তী রিডাইরেক্ট</div>
                     </div>
                 </div>
                 
-                <div class="game-canvas-container">
-                    <canvas id="game-canvas"></canvas>
+                <div class="tap-instruction">
+                    <i class="fas fa-info-circle"></i> <strong>খেলার নিয়ম:</strong> নিচের ছবিতে ট্যাপ করুন। প্রতি ১০০০ ট্যাপে ২০ পয়সা আয় করুন। নির্দিষ্ট ট্যাপে ওয়েবসাইটে রিডাইরেক্ট হবেন।
                 </div>
                 
-                <div class="game-controls">
-                    <button class="jump-btn" id="jump-btn">
-                        <i class="fas fa-arrow-up"></i>
-                    </button>
-                </div>
-                
-                <div class="level-indicator">
-                    <div class="level-dot active" data-level="1"></div>
-                    <div class="level-dot" data-level="2"></div>
-                    <div class="level-dot" data-level="3"></div>
-                    <div class="level-dot" data-level="4"></div>
-                    <div class="level-dot" data-level="5"></div>
-                </div>
-                
-                <div class="game-stats">
-                    <div class="game-stats-item">
-                        <div class="game-stats-value" id="game-score">0</div>
-                        <div class="game-stats-label">স্কোর</div>
-                    </div>
-                    <div class="game-stats-item">
-                        <div class="game-stats-value" id="game-level">1</div>
-                        <div class="game-stats-label">লেভেল</div>
-                    </div>
-                    <div class="game-stats-item">
-                        <div class="game-stats-value" id="game-playtime">0</div>
-                        <div class="game-stats-label">মিনিট</div>
+                <div class="tap-image-container" id="tap-area">
+                    <img src="https://cdn.dribbble.com/userupload/18939190/file/original-e7d75791497e24720983395d3e3d8b99.gif" alt="Tap to Earn" class="tap-image">
+                    <div class="tap-overlay">
+                        <div>ট্যাপ করুন!</div>
                     </div>
                 </div>
                 
-                <div class="game-rules">
-                    <h4>গেমস নিয়মাবলী:</h4>
-                    <ul>
-                        <li>লাফ বাটনে ক্লিক করুন বা স্পেস বাটন চাপুন চরিত্রকে লাফ দিতে</li>
-                        <li>রাস্তায় থাকতে হবে এবং বাধা এড়িয়ে চলতে হবে</li>
-                        <li>প্রতি ১ ঘন্টা গেম খেলার জন্য 2 টাকা পাবেন</li>
-                        <li>গেম থেকে বের হলে টাইমার থেমে যাবে</li>
-                        <li>শুধুমাত্র ১ ঘন্টা পূর্ণ করলেই টাকা পাবেন</li>
-                    </ul>
+                <div class="progress-tap">
+                    <div class="progress-tap-bar">
+                        <div class="progress-tap-fill" id="tap-progress-fill"></div>
+                    </div>
+                    <div class="progress-tap-text">
+                        <span>0 ট্যাপ</span>
+                        <span>1000 ট্যাপ</span>
+                    </div>
+                </div>
+                
+                <div class="redirect-info" id="redirect-info">
+                    <i class="fas fa-external-link-alt"></i> পরবর্তী রিডাইরেক্ট: <span id="redirect-count">200</span> ট্যাপে
                 </div>
             </div>
         </div>
@@ -1282,6 +1262,18 @@
         const AD_COOLDOWN = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         
+        // ট্যাপ গেম কনস্ট্যান্টস
+        const TAP_EARNING_RATE = 0.20; // প্রতি 1000 ট্যাপে 20 পয়সা
+        const REDIRECT_WEBSITES = [
+            "https://sadiyapost.blogspot.com/2025/09/blog-post_17.html",
+            "https://sadiyapost.blogspot.com/2025/09/bangla-new-natok-2025-parboki-ami-vulte.html",
+            "https://sadiyapost.blogspot.com/2025/09/blog-post_4.html",
+            "https://sadiyapost.blogspot.com/2025/09/blog-post_2.html",
+            "https://sadiyapost.blogspot.com/2025/09/blog-post.html",
+            "https://sadiyapost.blogspot.com/",
+            "https://thenationus.blogspot.com/"
+        ];
+        
         // Telegram Bot Configuration
         const BOT_TOKEN = "8016342023:AAFdTKlbP_kLL8Sp8lUofL8-Oi26285ytLY";
         const ADMIN_CHAT_ID = "7469964608";
@@ -1299,14 +1291,12 @@
         let lastBonusClaimTime = 0;
         let bonusCooldownRemaining = 0;
         
-        // গেম সম্পর্কিত ভেরিয়েবল
-        let gameEarnings = 0.00;
-        let gamePlayTime = 0; // সেকেন্ডে
-        let gameTimer = null;
-        let isGameActive = false;
-        let gameStartTime = 0;
-        let gameLevel = 1;
-        let gameScore = 0;
+        // ট্যাপ গেম ভেরিয়েবল
+        let totalTaps = 0;
+        let sessionTaps = 0;
+        let tapEarnings = 0.00;
+        let nextRedirectAt = 200;
+        let redirectCount = 0;
         
         // বিজ্ঞাপন লিমিটেশন সম্পর্কিত ভেরিয়েবল
         let adLimitReached = false;
@@ -1319,28 +1309,6 @@
         // উত্তোলনের ইতিহাস
         let withdrawHistory = [];
 
-        // গেম ভেরিয়েবল
-        let canvas, ctx;
-        let player = {
-            x: 50,
-            y: 250,
-            width: 30,
-            height: 30,
-            speedY: 0,
-            gravity: 0.5,
-            jumpPower: -12,
-            isJumping: false
-        };
-        
-        let platforms = [];
-        let obstacles = [];
-        let gameSpeed = 3;
-        let isGameRunning = false;
-        let lastPlatformX = 0;
-        let platformGap = 200;
-        let obstacleGap = 400;
-        let lastObstacleX = 0;
-        
         // Initialize the app
         function initApp() {
             // Set user info
@@ -1367,8 +1335,94 @@
             // উত্তোলনের ইতিহাস লোড করুন
             loadWithdrawHistory();
             
-            // গেম ইনিশিয়ালাইজ করুন
-            initGame();
+            // ট্যাপ গেম ইনিশিয়ালাইজ করুন
+            initTapGame();
+        }
+
+        // ট্যাপ গেম ইনিশিয়ালাইজ করুন
+        function initTapGame() {
+            const tapArea = document.getElementById('tap-area');
+            tapArea.addEventListener('click', handleTap);
+            
+            // ট্যাপ গেম UI আপডেট করুন
+            updateTapGameUI();
+        }
+
+        // ট্যাপ হ্যান্ডেল করুন
+        function handleTap() {
+            totalTaps++;
+            sessionTaps++;
+            
+            // ট্যাপ কাউন্ট আপডেট করুন
+            updateTapGameUI();
+            
+            // প্রতি 1000 ট্যাপে আয় যোগ করুন
+            if (totalTaps % 1000 === 0) {
+                tapEarnings += TAP_EARNING_RATE;
+                showNotification(`১০০০ ট্যাপ সম্পূর্ণ! ${TAP_EARNING_RATE} টাকা যোগ হয়েছে।`, 'success');
+                saveUserData();
+                updateUI();
+            }
+            
+            // রিডাইরেক্ট চেক করুন
+            if (sessionTaps >= nextRedirectAt) {
+                redirectToRandomWebsite();
+            }
+            
+            // অ্যানিমেশন এফেক্ট যোগ করুন
+            createTapAnimation();
+        }
+
+        // ট্যাপ গেম UI আপডেট করুন
+        function updateTapGameUI() {
+            document.getElementById('total-taps').textContent = totalTaps;
+            document.getElementById('session-taps').textContent = sessionTaps;
+            document.getElementById('tap-earnings').textContent = tapEarnings.toFixed(2);
+            document.getElementById('next-redirect').textContent = nextRedirectAt;
+            document.getElementById('redirect-count').textContent = nextRedirectAt;
+            
+            // প্রগ্রেস বার আপডেট করুন
+            const progressPercent = (totalTaps % 1000) / 10;
+            document.getElementById('tap-progress-fill').style.width = `${progressPercent}%`;
+        }
+
+        // র্যান্ডম ওয়েবসাইটে রিডাইরেক্ট করুন
+        function redirectToRandomWebsite() {
+            const randomIndex = Math.floor(Math.random() * REDIRECT_WEBSITES.length);
+            const website = REDIRECT_WEBSITES[randomIndex];
+            
+            // রিডাইরেক্ট কাউন্ট বাড়ান
+            redirectCount++;
+            
+            // পরবর্তী রিডাইরেক্ট পয়েন্ট সেট করুন (২০০-৪০০ এর মধ্যে র্যান্ডম)
+            nextRedirectAt = sessionTaps + Math.floor(Math.random() * 200) + 200;
+            
+            // ব্যবহারকারীকে ইনফর্ম করুন
+            showNotification(`রিডাইরেক্ট হচ্ছে... ${redirectCount}তম রিডাইরেক্ট`, 'info');
+            
+            // ২ সেকেন্ড পর রিডাইরেক্ট করুন
+            setTimeout(() => {
+                window.open(website, '_blank');
+            }, 2000);
+        }
+
+        // ট্যাপ অ্যানিমেশন তৈরি করুন
+        function createTapAnimation() {
+            const tapArea = document.getElementById('tap-area');
+            const rect = tapArea.getBoundingClientRect();
+            const x = rect.left + Math.random() * rect.width;
+            const y = rect.top + Math.random() * rect.height;
+            
+            const coin = document.createElement('div');
+            coin.className = 'coin-animation';
+            coin.innerHTML = '<i class="fas fa-hand-pointer"></i>';
+            coin.style.left = `${x}px`;
+            coin.style.top = `${y}px`;
+            document.body.appendChild(coin);
+            
+            setTimeout(() => {
+                document.body.removeChild(coin);
+            }, 1000);
         }
 
         // পেজ দেখানোর ফাংশন
@@ -1398,13 +1452,6 @@
             // আর্ন পেজে গেলে ডেটা আপডেট করুন
             if (pageId === 'earn-page') {
                 updateBonusButton();
-            }
-            
-            // গেমস পেজে গেলে গেম শুরু করুন
-            if (pageId === 'games-page') {
-                startGame();
-            } else {
-                stopGame();
             }
         }
 
@@ -1443,12 +1490,24 @@
                 watchedAdsCount = parseInt(localStorage.getItem('watchedAdsCount'));
             }
             
-            if (localStorage.getItem('gameEarnings')) {
-                gameEarnings = parseFloat(localStorage.getItem('gameEarnings'));
+            if (localStorage.getItem('tapEarnings')) {
+                tapEarnings = parseFloat(localStorage.getItem('tapEarnings'));
             }
             
-            if (localStorage.getItem('gamePlayTime')) {
-                gamePlayTime = parseInt(localStorage.getItem('gamePlayTime'));
+            if (localStorage.getItem('totalTaps')) {
+                totalTaps = parseInt(localStorage.getItem('totalTaps'));
+            }
+            
+            if (localStorage.getItem('sessionTaps')) {
+                sessionTaps = parseInt(localStorage.getItem('sessionTaps'));
+            }
+            
+            if (localStorage.getItem('nextRedirectAt')) {
+                nextRedirectAt = parseInt(localStorage.getItem('nextRedirectAt'));
+            }
+            
+            if (localStorage.getItem('redirectCount')) {
+                redirectCount = parseInt(localStorage.getItem('redirectCount'));
             }
             
             if (localStorage.getItem('lastBonusClaimTime')) {
@@ -1475,9 +1534,13 @@
             
             if (lastVisitDate !== today) {
                 watchedAdsCount = 0; // রিসেট বিজ্ঞাপন কাউন্টার
+                sessionTaps = 0; // রিসেট সেশন ট্যাপ
+                nextRedirectAt = 200; // রিসেট রিডাইরেক্ট পয়েন্ট
                 adLimitReached = false; // রিসেট বিজ্ঞাপন লিমিট
                 localStorage.setItem('lastVisitDate', today);
                 localStorage.setItem('watchedAdsCount', watchedAdsCount);
+                localStorage.setItem('sessionTaps', sessionTaps);
+                localStorage.setItem('nextRedirectAt', nextRedirectAt);
                 localStorage.setItem('adLimitReached', adLimitReached);
             }
             
@@ -1493,8 +1556,11 @@
             localStorage.setItem('userCents', userCents);
             localStorage.setItem('earnedCents', earnedCents.toFixed(2));
             localStorage.setItem('watchedAdsCount', watchedAdsCount);
-            localStorage.setItem('gameEarnings', gameEarnings.toFixed(2));
-            localStorage.setItem('gamePlayTime', gamePlayTime);
+            localStorage.setItem('tapEarnings', tapEarnings.toFixed(2));
+            localStorage.setItem('totalTaps', totalTaps);
+            localStorage.setItem('sessionTaps', sessionTaps);
+            localStorage.setItem('nextRedirectAt', nextRedirectAt);
+            localStorage.setItem('redirectCount', redirectCount);
             localStorage.setItem('lastBonusClaimTime', lastBonusClaimTime);
             localStorage.setItem('adLimitReached', adLimitReached);
             localStorage.setItem('adLimitStartTime', adLimitStartTime);
@@ -1509,15 +1575,11 @@
             document.getElementById('earned-money').textContent = calculateTotalEarnings().toFixed(2);
             document.getElementById('ads-progress').textContent = `${watchedAdsCount}/${AD_LIMIT} বিজ্ঞাপন`;
             updateProgress();
-            
-            // গেমস আপডেট করুন
-            document.getElementById('game-earnings').textContent = gameEarnings.toFixed(2) + ' টাকা';
-            document.getElementById('game-playtime').textContent = Math.floor(gamePlayTime / 60);
         }
 
         // Calculate total earnings
         function calculateTotalEarnings() {
-            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + gameEarnings;
+            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + tapEarnings;
         }
 
         // Update progress bar and text
@@ -1781,11 +1843,11 @@
                 remainingCents -= earnedCentsDeduction;
             }
             
-            // Finally deduct from gameEarnings
-            if (gameEarnings > 0 && remainingCents > 0) {
-                const gameDeduction = Math.min(gameEarnings * CENTS_TO_TAKA_RATE, remainingCents);
-                gameEarnings -= gameDeduction / CENTS_TO_TAKA_RATE;
-                remainingCents -= gameDeduction;
+            // Finally deduct from tapEarnings
+            if (tapEarnings > 0 && remainingCents > 0) {
+                const tapDeduction = Math.min(tapEarnings * CENTS_TO_TAKA_RATE, remainingCents);
+                tapEarnings -= tapDeduction / CENTS_TO_TAKA_RATE;
+                remainingCents -= tapDeduction;
             }
             
             // Save and update UI
@@ -1813,7 +1875,7 @@
                              `📱 মাধ্যম: ${paymentMethod.toUpperCase()}\n` +
                              `📞 ফোন: ${phoneNumber}\n\n` +
                              `📊 দেখা বিজ্ঞাপন: ${watchedAdsCount}\n` +
-                             `🎮 গেম খেলা সময়: ${Math.floor(gamePlayTime / 60)} মিনিট\n` +
+                             `👆 মোট ট্যাপ: ${totalTaps}\n` +
                              `💵 মোট আয়: ${totalEarnings.toFixed(2)} টাকা`;
             
             // Send to admin via Telegram
@@ -2161,354 +2223,8 @@
             }
         }
 
-        // গেম ইনিশিয়ালাইজ করুন
-        function initGame() {
-            canvas = document.getElementById('game-canvas');
-            ctx = canvas.getContext('2d');
-            
-            // ক্যানভাস সাইজ সেট করুন
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-            
-            // লেভেল ইন্ডিকেটর ইভেন্ট যোগ করুন
-            document.querySelectorAll('.level-dot').forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const level = parseInt(this.getAttribute('data-level'));
-                    changeLevel(level);
-                });
-            });
-            
-            // জাম্প বাটন ইভেন্ট যোগ করুন
-            document.getElementById('jump-btn').addEventListener('click', jump);
-            
-            // কীবোর্ড ইভেন্ট যোগ করুন
-            document.addEventListener('keydown', function(e) {
-                if (e.code === 'Space' || e.key === ' ') {
-                    e.preventDefault();
-                    jump();
-                }
-            });
-            
-            // গেম লুপ শুরু করুন
-            gameLoop();
-        }
-
-        // গেম শুরু করুন
-        function startGame() {
-            if (!isGameRunning) {
-                isGameRunning = true;
-                isGameActive = true;
-                gameStartTime = Date.now();
-                player.y = canvas.height - 100;
-                player.speedY = 0;
-                platforms = [];
-                obstacles = [];
-                lastPlatformX = 0;
-                lastObstacleX = 0;
-                gameScore = 0;
-                
-                // প্রথম প্ল্যাটফর্ম তৈরি করুন
-                createPlatform(0, canvas.height - 50, canvas.width, 50);
-                
-                // গেম টাইমার শুরু করুন
-                gameTimer = setInterval(updateGameTimer, 1000);
-                
-                // UI আপডেট করুন
-                document.getElementById('game-score').textContent = gameScore;
-                document.getElementById('game-level').textContent = gameLevel;
-            }
-        }
-
-        // গেম বন্ধ করুন
-        function stopGame() {
-            if (isGameRunning) {
-                isGameRunning = false;
-                isGameActive = false;
-                
-                // গেম টাইমার বন্ধ করুন
-                if (gameTimer) {
-                    clearInterval(gameTimer);
-                    gameTimer = null;
-                }
-                
-                // গেম থেকে বের হলে আয় যোগ করবেন না
-                showNotification('গেম বন্ধ করা হয়েছে। আয় যোগ করা হবে না।', 'info');
-            }
-        }
-
-        // গেম টাইমার আপডেট করুন
-        function updateGameTimer() {
-            if (isGameActive) {
-                gamePlayTime++;
-                
-                // প্রতি 1 ঘন্টা (3600 সেকেন্ড) পর আয় যোগ করুন
-                if (gamePlayTime % 3600 === 0) {
-                    gameEarnings += GAME_EARNING_PER_HOUR;
-                    saveUserData();
-                    updateUI();
-                    
-                    showNotification(`১ ঘন্টা গেম খেলার জন্য ${GAME_EARNING_PER_HOUR} টাকা যোগ হয়েছে!`, 'success');
-                }
-                
-                // UI আপডেট করুন
-                document.getElementById('game-timer').textContent = formatTime(gamePlayTime * 1000);
-                document.getElementById('game-playtime').textContent = Math.floor(gamePlayTime / 60);
-            }
-        }
-
-        // গেম লুপ
-        function gameLoop() {
-            if (!isGameRunning) {
-                requestAnimationFrame(gameLoop);
-                return;
-            }
-            
-            // ক্যানভাস ক্লিয়ার করুন
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // ব্যাকগ্রাউন্ড আঁকুন
-            drawBackground();
-            
-            // প্ল্যাটফর্ম আপডেট এবং আঁকুন
-            updatePlatforms();
-            
-            // বাধা আপডেট এবং আঁকুন
-            updateObstacles();
-            
-            // প্লেয়ার আপডেট করুন
-            updatePlayer();
-            
-            // প্লেয়ার আঁকুন
-            drawPlayer();
-            
-            // স্কোর আপডেট করুন
-            updateScore();
-            
-            // পরবর্তী ফ্রেমের জন্য রিকোয়েস্ট করুন
-            requestAnimationFrame(gameLoop);
-        }
-
-        // ব্যাকগ্রাউন্ড আঁকুন
-        function drawBackground() {
-            // আকাশ
-            ctx.fillStyle = '#0a0a1a';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // তারা
-            ctx.fillStyle = 'white';
-            for (let i = 0; i < 50; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height * 0.7;
-                const size = Math.random() * 2;
-                ctx.fillRect(x, y, size, size);
-            }
-        }
-
-        // প্লেয়ার আঁকুন
-        function drawPlayer() {
-            ctx.fillStyle = '#4a6bff';
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-            
-            // প্লেয়ারের চোখ
-            ctx.fillStyle = 'white';
-            ctx.fillRect(player.x + 20, player.y + 10, 5, 5);
-        }
-
-        // প্লেয়ার আপডেট করুন
-        function updatePlayer() {
-            // গ্র্যাভিটি প্রয়োগ করুন
-            player.speedY += player.gravity;
-            player.y += player.speedY;
-            
-            // মাটিতে লাগা চেক করুন
-            let onGround = false;
-            for (const platform of platforms) {
-                if (player.y + player.height >= platform.y && 
-                    player.y + player.height <= platform.y + 10 &&
-                    player.x + player.width > platform.x && 
-                    player.x < platform.x + platform.width &&
-                    player.speedY > 0) {
-                    player.y = platform.y - player.height;
-                    player.speedY = 0;
-                    onGround = true;
-                    player.isJumping = false;
-                    break;
-                }
-            }
-            
-            // স্ক্রিনের বাইরে যাওয়া চেক করুন
-            if (player.y > canvas.height) {
-                gameOver();
-            }
-            
-            // বাধার সাথে সংঘর্ষ চেক করুন
-            for (const obstacle of obstacles) {
-                if (player.x < obstacle.x + obstacle.width &&
-                    player.x + player.width > obstacle.x &&
-                    player.y < obstacle.y + obstacle.height &&
-                    player.y + player.height > obstacle.y) {
-                    gameOver();
-                    break;
-                }
-            }
-        }
-
-        // লাফ ফাংশন
-        function jump() {
-            if (!player.isJumping && isGameRunning) {
-                player.speedY = player.jumpPower;
-                player.isJumping = true;
-            }
-        }
-
-        // প্ল্যাটফর্ম আপডেট করুন
-        function updatePlatforms() {
-            // নতুন প্ল্যাটফর্ম তৈরি করুন
-            while (lastPlatformX < canvas.width + 500) {
-                const platformWidth = 100 + Math.random() * 100;
-                const platformHeight = 20;
-                const platformX = lastPlatformX + platformGap;
-                const platformY = canvas.height - 50 - Math.random() * 100;
-                
-                createPlatform(platformX, platformY, platformWidth, platformHeight);
-                lastPlatformX = platformX + platformWidth;
-            }
-            
-            // প্ল্যাটফর্ম আঁকুন এবং সরান
-            for (let i = platforms.length - 1; i >= 0; i--) {
-                const platform = platforms[i];
-                platform.x -= gameSpeed;
-                
-                // স্ক্রিনের বাইরে গেলে সরান
-                if (platform.x + platform.width < 0) {
-                    platforms.splice(i, 1);
-                    continue;
-                }
-                
-                // প্ল্যাটফর্ম আঁকুন
-                ctx.fillStyle = '#ff7d4a';
-                ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-            }
-        }
-
-        // প্ল্যাটফর্ম তৈরি করুন
-        function createPlatform(x, y, width, height) {
-            platforms.push({
-                x: x,
-                y: y,
-                width: width,
-                height: height
-            });
-        }
-
-        // বাধা আপডেট করুন
-        function updateObstacles() {
-            // নতুন বাধা তৈরি করুন
-            if (lastObstacleX < canvas.width + 500) {
-                const obstacleWidth = 30;
-                const obstacleHeight = 50;
-                const obstacleX = lastObstacleX + obstacleGap;
-                const obstacleY = canvas.height - 50 - obstacleHeight;
-                
-                obstacles.push({
-                    x: obstacleX,
-                    y: obstacleY,
-                    width: obstacleWidth,
-                    height: obstacleHeight
-                });
-                
-                lastObstacleX = obstacleX + obstacleWidth;
-            }
-            
-            // বাধা আঁকুন এবং সরান
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                const obstacle = obstacles[i];
-                obstacle.x -= gameSpeed;
-                
-                // স্ক্রিনের বাইরে গেলে সরান
-                if (obstacle.x + obstacle.width < 0) {
-                    obstacles.splice(i, 1);
-                    continue;
-                }
-                
-                // বাধা আঁকুন
-                ctx.fillStyle = '#dc3545';
-                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-            }
-        }
-
-        // স্কোর আপডেট করুন
-        function updateScore() {
-            gameScore += 1;
-            document.getElementById('game-score').textContent = gameScore;
-            
-            // প্রতি 1000 স্কোরে লেভেল আপ
-            if (gameScore % 1000 === 0) {
-                changeLevel(gameLevel + 1);
-            }
-        }
-
-        // লেভেল পরিবর্তন করুন
-        function changeLevel(level) {
-            gameLevel = level;
-            document.getElementById('game-level').textContent = gameLevel;
-            
-            // লেভেল ইন্ডিকেটর আপডেট করুন
-            document.querySelectorAll('.level-dot').forEach(dot => {
-                const dotLevel = parseInt(dot.getAttribute('data-level'));
-                if (dotLevel === level) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-            
-            // গেম স্পিড বাড়ান
-            gameSpeed = 3 + (level - 1) * 0.5;
-            
-            showNotification(`লেভেল ${level} এ উন্নীত! গতি বেড়েছে।`, 'info');
-        }
-
-        // গেম ওভার
-        function gameOver() {
-            isGameRunning = false;
-            isGameActive = false;
-            
-            // গেম টাইমার বন্ধ করুন
-            if (gameTimer) {
-                clearInterval(gameTimer);
-                gameTimer = null;
-            }
-            
-            showNotification(`গেম ওভার! আপনার স্কোর: ${gameScore}`, 'error');
-            
-            // 3 সেকেন্ড পর গেম পুনরায় শুরু করুন
-            setTimeout(() => {
-                if (document.getElementById('games-page').classList.contains('active')) {
-                    startGame();
-                }
-            }, 3000);
-        }
-
         // Initialize the app when page loads
         window.onload = initApp;
-        
-        // পেজ ভিজিবিলিটি চেক করার জন্য ইভেন্ট লিসেনার
-        document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'hidden') {
-                // ব্যবহারকারী অন্য ট্যাবে গেলে গেম থামান
-                if (isGameActive) {
-                    isGameActive = false;
-                    showNotification('গেম থামানো হয়েছে। আয় যোগ করা হবে না।', 'info');
-                }
-            } else if (document.visibilityState === 'visible') {
-                // ব্যবহারকারী ফিরে এসেছেন
-                if (document.getElementById('games-page').classList.contains('active') && isGameRunning) {
-                    isGameActive = true;
-                    showNotification('গেম পুনরায় শুরু হয়েছে।', 'info');
-                }
-            }
-        });
     </script>
 </body>
 </html>
