@@ -1026,9 +1026,9 @@
             
             <div class="bonus-card">
                 <h3 class="section-title"><i class="fas fa-gift"></i> ডেইলি বোনাস</h3>
-                <p>প্রতি ৩ দিন পরপর ৩ টাকা বোনাস পান। বোনাস নেওয়ার পর পরবর্তী বোনাসের জন্য ৩ দিন অপেক্ষা করুন।</p>
+                <p>প্রতি ৩ দিন পরপর ১ টাকা বোনাস পান। বোনাস নেওয়ার পর পরবর্তী বোনাসের জন্য ৩ দিন অপেক্ষা করুন।</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ৩ টাকা
+                    <i class="fas fa-coins"></i> পুরস্কার: ১ টাকা
                 </div>
                 <button class="btn btn-warning" id="daily-bonus-btn" onclick="claimDailyBonus()">
                     <i class="fas fa-gift"></i> ডেইলি বোনাস নিন
@@ -1042,7 +1042,7 @@
             <div class="rate-info">
                 <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
                 <p><i class="fas fa-gamepad"></i> প্রতি ১ ঘন্টা গেমস খেলা = 2 টাকা</p>
-                <p><i class="fas fa-gift"></i> ডেইলি বোনাস = ３ টাকা (প্রতি ３ দিন পরপর)</p>
+                <p><i class="fas fa-gift"></i> ডেইলি বোনাস = 1 টাকা (প্রতি 3 দিন পরপর)</p>
             </div>
         </div>
         
@@ -1199,7 +1199,7 @@
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-gift"></i> নতুন ফিচার</h3>
-                    <p>ডেইলি বোনাস সিস্টেম চালু হয়েছে। প্রতি ৩ দিন পরপর ৩ টাকা বোনাস পান।</p>
+                    <p>ডেইলি বোনাস সিস্টেম চালু হয়েছে। প্রতি ৩ দিন পরপর ১ টাকা বোনাস পান।</p>
                     <small>আজ</small>
                 </div>
             </div>
@@ -1268,7 +1268,7 @@
         const CENTS_TO_TAKA_RATE = 100; // 100 পয়সা = 1 টাকা
         const GAME_EARNING_PER_HOUR = 2.00; // প্রতি ঘন্টা গেম খেলার জন্য 2 টাকা
         const MIN_WITHDRAW_TAKA = 30; // ন্যূনতম উত্তোলন 30 টাকা
-        const DAILY_BONUS_AMOUNT = 3.00; // ডেইলি বোনাস 3 টাকা
+        const DAILY_BONUS_AMOUNT = 1.00; // ডেইলি বোনাস 1 টাকা (3 টাকা থেকে 1 টাকা পরিবর্তন করা হয়েছে)
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
         const AD_LIMIT = 100; // বিজ্ঞাপন দেখার লিমিট (100টি)
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
@@ -1972,7 +1972,7 @@
             // কয়েন অ্যানিমেশন দেখান
             createCoinAnimation();
             
-            showNotification(`৩ টাকা বোনাস যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
+            showNotification(`১ টাকা বোনাস যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
             
             // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
             if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
