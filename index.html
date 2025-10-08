@@ -789,6 +789,15 @@
             margin: 10px 15px;
             font-size: 13px;
             display: none;
+            text-align: center;
+        }
+        
+        .ad-limit-gif {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            border-radius: 10px;
+            overflow: hidden;
         }
         
         /* উত্তোলন ইতিহাস স্টাইল */
@@ -889,7 +898,10 @@
         
         <!-- বিজ্ঞাপন লিমিটেশন তথ্য -->
         <div class="ad-limit-info" id="ad-limit-info">
-            <i class="fas fa-exclamation-triangle"></i> আপনি আজ ২০০টি বিজ্ঞাপন দেখেছেন। পরবর্তী ২০০টি বিজ্ঞাপন দেখতে <span id="ad-limit-timer">০২:০০:০০</span> অপেক্ষা করুন।
+            <div class="ad-limit-gif">
+                <img src="https://cdn.dribbble.com/userupload/19657679/file/original-0c6e70ffeb364a783ed502abd4c48e12.gif" alt="Limit Reached" style="width:100%; height:auto; border-radius:10px;">
+            </div>
+            <p><i class="fas fa-exclamation-triangle"></i> আপনি আজ 100টি বিজ্ঞাপন দেখেছেন। পরবর্তী 100টি বিজ্ঞাপন দেখতে <span id="ad-limit-timer">২৪:০০:০০</span> অপেক্ষা করুন।</p>
         </div>
         
         <!-- হেডার এর নিচে প্রথম বিজ্ঞাপন -->
@@ -943,7 +955,7 @@
             <div class="progress-container">
                 <div class="progress-header">
                     <h3>আজকের অগ্রগতি</h3>
-                    <span id="ads-progress">0/200 বিজ্ঞাপন</span>
+                    <span id="ads-progress">0/100 বিজ্ঞাপন</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
@@ -1258,8 +1270,8 @@
         const MIN_WITHDRAW_TAKA = 30; // ন্যূনতম উত্তোলন 30 টাকা
         const DAILY_BONUS_AMOUNT = 3.00; // ডেইলি বোনাস 3 টাকা
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-        const AD_LIMIT = 200; // বিজ্ঞাপন দেখার লিমিট
-        const AD_COOLDOWN = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
+        const AD_LIMIT = 100; // বিজ্ঞাপন দেখার লিমিট (100টি)
+        const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         
         // ট্যাপ গেম কনস্ট্যান্টস
@@ -1606,7 +1618,9 @@
                     document.getElementById('ad-limit-timer').textContent = formatTime(timeRemaining);
                     document.getElementById('watch-ad-btn').disabled = true;
                     document.getElementById('watch-ad-btn-earn').disabled = true;
-                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-clock"></i> বিজ্ঞাপন লিমিট পূরণ হয়েছে। কুলডাউন চলছে...';
+                    document.getElementById('auto-ad-btn').disabled = true;
+                    document.getElementById('auto-ad-btn-earn').disabled = true;
+                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-clock"></i> বিজ্ঞাপন লিমিট পূরণ হয়েছে। ২৪ ঘন্টা পরে আবার চেষ্টা করুন...';
                 } else {
                     // কুলডাউন শেষ
                     adLimitReached = false;
@@ -1614,6 +1628,8 @@
                     adLimitInfo.style.display = 'none';
                     document.getElementById('watch-ad-btn').disabled = false;
                     document.getElementById('watch-ad-btn-earn').disabled = false;
+                    document.getElementById('auto-ad-btn').disabled = false;
+                    document.getElementById('auto-ad-btn-earn').disabled = false;
                     document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> বিজ্ঞাপন দেখতে প্রস্তুত';
                     saveUserData();
                 }
@@ -1628,7 +1644,7 @@
             
             // বিজ্ঞাপন লিমিটেশন চেক করুন
             if (watchedAdsCount >= AD_LIMIT) {
-                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
+                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২৪ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
                 return;
             }
             
@@ -1734,7 +1750,7 @@
         function startAutoAds() {
             // বিজ্ঞাপন লিমিটেশন চেক করুন
             if (watchedAdsCount >= AD_LIMIT) {
-                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
+                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২৪ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
                 return;
             }
             
@@ -2228,4 +2244,3 @@
     </script>
 </body>
 </html>
-
