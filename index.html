@@ -50,6 +50,44 @@
             backdrop-filter: blur(10px);
         }
         
+        .notice-bar {
+            background: linear-gradient(to right, var(--warning-color), #ff7e5f);
+            color: #000;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        
+        .notice-bar h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .notice-bar p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-btn:hover {
+            background: #0077b5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
         .header {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
@@ -915,6 +953,15 @@
 </head>
 <body>
     <div class="container">
+        <!-- গুরুত্বপূর্ণ নোটিশ বার -->
+        <div class="notice-bar">
+            <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
+            <p>আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। যারা পেমেন্ট রিকুয়েস্ট পাঠিয়েছেন তাদেরকে ১০০% পেমেন্ট করা হবে। আমরা কিছু ত্রুটি লক্ষ করতেছি যার ফলে আমরা আমাদের BOT বন্ধ করতে বাধ্য হয়েছি। প্রয়োজনে আমাদের টেলিগ্রাম চ্যানেলে যোগাযোগ করুন।</p>
+            <a href="https://t.me/TASKSOIVEMONEY" target="_blank" class="telegram-btn">
+                <i class="fab fa-telegram"></i> টেলিগ্রাম চ্যানেলে যোগ দিন
+            </a>
+        </div>
+        
         <div class="header">
             <h1>টাকা আয় করুন - বিজ্ঞাপন দেখুন</h1>
             <p>বিজ্ঞাপন দেখে এবং গেমস খেলে আয় করুন</p>
@@ -1000,17 +1047,17 @@
             </div>
             
             <div class="ad-status" id="ad-status">
-                <i class="fas fa-check-circle"></i> বিজ্ঞাপন দেখতে প্রস্তুত
+                <i class="fas fa-times-circle"></i> বট উন্নয়নের জন্য সাময়িকভাবে বন্ধ
             </div>
             
             <div class="action-buttons">
-                <button class="btn btn-primary" id="watch-ad-btn" onclick="watchAd()">
+                <button class="btn btn-primary" id="watch-ad-btn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন
                 </button>
-                <button class="btn btn-success" id="auto-ad-btn" onclick="startAutoAds()">
+                <button class="btn btn-success" id="auto-ad-btn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
                 </button>
-                <button class="btn btn-danger" id="stop-auto-btn" onclick="stopAutoAds()" disabled>
+                <button class="btn btn-danger" id="stop-auto-btn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-stop"></i> বন্ধ করুন
                 </button>
                 <button class="btn btn-secondary" onclick="showWithdrawForm()">
@@ -1046,13 +1093,13 @@
             <h3 class="section-title"><i class="fas fa-coins"></i> টাকা আয় করার উপায়</h3>
             
             <div class="action-buttons">
-                <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="watchAd()">
+                <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়সা)
                 </button>
-                <button class="btn btn-success" id="auto-ad-btn-earn" onclick="startAutoAds()">
+                <button class="btn btn-success" id="auto-ad-btn-earn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
                 </button>
-                <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="stopAutoAds()" disabled>
+                <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-stop"></i> বন্ধ করুন
                 </button>
             </div>
@@ -1063,7 +1110,7 @@
                 <div class="reward">
                     <i class="fas fa-coins"></i> পুরস্কার: ১ টাকা
                 </div>
-                <button class="btn btn-warning" id="daily-bonus-btn" onclick="claimDailyBonus()">
+                <button class="btn btn-warning" id="daily-bonus-btn" onclick="showMaintenanceNotice()" disabled>
                     <i class="fas fa-gift"></i> ডেইলি বোনাস নিন
                 </button>
                 <div id="bonus-timer-container" class="timer-container">
@@ -1107,10 +1154,10 @@
                     <i class="fas fa-info-circle"></i> <strong>খেলার নিয়ম:</strong> নিচের ছবিতে ট্যাপ করুন। প্রতি ১০০০ ট্যাপে ২০ পয়সা আয় করুন। নির্দিষ্ট ট্যাপে ওয়েবসাইটে রিডাইরেক্ট হবেন।
                 </div>
                 
-                <div class="tap-image-container" id="tap-area">
+                <div class="tap-image-container" id="tap-area" onclick="showMaintenanceNotice()">
                     <img src="https://cdn.dribbble.com/userupload/18939190/file/original-e7d75791497e24720983395d3e3d8b99.gif" alt="Tap to Earn" class="tap-image">
                     <div class="tap-overlay">
-                        <div>ট্যাপ করুন!</div>
+                        <div>সাময়িকভাবে বন্ধ</div>
                     </div>
                 </div>
                 
@@ -1217,15 +1264,21 @@
             
             <div class="notification-list">
                 <div class="stat-card">
-                    <h3><i class="fas fa-info-circle"></i> নতুন আপডেট</h3>
-                    <p>স্বয়ংক্রিয় বিজ্ঞাপন সিস্টেম চালু হয়েছে। এখন থেকে স্বয়ংক্রিয়ভাবে বিজ্ঞাপন দেখে টাকা আয় করতে পারবেন।</p>
-                    <small>২ দিন আগে</small>
+                    <h3><i class="fas fa-info-circle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
+                    <p>আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। যারা পেমেন্ট রিকুয়েস্ট পাঠিয়েছেন তাদেরকে ১০০% পেমেন্ট করা হবে।</p>
+                    <small>আজ</small>
+                </div>
+                
+                <div class="stat-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
+                    <p>আমরা কিছু ত্রুটি লক্ষ করতেছি যার ফলে আমরা আমাদের BOT বন্ধ করতে বাধ্য হয়েছি। প্রয়োজনে আমাদের টেলিগ্রাম চ্যানেলে যোগাযোগ করুন।</p>
+                    <small>আজ</small>
                 </div>
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-gamepad"></i> নতুন ফিচার</h3>
                     <p>গেমস সিস্টেম চালু হয়েছে। এখন থেকে গেমস খেলে প্রতি ঘন্টায় ২ টাকা আয় করতে পারবেন।</p>
-                    <small>আজ</small>
+                    <small>২ দিন আগে</small>
                 </div>
                 
                 <div class="stat-card">
@@ -1237,13 +1290,13 @@
                 <div class="stat-card">
                     <h3><i class="fas fa-link"></i> নতুন ফিচার</h3>
                     <p>ডাইরেক্ট লিংক ক্লিক সিস্টেম চালু হয়েছে। এখন থেকে লিংক ক্লিক করে অতিরিক্ত টাকা আয় করুন।</p>
-                    <small>আজ</small>
+                    <small>৩ দিন আগে</small>
                 </div>
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-gift"></i> নতুন ফিচার</h3>
                     <p>ডেইলি বোনাস সিস্টেম চালু হয়েছে। প্রতি ৩ দিন পরপর ১ টাকা বোনাস পান।</p>
-                    <small>আজ</small>
+                    <small>৫ দিন আগে</small>
                 </div>
             </div>
         </div>
@@ -1376,7 +1429,6 @@
             // Load user data
             loadUserData();
             updateUI();
-            checkAdReady();
             
             // টাইমার শুরু করুন
             startTimers();
@@ -1393,11 +1445,11 @@
             // উত্তোলনের ইতিহাস লোড করুন
             loadWithdrawHistory();
             
-            // ট্যাপ গেম ইনিশিয়ালাইজ করুন
-            initTapGame();
-            
             // উত্তোলন উপলব্ধতা চেক করুন
             checkWithdrawAvailability();
+            
+            // বট বন্ধের বার্তা দেখান
+            showMaintenanceNotice();
         }
 
         // বর্তমান তারিখ আপডেট করুন
@@ -1442,92 +1494,6 @@
             }
         }
 
-        // ট্যাপ গেম ইনিশিয়ালাইজ করুন
-        function initTapGame() {
-            const tapArea = document.getElementById('tap-area');
-            tapArea.addEventListener('click', handleTap);
-            
-            // ট্যাপ গেম UI আপডেট করুন
-            updateTapGameUI();
-        }
-
-        // ট্যাপ হ্যান্ডেল করুন
-        function handleTap() {
-            totalTaps++;
-            sessionTaps++;
-            
-            // ট্যাপ কাউন্ট আপডেট করুন
-            updateTapGameUI();
-            
-            // প্রতি 1000 ট্যাপে আয় যোগ করুন
-            if (totalTaps % 1000 === 0) {
-                tapEarnings += TAP_EARNING_RATE;
-                showNotification(`১০০০ ট্যাপ সম্পূর্ণ! ${TAP_EARNING_RATE} টাকা যোগ হয়েছে।`, 'success');
-                saveUserData();
-                updateUI();
-            }
-            
-            // রিডাইরেক্ট চেক করুন
-            if (sessionTaps >= nextRedirectAt) {
-                redirectToRandomWebsite();
-            }
-            
-            // অ্যানিমেশন এফেক্ট যোগ করুন
-            createTapAnimation();
-        }
-
-        // ট্যাপ গেম UI আপডেট করুন
-        function updateTapGameUI() {
-            document.getElementById('total-taps').textContent = totalTaps;
-            document.getElementById('session-taps').textContent = sessionTaps;
-            document.getElementById('tap-earnings').textContent = tapEarnings.toFixed(2);
-            document.getElementById('next-redirect').textContent = nextRedirectAt;
-            document.getElementById('redirect-count').textContent = nextRedirectAt;
-            
-            // প্রগ্রেস বার আপডেট করুন
-            const progressPercent = (totalTaps % 1000) / 10;
-            document.getElementById('tap-progress-fill').style.width = `${progressPercent}%`;
-        }
-
-        // র্যান্ডম ওয়েবসাইটে রিডাইরেক্ট করুন
-        function redirectToRandomWebsite() {
-            const randomIndex = Math.floor(Math.random() * REDIRECT_WEBSITES.length);
-            const website = REDIRECT_WEBSITES[randomIndex];
-            
-            // রিডাইরেক্ট কাউন্ট বাড়ান
-            redirectCount++;
-            
-            // পরবর্তী রিডাইরেক্ট পয়েন্ট সেট করুন (২০০-৪০০ এর মধ্যে র্যান্ডম)
-            nextRedirectAt = sessionTaps + Math.floor(Math.random() * 200) + 200;
-            
-            // ব্যবহারকারীকে ইনফর্ম করুন
-            showNotification(`রিডাইরেক্ট হচ্ছে... ${redirectCount}তম রিডাইরেক্ট`, 'info');
-            
-            // ২ সেকেন্ড পর রিডাইরেক্ট করুন
-            setTimeout(() => {
-                window.open(website, '_blank');
-            }, 2000);
-        }
-
-        // ট্যাপ অ্যানিমেশন তৈরি করুন
-        function createTapAnimation() {
-            const tapArea = document.getElementById('tap-area');
-            const rect = tapArea.getBoundingClientRect();
-            const x = rect.left + Math.random() * rect.width;
-            const y = rect.top + Math.random() * rect.height;
-            
-            const coin = document.createElement('div');
-            coin.className = 'coin-animation';
-            coin.innerHTML = '<i class="fas fa-hand-pointer"></i>';
-            coin.style.left = `${x}px`;
-            coin.style.top = `${y}px`;
-            document.body.appendChild(coin);
-            
-            setTimeout(() => {
-                document.body.removeChild(coin);
-            }, 1000);
-        }
-
         // পেজ দেখানোর ফাংশন
         function showPage(pageId, element) {
             // সব পেজ লুকান
@@ -1568,16 +1534,6 @@
             const newId = Math.floor(100000 + Math.random() * 900000);
             localStorage.setItem('userId', newId.toString());
             return newId.toString();
-        }
-
-        // Check if Monetag ad is ready
-        function checkAdReady() {
-            if (typeof window.show_9472189 !== 'function') {
-                document.getElementById('ad-status').innerHTML = '<i class="fas fa-spinner fa-spin"></i> বিজ্ঞাপন সিস্টেম লোড হচ্ছে...';
-                setTimeout(checkAdReady, 1000);
-            } else {
-                document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> বিজ্ঞাপন দেখতে প্রস্তুত';
-            }
         }
 
         // Load user data from localStorage
@@ -1708,20 +1664,12 @@
                 if (timeRemaining > 0) {
                     adLimitInfo.style.display = 'block';
                     document.getElementById('ad-limit-timer').textContent = formatTime(timeRemaining);
-                    document.getElementById('watch-ad-btn').disabled = true;
-                    document.getElementById('watch-ad-btn-earn').disabled = true;
-                    document.getElementById('auto-ad-btn').disabled = true;
-                    document.getElementById('auto-ad-btn-earn').disabled = true;
                     document.getElementById('ad-status').innerHTML = '<i class="fas fa-clock"></i> বিজ্ঞাপন লিমিট পূরণ হয়েছে। ২৪ ঘন্টা পরে আবার চেষ্টা করুন...';
                 } else {
                     // কুলডাউন শেষ
                     adLimitReached = false;
                     watchedAdsCount = 0;
                     adLimitInfo.style.display = 'none';
-                    document.getElementById('watch-ad-btn').disabled = false;
-                    document.getElementById('watch-ad-btn-earn').disabled = false;
-                    document.getElementById('auto-ad-btn').disabled = false;
-                    document.getElementById('auto-ad-btn-earn').disabled = false;
                     document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> বিজ্ঞাপন দেখতে প্রস্তুত';
                     saveUserData();
                 }
@@ -1732,142 +1680,17 @@
 
         // Function to watch an ad and earn cents
         function watchAd() {
-            if (isAdLoading) return;
-            
-            // বিজ্ঞাপন লিমিটেশন চেক করুন
-            if (watchedAdsCount >= AD_LIMIT) {
-                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২৪ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
-                return;
-            }
-            
-            if (typeof window.show_9472189 !== 'function') {
-                document.getElementById('ad-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> বিজ্ঞাপন সিস্টেম প্রস্তুত নয়। দয়া করে অপেক্ষা করুন...';
-                return;
-            }
-
-            isAdLoading = true;
-            document.getElementById('watch-ad-btn').disabled = true;
-            document.getElementById('watch-ad-btn-earn').disabled = true;
-            document.getElementById('ad-status').innerHTML = '<i class="fas fa-spinner fa-spin"></i> বিজ্ঞাপন লোড হচ্ছে...';
-            
-            try {
-                // Show the ad
-                window.show_9472189().then(() => {
-                    // Ad watched successfully
-                    watchedAdsCount++;
-                    userCents += CENTS_PER_AD;
-                    
-                    // Check if we have enough cents to convert to Taka
-                    if (userCents >= CENTS_TO_TAKA_RATE) {
-                        const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
-                        earnedCents += takaEarned;
-                        userCents %= CENTS_TO_TAKA_RATE;
-                    }
-                    
-                    // বিজ্ঞাপন লিমিটেশন চেক করুন
-                    if (watchedAdsCount >= AD_LIMIT) {
-                        adLimitReached = true;
-                        adLimitStartTime = Date.now();
-                        document.getElementById('ad-limit-info').style.display = 'block';
-                    }
-                    
-                    saveUserData();
-                    updateUI();
-                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> বিজ্ঞাপন সফলভাবে দেখা হয়েছে!';
-                    
-                    // Show coin animation
-                    createCoinAnimation();
-                    
-                    // Show success notification
-                    showNotification(`${CENTS_PER_AD} পয়সা যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
-                    
-                    // Check if earned enough for withdrawal
-                    if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
-                        showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
-                    }
-                    
-                    // If in auto mode, continue after delay
-                    if (isAutoMode) {
-                        setTimeout(() => {
-                            isAdLoading = false;
-                            document.getElementById('watch-ad-btn').disabled = false;
-                            document.getElementById('watch-ad-btn-earn').disabled = false;
-                            watchAd();
-                        }, 10000); // 10 seconds delay between auto ads
-                    } else {
-                        isAdLoading = false;
-                        document.getElementById('watch-ad-btn').disabled = false;
-                        document.getElementById('watch-ad-btn-earn').disabled = false;
-                    }
-                }).catch(error => {
-                    console.error('Error showing ad:', error);
-                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-times-circle"></i> বিজ্ঞাপন দেখানো যায়নি। আবার চেষ্টা করুন।';
-                    isAdLoading = false;
-                    document.getElementById('watch-ad-btn').disabled = false;
-                    document.getElementById('watch-ad-btn-earn').disabled = false;
-                    
-                    if (isAutoMode) {
-                        setTimeout(watchAd, 10000); // Retry after 10 seconds
-                    }
-                });
-            } catch (error) {
-                console.error('Error in ad system:', error);
-                document.getElementById('ad-status').innerHTML = '<i class="fas fa-exclamation-triangle"></i> বিজ্ঞাপন সিস্টেমে ত্রুটি। পৃষ্ঠাটি রিফ্রেশ করুন।';
-                isAdLoading = false;
-                document.getElementById('watch-ad-btn').disabled = false;
-                document.getElementById('watch-ad-btn-earn').disabled = false;
-            }
-        }
-
-        // Create coin animation
-        function createCoinAnimation() {
-            const button = document.getElementById('watch-ad-btn');
-            const rect = button.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            
-            const coin = document.createElement('div');
-            coin.className = 'coin-animation';
-            coin.innerHTML = '<i class="fas fa-coins"></i>';
-            coin.style.left = `${x}px`;
-            coin.style.top = `${y}px`;
-            document.body.appendChild(coin);
-            
-            setTimeout(() => {
-                document.body.removeChild(coin);
-            }, 1000);
+            showMaintenanceNotice();
         }
 
         // Start auto ads mode
         function startAutoAds() {
-            // বিজ্ঞাপন লিমিটেশন চেক করুন
-            if (watchedAdsCount >= AD_LIMIT) {
-                showNotification(`আপনি আজ ${AD_LIMIT}টি বিজ্ঞাপন দেখেছেন। ২৪ ঘন্টা পর আবার চেষ্টা করুন।`, 'error');
-                return;
-            }
-            
-            isAutoMode = true;
-            document.getElementById('auto-ad-btn').disabled = true;
-            document.getElementById('auto-ad-btn-earn').disabled = true;
-            document.getElementById('stop-auto-btn').disabled = false;
-            document.getElementById('stop-auto-btn-earn').disabled = false;
-            document.getElementById('watch-ad-btn').disabled = true;
-            document.getElementById('watch-ad-btn-earn').disabled = true;
-            document.getElementById('ad-status').innerHTML = '<i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন মোড চালু';
-            
-            watchAd(); // Start the first ad
+            showMaintenanceNotice();
         }
 
         // Stop auto ads mode
         function stopAutoAds() {
-            isAutoMode = false;
-            document.getElementById('auto-ad-btn').disabled = false;
-            document.getElementById('auto-ad-btn-earn').disabled = false;
-            document.getElementById('stop-auto-btn').disabled = true;
-            document.getElementById('stop-auto-btn-earn').disabled = true;
-            document.getElementById('watch-ad-btn').disabled = false;
-            document.getElementById('watch-ad-btn-earn').disabled = false;
-            document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> স্বয়ংক্রিয় বিজ্ঞাপন মোড বন্ধ';
+            showMaintenanceNotice();
         }
 
         // Show withdraw form
@@ -2059,31 +1882,7 @@
 
         // ডেইলি বোনাস ক্লেইম ফাংশন
         function claimDailyBonus() {
-            const now = Date.now();
-            
-            // যদি কুলডাউন সময় এখনও না হয়ে থাকে
-            if (lastBonusClaimTime > 0 && (now - lastBonusClaimTime) < BONUS_COOLDOWN) {
-                showNotification('আপনি ইতিমধ্যে বোনাস নিয়েছেন। পরবর্তী বোনাসের জন্য অপেক্ষা করুন।', 'error');
-                return;
-            }
-            
-            // বোনাস দিন
-            earnedCents += DAILY_BONUS_AMOUNT;
-            lastBonusClaimTime = now;
-            
-            saveUserData();
-            updateUI();
-            updateBonusButton();
-            
-            // কয়েন অ্যানিমেশন দেখান
-            createCoinAnimation();
-            
-            showNotification(`১ টাকা বোনাস যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
-            
-            // উত্তোলনের জন্য পর্যাপ্ত টাকা হলে নোটিফিকেশন
-            if (calculateTotalEarnings() >= MIN_WITHDRAW_TAKA) {
-                showNotification(`অভিনন্দন! আপনি উত্তোলনের জন্য ${MIN_WITHDRAW_TAKA} টাকা সংগ্রহ করেছেন।`, 'info');
-            }
+            showMaintenanceNotice();
         }
 
         // বোনাস বাটন আপডেট করুন
@@ -2104,7 +1903,7 @@
                 bonusCountdown.textContent = formatTime(cooldownRemaining);
             } else {
                 // বোনাস নেওয়ার জন্য প্রস্তুত
-                bonusButton.disabled = false;
+                bonusButton.disabled = true;
                 bonusButton.innerHTML = '<i class="fas fa-gift"></i> ডেইলি বোনাস নিন';
                 bonusTimerContainer.style.display = 'none';
             }
@@ -2355,6 +2154,11 @@
             } else {
                 showNotification('রিফ্রেশ করার জন্য পর্যাপ্ত পয়সা নেই।', 'info');
             }
+        }
+        
+        // মেইনটেনেন্স নোটিশ দেখান
+        function showMaintenanceNotice() {
+            showNotification('আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। দয়া করে কিছুক্ষণ পর আবার চেষ্টা করুন।', 'info');
         }
 
         // Initialize the app when page loads
