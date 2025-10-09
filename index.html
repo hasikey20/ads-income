@@ -876,13 +876,22 @@
         
         /* তারিখ প্রদর্শনের জন্য নতুন স্টাইল */
         .date-display {
-            text-align: center;
-            margin: 10px 15px;
+            background-color: rgba(0, 0, 0, 0.2);
             padding: 10px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px;
             font-size: 14px;
             color: var(--text-muted);
+        }
+        
+        .withdraw-notice {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px;
+            text-align: center;
         }
         
         .withdraw-gif {
@@ -891,15 +900,6 @@
             margin: 15px auto;
             border-radius: 10px;
             overflow: hidden;
-        }
-        
-        .withdraw-notice {
-            background: rgba(255, 193, 7, 0.2);
-            border-left: 4px solid var(--warning-color);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px;
-            text-align: center;
         }
         
         @media (max-width: 400px) {
@@ -926,7 +926,7 @@
         
         <!-- তারিখ প্রদর্শন -->
         <div class="date-display">
-            <i class="fas fa-calendar-alt"></i> আজ: <span id="current-date">লোড হচ্ছে...</span>
+            <i class="fas fa-calendar-alt"></i> আজকের তারিখ: <span id="current-date"></span>
         </div>
         
         <!-- বিজ্ঞাপন লিমিটেশন তথ্য -->
@@ -1134,72 +1134,55 @@
         <div class="page-section" id="withdraw-page">
             <h3 class="section-title"><i class="fas fa-wallet"></i> টাকা উত্তোলন</h3>
             
-            <!-- উত্তোলনের তারিখ চেক করুন -->
-            <div id="withdraw-date-check" style="display: none;">
-                <!-- উত্তোলনের তারিখ হলে এই অংশ দেখাবে -->
+            <!-- উত্তোলন নোটিশ -->
+            <div class="withdraw-notice">
+                <h3><i class="fas fa-info-circle"></i> উত্তোলন নিয়ম</h3>
+                <p>উত্তোলন শুধুমাত্র মাসের <strong>১০ ও ১১ তারিখে</strong> করা যাবে। উত্তোলন অনুরোধ করার পর তা <strong>৫ দিনের মধ্যে</strong> প্রসেস করা হবে।</p>
                 <div class="withdraw-gif">
-                    <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Available" style="width:100%; height:auto; border-radius:10px;">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Notice" style="width:100%; height:auto; border-radius:10px;">
                 </div>
-                
-                <div class="stat-card">
-                    <h3>মোট আয়</h3>
-                    <p id="total-earned-withdraw">0.00 <small>টাকা</small></p>
+                <p id="withdraw-availability"></p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>মোট আয়</h3>
+                <p id="total-earned-withdraw">0.00 <small>টাকা</small></p>
+            </div>
+            
+            <div class="withdraw-section" id="withdraw-section">
+                <div class="form-group">
+                    <label for="withdraw-amount">পরিমাণ (টাকা)</label>
+                    <input type="number" id="withdraw-amount" class="form-control" placeholder="টাকার পরিমাণ লিখুন" min="30">
                 </div>
-                
-                <div class="withdraw-section" id="withdraw-section">
-                    <div class="form-group">
-                        <label for="withdraw-amount">পরিমাণ (টাকা)</label>
-                        <input type="number" id="withdraw-amount" class="form-control" placeholder="টাকার পরিমাণ লিখুন" min="30">
-                    </div>
-                    <div class="form-group">
-                        <label for="payment-method">পেমেন্ট মাধ্যম</label>
-                        <select id="payment-method" class="form-control">
-                            <option value="" disabled selected>পেমেন্ট মাধ্যম নির্বাচন করুন</option>
-                            <option value="bkash">bKash</option>
-                            <option value="nagad">Nagad</option>
-                            <option value="rocket">Rocket</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="withdraw-phone">মোবাইল নম্বর</label>
-                        <input type="text" id="withdraw-phone" class="form-control" placeholder="01XXXXXXXXX" pattern="01[3-9]{1}[0-9]{8}">
-                    </div>
-                    <button class="btn btn-primary" onclick="withdrawPoints()">
-                        <i class="fas fa-paper-plane"></i> অনুরোধ পাঠান
-                    </button>
-                    <div id="withdraw-status"></div>
+                <div class="form-group">
+                    <label for="payment-method">পেমেন্ট মাধ্যম</label>
+                    <select id="payment-method" class="form-control">
+                        <option value="" disabled selected>পেমেন্ট মাধ্যম নির্বাচন করুন</option>
+                        <option value="bkash">bKash</option>
+                        <option value="nagad">Nagad</option>
+                        <option value="rocket">Rocket</option>
+                    </select>
                 </div>
-                
-                <div class="withdraw-history" id="withdraw-history">
-                    <h3 class="section-title"><i class="fas fa-history"></i> উত্তোলনের ইতিহাস</h3>
-                    <div id="withdraw-history-list">
-                        <!-- উত্তোলনের ইতিহাস এখানে যোগ হবে -->
-                    </div>
+                <div class="form-group">
+                    <label for="withdraw-phone">মোবাইল নম্বর</label>
+                    <input type="text" id="withdraw-phone" class="form-control" placeholder="01XXXXXXXXX" pattern="01[3-9]{1}[0-9]{8}">
                 </div>
-                
-                <div class="rate-info">
-                    <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
-                    <p><i class="fas fa-clock"></i> উত্তোলন প্রসেসিং সময়: ২৪-৪৮ ঘন্টা</p>
+                <button class="btn btn-primary" id="withdraw-submit-btn" onclick="withdrawPoints()">
+                    <i class="fas fa-paper-plane"></i> অনুরোধ পাঠান
+                </button>
+                <div id="withdraw-status"></div>
+            </div>
+            
+            <div class="withdraw-history" id="withdraw-history">
+                <h3 class="section-title"><i class="fas fa-history"></i> উত্তোলনের ইতিহাস</h3>
+                <div id="withdraw-history-list">
+                    <!-- উত্তোলনের ইতিহাস এখানে যোগ হবে -->
                 </div>
             </div>
             
-            <!-- উত্তোলনের তারিখ না হলে এই অংশ দেখাবে -->
-            <div id="withdraw-not-available" style="display: none;">
-                <div class="withdraw-gif">
-                    <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Not Available" style="width:100%; height:auto; border-radius:10px;">
-                </div>
-                
-                <div class="withdraw-notice">
-                    <h3><i class="fas fa-exclamation-triangle"></i> উত্তোলন সেবা বর্তমানে সক্রিয় নেই</h3>
-                    <p>উত্তোলন সেবা শুধুমাত্র মাসের ১০ এবং ১১ তারিখে পাওয়া যায়।</p>
-                    <p>বর্তমান তারিখ: <span id="current-withdraw-date">লোড হচ্ছে...</span></p>
-                    <p>পরবর্তী উত্তোলনের তারিখ: <span id="next-withdraw-date">লোড হচ্ছে...</span></p>
-                </div>
-                
-                <div class="rate-info">
-                    <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
-                    <p><i class="fas fa-calendar-alt"></i> উত্তোলনের তারিখ: প্রতি মাসের ১০ এবং ১১ তারিখ</p>
-                </div>
+            <div class="rate-info">
+                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
+                <p><i class="fas fa-clock"></i> উত্তোলন প্রসেসিং সময়: ৫ দিন</p>
             </div>
         </div>
         
@@ -1235,8 +1218,8 @@
             <div class="notification-list">
                 <div class="stat-card">
                     <h3><i class="fas fa-info-circle"></i> নতুন আপডেট</h3>
-                    <p>উত্তোলন সেবা এখন শুধুমাত্র মাসের ১০ এবং ১১ তারিখে পাওয়া যাবে। দয়া করে এই তারিখগুলোতে উত্তোলনের জন্য আবেদন করুন।</p>
-                    <small>আজ</small>
+                    <p>স্বয়ংক্রিয় বিজ্ঞাপন সিস্টেম চালু হয়েছে। এখন থেকে স্বয়ংক্রিয়ভাবে বিজ্ঞাপন দেখে টাকা আয় করতে পারবেন।</p>
+                    <small>২ দিন আগে</small>
                 </div>
                 
                 <div class="stat-card">
@@ -1332,7 +1315,7 @@
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
         const AD_LIMIT = 100; // বিজ্ঞাপন দেখার লিমিট (100টি)
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-        const WITHDRAW_PROCESSING_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        const WITHDRAW_PROCESSING_TIME = 5 * 24 * 60 * 60 * 1000; // 5 days in milliseconds (5 দিন)
         
         // ট্যাপ গেম কনস্ট্যান্টস
         const TAP_EARNING_RATE = 0.20; // প্রতি 1000 ট্যাপে 20 পয়সা
@@ -1387,6 +1370,9 @@
             document.getElementById('user-id').textContent = userId;
             document.getElementById('user-avatar').textContent = userId.charAt(0).toUpperCase();
             
+            // তারিখ আপডেট করুন
+            updateCurrentDate();
+            
             // Load user data
             loadUserData();
             updateUI();
@@ -1410,79 +1396,49 @@
             // ট্যাপ গেম ইনিশিয়ালাইজ করুন
             initTapGame();
             
-            // তারিখ আপডেট করুন
-            updateDateTime();
+            // উত্তোলন উপলব্ধতা চেক করুন
+            checkWithdrawAvailability();
         }
 
-        // তারিখ এবং সময় আপডেট করুন
-        function updateDateTime() {
+        // বর্তমান তারিখ আপডেট করুন
+        function updateCurrentDate() {
             const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            
-            const formattedDate = now.toLocaleDateString('bn-BD', options);
-            document.getElementById('current-date').textContent = formattedDate;
-            
-            // উত্তোলন পৃষ্ঠার জন্য তারিখ আপডেট করুন
-            if (document.getElementById('withdraw-page').classList.contains('active')) {
-                updateWithdrawPageDate();
-            }
+            const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+            const dateString = now.toLocaleDateString('bn-BD', options);
+            document.getElementById('current-date').textContent = dateString;
         }
 
-        // উত্তোলন পৃষ্ঠার তারিখ আপডেট করুন
-        function updateWithdrawPageDate() {
+        // উত্তোলন উপলব্ধতা চেক করুন
+        function checkWithdrawAvailability() {
             const now = new Date();
             const currentDay = now.getDate();
+            const withdrawSubmitBtn = document.getElementById('withdraw-submit-btn');
+            const withdrawAvailability = document.getElementById('withdraw-availability');
             
-            // বর্তমান তারিখ ফরম্যাট করুন
-            const options = { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric'
-            };
-            const formattedDate = now.toLocaleDateString('bn-BD', options);
-            document.getElementById('current-withdraw-date').textContent = formattedDate;
-            
-            // পরবর্তী উত্তোলনের তারিখ গণনা করুন
-            let nextWithdrawDate = new Date(now);
-            if (currentDay <= 10) {
-                nextWithdrawDate.setDate(10);
-            } else if (currentDay <= 11) {
-                nextWithdrawDate.setDate(11);
+            // মাসের ১০ এবং ১১ তারিখে উত্তোলন সক্রিয়
+            if (currentDay === 10 || currentDay === 11) {
+                withdrawSubmitBtn.disabled = false;
+                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> উত্তোলন সক্রিয়! আজ উত্তোলন করতে পারেন।';
+                withdrawAvailability.style.color = 'var(--success-color)';
             } else {
-                nextWithdrawDate.setMonth(nextWithdrawDate.getMonth() + 1);
-                nextWithdrawDate.setDate(10);
-            }
-            
-            const nextFormattedDate = nextWithdrawDate.toLocaleDateString('bn-BD', options);
-            document.getElementById('next-withdraw-date').textContent = nextFormattedDate;
-            
-            // উত্তোলনের তারিখ চেক করুন
-            checkWithdrawDate();
-        }
-
-        // উত্তোলনের তারিখ চেক করুন
-        function checkWithdrawDate() {
-            const now = new Date();
-            const currentDay = now.getDate();
-            const isWithdrawDate = (currentDay === 10 || currentDay === 11);
-            
-            const withdrawDateCheck = document.getElementById('withdraw-date-check');
-            const withdrawNotAvailable = document.getElementById('withdraw-not-available');
-            
-            if (isWithdrawDate) {
-                withdrawDateCheck.style.display = 'block';
-                withdrawNotAvailable.style.display = 'none';
-            } else {
-                withdrawDateCheck.style.display = 'none';
-                withdrawNotAvailable.style.display = 'block';
+                withdrawSubmitBtn.disabled = true;
+                
+                // পরবর্তী উত্তোলনের তারিখ গণনা করুন
+                let nextWithdrawDay, nextWithdrawMonth;
+                if (currentDay < 10) {
+                    nextWithdrawDay = 10;
+                    nextWithdrawMonth = now.getMonth();
+                } else {
+                    nextWithdrawDay = 10;
+                    nextWithdrawMonth = now.getMonth() + 1;
+                }
+                
+                const nextWithdrawDate = new Date(now.getFullYear(), nextWithdrawMonth, nextWithdrawDay);
+                const timeUntilNextWithdraw = nextWithdrawDate - now;
+                const daysUntilNextWithdraw = Math.ceil(timeUntilNextWithdraw / (1000 * 60 * 60 * 24));
+                
+                withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> উত্তোলন বন্ধ। পরবর্তী উত্তোলন ${nextWithdrawDay} তারিখে, ${daysUntilNextWithdraw} দিন বাকি।`;
+                withdrawAvailability.style.color = 'var(--warning-color)';
             }
         }
 
@@ -1594,7 +1550,7 @@
             if (pageId === 'withdraw-page') {
                 document.getElementById('total-earned-withdraw').textContent = calculateTotalEarnings().toFixed(2);
                 loadWithdrawHistory();
-                updateWithdrawPageDate();
+                checkWithdrawAvailability();
             }
             
             // আর্ন পেজে গেলে ডেটা আপডেট করুন
@@ -1940,22 +1896,20 @@
 
         // Handle withdrawal request
         function withdrawPoints() {
+            const now = new Date();
+            const currentDay = now.getDate();
+            
+            // উত্তোলন শুধুমাত্র ১০ এবং ১১ তারিখে করা যাবে
+            if (currentDay !== 10 && currentDay !== 11) {
+                showNotification('উত্তোলন শুধুমাত্র মাসের ১০ ও ১১ তারিখে করা যাবে।', 'error');
+                return;
+            }
+            
             const amount = parseFloat(document.getElementById('withdraw-amount').value);
             const paymentMethod = document.getElementById('payment-method').value;
             const phoneNumber = document.getElementById('withdraw-phone').value;
             const totalEarnings = calculateTotalEarnings();
             const withdrawStatus = document.getElementById('withdraw-status');
-            
-            // উত্তোলনের তারিখ চেক করুন
-            const now = new Date();
-            const currentDay = now.getDate();
-            const isWithdrawDate = (currentDay === 10 || currentDay === 11);
-            
-            if (!isWithdrawDate) {
-                withdrawStatus.textContent = 'উত্তোলন সেবা শুধুমাত্র মাসের ১০ এবং ১১ তারিখে পাওয়া যায়।';
-                withdrawStatus.className = 'error-message';
-                return;
-            }
             
             // Validate inputs
             if (!amount || isNaN(amount)) {
@@ -2045,7 +1999,7 @@
             sendWithdrawRequestToAdmin(message);
             
             // Show success message
-            withdrawStatus.textContent = 'উত্তোলন অনুরোধ সফলভাবে জমা দেওয়া হয়েছে! প্রসেসিং করতে ২৪-৪৮ ঘন্টা সময় লাগতে পারে।';
+            withdrawStatus.textContent = 'উত্তোলন অনুরোধ সফলভাবে জমা দেওয়া হয়েছে! প্রসেসিং করতে ৫ দিন সময় লাগতে পারে।';
             withdrawStatus.className = 'success-message';
             
             // Show notification
@@ -2091,11 +2045,16 @@
 
         // সময় ফরম্যাট করার ফাংশন
         function formatTime(milliseconds) {
-            const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+            const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
             
-            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (days > 0) {
+                return `${days} দিন ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
         }
 
         // ডেইলি বোনাস ক্লেইম ফাংশন
@@ -2270,6 +2229,11 @@
 
         // টাইমার শুরু করুন
         function startTimers() {
+            // তারিখ আপডেট করুন
+            setInterval(() => {
+                updateCurrentDate();
+            }, 60000); // প্রতি মিনিটে আপডেট
+            
             // লিংক পরিবর্তন টাইমার
             setInterval(() => {
                 updateLinkChangeTimer();
@@ -2288,11 +2252,6 @@
             // উত্তোলনের ইতিহাস টাইমার
             setInterval(() => {
                 updateWithdrawHistoryTimers();
-            }, 1000);
-            
-            // তারিখ এবং সময় আপডেট টাইমার
-            setInterval(() => {
-                updateDateTime();
             }, 1000);
         }
 
@@ -2324,6 +2283,10 @@
                 const timeRemaining = Math.max(0, withdraw.processingTime - timeElapsed);
                 const isPaid = timeRemaining <= 0;
                 
+                // তারিখ ফরম্যাট করুন
+                const requestDate = new Date(withdraw.timestamp);
+                const dateString = requestDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+                
                 historyItem.innerHTML = `
                     <div class="withdraw-history-header">
                         <div class="withdraw-amount">${withdraw.amount} টাকা</div>
@@ -2333,6 +2296,9 @@
                     </div>
                     <div class="withdraw-details">
                         মাধ্যম: ${withdraw.paymentMethod.toUpperCase()} | ফোন: ${withdraw.phoneNumber}
+                    </div>
+                    <div class="withdraw-details">
+                        তারিখ: ${dateString}
                     </div>
                     ${!isPaid ? `
                         <div class="withdraw-timer">
