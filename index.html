@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>টাকা আয় করুন - বিজ্ঞাপন দেখুন</title>
+    <title>Task Solve Money - Earn Binance SHIB Tokens</title>
     <script src='//libtl.com/sdk.js' data-zone='9472189' data-sdk='show_9472189'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -35,7 +35,7 @@
             display: flex;
             flex-direction: column;
             padding: 15px;
-            padding-bottom: 70px; /* নেভিগেশন বারের জন্য স্থান */
+            padding-bottom: 70px;
         }
         
         .container {
@@ -48,44 +48,6 @@
             overflow: hidden;
             padding-bottom: 20px;
             backdrop-filter: blur(10px);
-        }
-        
-        .notice-bar {
-            background: linear-gradient(to right, var(--warning-color), #ff7e5f);
-            color: #000;
-            padding: 15px;
-            text-align: center;
-            border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
-        
-        .notice-bar h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .notice-bar p {
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        
-        .telegram-btn {
-            display: inline-block;
-            background: #0088cc;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .telegram-btn:hover {
-            background: #0077b5;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .header {
@@ -109,6 +71,15 @@
             margin: 10px auto;
             border-radius: 10px;
             overflow: hidden;
+            position: relative;
+            height: 150px;
+        }
+        
+        .header-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
         
         .badge {
@@ -411,7 +382,6 @@
             animation: coinAnimation 1s forwards;
         }
         
-        /* নেভিগেশন বার স্টাইল */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -453,7 +423,6 @@
             color: var(--primary-color);
         }
         
-        /* পেজ সেকশন স্টাইল */
         .page-section {
             display: none;
         }
@@ -462,7 +431,6 @@
             display: block;
         }
         
-        /* বিজ্ঞাপন কন্টেইনার স্টাইল */
         .ad-container {
             margin: 15px;
             display: flex;
@@ -474,7 +442,6 @@
             overflow: hidden;
         }
         
-        /* ট্যাপ গেম স্টাইল */
         .tap-game-container {
             margin: 15px;
             background-color: var(--card-bg);
@@ -598,7 +565,6 @@
             color: var(--text-muted);
         }
         
-        /* ওয়েবসাইট ভিজিট কার্ড স্টাইল */
         .website-card, .task-card, .bonus-card {
             margin-bottom: 15px;
         }
@@ -657,7 +623,6 @@
             text-decoration: underline;
         }
         
-        /* সাপোর্ট চ্যাট স্টাইল */
         .support-chat-btn {
             position: fixed;
             bottom: 80px;
@@ -838,7 +803,6 @@
             overflow: hidden;
         }
         
-        /* উত্তোলন ইতিহাস স্টাইল */
         .withdraw-history {
             margin: 15px;
         }
@@ -912,7 +876,6 @@
             align-items: center;
         }
         
-        /* তারিখ প্রদর্শনের জন্য নতুন স্টাইল */
         .date-display {
             background-color: rgba(0, 0, 0, 0.2);
             padding: 10px;
@@ -940,6 +903,102 @@
             overflow: hidden;
         }
         
+        .admin-info-section {
+            margin: 15px;
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .admin-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .admin-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .admin-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .admin-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .admin-link i {
+            margin-right: 8px;
+        }
+        
+        .youtube-link {
+            background: linear-gradient(to right, #ff0000, #cc0000);
+            color: white;
+        }
+        
+        .telegram-link {
+            background: linear-gradient(to right, #0088cc, #006699);
+            color: white;
+        }
+        
+        .proof-link {
+            background: linear-gradient(to right, var(--success-color), #11998e);
+            color: white;
+        }
+        
+        @keyframes slide {
+            0% { opacity: 0; transform: translateX(-100%); }
+            10% { opacity: 1; transform: translateX(0); }
+            40% { opacity: 1; transform: translateX(0); }
+            50% { opacity: 0; transform: translateX(100%); }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
+        
+        .sliding-banner {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .sliding-banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            animation: slide 10s infinite;
+        }
+        
+        .sliding-banner img:nth-child(2) {
+            animation-delay: 5s;
+        }
+        
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
@@ -953,38 +1012,32 @@
 </head>
 <body>
     <div class="container">
-        <!-- গুরুত্বপূর্ণ নোটিশ বার -->
-        <div class="notice-bar">
-            <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
-            <p>আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। যারা পেমেন্ট রিকুয়েস্ট পাঠিয়েছেন তাদেরকে ১০০% পেমেন্ট করা হবে। আমরা কিছু ত্রুটি লক্ষ করতেছি যার ফলে আমরা আমাদের BOT বন্ধ করতে বাধ্য হয়েছি। প্রয়োজনে আমাদের টেলিগ্রাম চ্যানেলে যোগাযোগ করুন।</p>
-            <a href="https://t.me/TASKSOIVEMONEY" target="_blank" class="telegram-btn">
-                <i class="fab fa-telegram"></i> টেলিগ্রাম চ্যানেলে যোগ দিন
-            </a>
-        </div>
-        
         <div class="header">
-            <h1>টাকা আয় করুন - বিজ্ঞাপন দেখুন</h1>
-            <p>বিজ্ঞাপন দেখে এবং গেমস খেলে আয় করুন</p>
+            <h1>Task Solve Money - Earn SHIB Tokens</h1>
+            <p>Watch ads and play games to earn Binance SHIB tokens</p>
             <div class="header-gif">
-                <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU3bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF" style="width:100%; height:auto; border-radius:10px;">
+                <div class="sliding-banner">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU3bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyOXVkOG80YWh0ejNhcHpqemIyb290dTduejRxeTA1MGp3ODk2ZjhqNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/sTb0uNOyWohZTvQQLc/giphy.gif" alt="GIF">
+                </div>
             </div>
-            <div class="badge">সক্রিয়</div>
+            <div class="badge">Active</div>
         </div>
         
-        <!-- তারিখ প্রদর্শন -->
+        <!-- Date display -->
         <div class="date-display">
-            <i class="fas fa-calendar-alt"></i> আজকের তারিখ: <span id="current-date"></span>
+            <i class="fas fa-calendar-alt"></i> Today's Date: <span id="current-date"></span>
         </div>
         
-        <!-- বিজ্ঞাপন লিমিটেশন তথ্য -->
+        <!-- Ad limit info -->
         <div class="ad-limit-info" id="ad-limit-info">
             <div class="ad-limit-gif">
                 <img src="https://cdn.dribbble.com/userupload/19657679/file/original-0c6e70ffeb364a783ed502abd4c48e12.gif" alt="Limit Reached" style="width:100%; height:auto; border-radius:10px;">
             </div>
-            <p><i class="fas fa-exclamation-triangle"></i> আপনি আজ 100টি বিজ্ঞাপন দেখেছেন। পরবর্তী 100টি বিজ্ঞাপন দেখতে <span id="ad-limit-timer">২৪:০০:০০</span> অপেক্ষা করুন।</p>
+            <p><i class="fas fa-exclamation-triangle"></i> You have watched 100 ads today. Wait for <span id="ad-limit-timer">24:00:00</span> to watch the next 100 ads.</p>
         </div>
         
-        <!-- হেডার এর নিচে প্রথম বিজ্ঞাপন -->
+        <!-- First ad after header -->
         <div class="ad-container">
             <center>
                 <script type="text/javascript">
@@ -1000,20 +1053,20 @@
             </center>
         </div>
         
-        <!-- হোম পেজ -->
+        <!-- Home Page -->
         <div class="page-section active" id="home-page">
             <div class="user-card">
                 <div class="user-info-container">
                     <div class="user-avatar" id="user-avatar">U</div>
                     <div class="user-info">
-                        <h3 id="user-name">ব্যবহারকারী</h3>
-                        <p>আইডি: <span id="user-id">12345</span></p>
+                        <h3 id="user-name">User</h3>
+                        <p>ID: <span id="user-id">12345</span></p>
                     </div>
                 </div>
                 <div class="balance-container">
                     <div class="user-info">
-                        <h3>ব্যালেন্স</h3>
-                        <p id="user-balance">0.00 <small>টাকা</small></p>
+                        <h3>Balance</h3>
+                        <p id="user-balance">0 <small>SHIB</small></p>
                     </div>
                     <button class="refresh-btn" onclick="refreshBalance()">
                         <i class="fas fa-sync-alt"></i>
@@ -1023,49 +1076,49 @@
             
             <div class="stats-container">
                 <div class="stat-card">
-                    <h3>পয়েন্ট</h3>
-                    <p id="user-points">0</p>
+                    <h3>Total Tokens</h3>
+                    <p id="user-tokens">0</p>
                 </div>
                 <div class="stat-card">
-                    <h3>আয়কৃত টাকা</h3>
-                    <p id="earned-money">0.00 <small>টাকা</small></p>
+                    <h3>Earned Tokens</h3>
+                    <p id="earned-tokens">0 <small>SHIB</small></p>
                 </div>
             </div>
             
             <div class="progress-container">
                 <div class="progress-header">
-                    <h3>আজকের অগ্রগতি</h3>
-                    <span id="ads-progress">0/100 বিজ্ঞাপন</span>
+                    <h3>Withdrawal Progress</h3>
+                    <span id="withdraw-progress">0/10000 SHIB</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
                 </div>
                 <div class="progress-text">
-                    <span>0 টাকা</span>
-                    <span>30 টাকা</span>
+                    <span>0 SHIB</span>
+                    <span>10000 SHIB</span>
                 </div>
             </div>
             
             <div class="ad-status" id="ad-status">
-                <i class="fas fa-times-circle"></i> বট উন্নয়নের জন্য সাময়িকভাবে বন্ধ
+                <i class="fas fa-check-circle"></i> Ready to watch ads
             </div>
             
             <div class="action-buttons">
-                <button class="btn btn-primary" id="watch-ad-btn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন
+                <button class="btn btn-primary" id="watch-ad-btn" onclick="watchAd()">
+                    <i class="fas fa-play"></i> Watch Ad
                 </button>
-                <button class="btn btn-success" id="auto-ad-btn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
+                <button class="btn btn-success" id="auto-ad-btn" onclick="startAutoAds()">
+                    <i class="fas fa-robot"></i> Auto Ads
                 </button>
-                <button class="btn btn-danger" id="stop-auto-btn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-stop"></i> বন্ধ করুন
+                <button class="btn btn-danger" id="stop-auto-btn" onclick="stopAutoAds()" disabled>
+                    <i class="fas fa-stop"></i> Stop
                 </button>
                 <button class="btn btn-secondary" onclick="showWithdrawForm()">
-                    <i class="fas fa-wallet"></i> টাকা উত্তোলন
+                    <i class="fas fa-wallet"></i> Withdraw
                 </button>
             </div>
             
-            <!-- পৃষ্ঠার মাঝখানে দ্বিতীয় বিজ্ঞাপন -->
+            <!-- Second ad in the middle -->
             <div class="ad-container">
                 <center>
                     <script type="text/javascript">
@@ -1082,82 +1135,82 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
-                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
-                <p><i class="fas fa-gamepad"></i> প্রতি ১ ঘন্টা গেমস খেলা = 2 টাকা</p>
+                <p><i class="fas fa-ad"></i> Per ad = 15 SHIB tokens</p>
+                <p><i class="fas fa-money-bill-wave"></i> Minimum withdrawal: 10000 SHIB</p>
+                <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
             </div>
         </div>
         
-        <!-- আর্ন পেজ -->
+        <!-- Earn Page -->
         <div class="page-section" id="earn-page">
-            <h3 class="section-title"><i class="fas fa-coins"></i> টাকা আয় করার উপায়</h3>
+            <h3 class="section-title"><i class="fas fa-coins"></i> Ways to Earn SHIB Tokens</h3>
             
             <div class="action-buttons">
-                <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-play"></i> বিজ্ঞাপন দেখুন (10 পয়সা)
+                <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="watchAd()">
+                    <i class="fas fa-play"></i> Watch Ad (15 SHIB)
                 </button>
-                <button class="btn btn-success" id="auto-ad-btn-earn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-robot"></i> স্বয়ংক্রিয় বিজ্ঞাপন
+                <button class="btn btn-success" id="auto-ad-btn-earn" onclick="startAutoAds()">
+                    <i class="fas fa-robot"></i> Auto Ads
                 </button>
-                <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-stop"></i> বন্ধ করুন
+                <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="stopAutoAds()" disabled>
+                    <i class="fas fa-stop"></i> Stop
                 </button>
             </div>
             
             <div class="bonus-card">
-                <h3 class="section-title"><i class="fas fa-gift"></i> ডেইলি বোনাস</h3>
-                <p>প্রতি ৩ দিন পরপর ১ টাকা বোনাস পান। বোনাস নেওয়ার পর পরবর্তী বোনাসের জন্য ৩ দিন অপেক্ষা করুন।</p>
+                <h3 class="section-title"><i class="fas fa-gift"></i> Daily Bonus</h3>
+                <p>Get 10 SHIB tokens every 3 days. After claiming the bonus, wait 3 days for the next bonus.</p>
                 <div class="reward">
-                    <i class="fas fa-coins"></i> পুরস্কার: ১ টাকা
+                    <i class="fas fa-coins"></i> Reward: 10 SHIB tokens
                 </div>
-                <button class="btn btn-warning" id="daily-bonus-btn" onclick="showMaintenanceNotice()" disabled>
-                    <i class="fas fa-gift"></i> ডেইলি বোনাস নিন
+                <button class="btn btn-warning" id="daily-bonus-btn" onclick="claimDailyBonus()">
+                    <i class="fas fa-gift"></i> Claim Daily Bonus
                 </button>
                 <div id="bonus-timer-container" class="timer-container">
-                    <div class="timer" id="bonus-countdown">৭২:০০:০০</div>
-                    <div class="timer-message">পরবর্তী বোনাস পাওয়ার জন্য অপেক্ষা করুন</div>
+                    <div class="timer" id="bonus-countdown">72:00:00</div>
+                    <div class="timer-message">Wait for next bonus</div>
                 </div>
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> প্রতি বিজ্ঞাপন = 10 পয়সা (100 পয়সা = 1 টাকা)</p>
-                <p><i class="fas fa-gamepad"></i> প্রতি ১ ঘন্টা গেমস খেলা = 2 টাকা</p>
-                <p><i class="fas fa-gift"></i> ডেইলি বোনাস = 1 টাকা (প্রতি 3 দিন পরপর)</p>
+                <p><i class="fas fa-ad"></i> Per ad = 15 SHIB tokens</p>
+                <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
+                <p><i class="fas fa-gift"></i> Daily Bonus = 10 SHIB (every 3 days)</p>
             </div>
         </div>
         
-        <!-- গেমস পেজ -->
+        <!-- Games Page -->
         <div class="page-section" id="games-page">
-            <h3 class="section-title"><i class="fas fa-gamepad"></i> ট্যাপ করে আয় করুন</h3>
+            <h3 class="section-title"><i class="fas fa-gamepad"></i> Tap to Earn SHIB</h3>
             
             <div class="tap-game-container">
                 <div class="tap-stats">
                     <div class="tap-stat-card">
                         <div class="tap-stat-value" id="total-taps">0</div>
-                        <div class="tap-stat-label">মোট ট্যাপ</div>
+                        <div class="tap-stat-label">Total Taps</div>
                     </div>
                     <div class="tap-stat-card">
                         <div class="tap-stat-value" id="session-taps">0</div>
-                        <div class="tap-stat-label">সেশন ট্যাপ</div>
+                        <div class="tap-stat-label">Session Taps</div>
                     </div>
                     <div class="tap-stat-card">
-                        <div class="tap-stat-value" id="tap-earnings">0.00</div>
-                        <div class="tap-stat-label">টাকা আয়</div>
+                        <div class="tap-stat-value" id="tap-earnings">0</div>
+                        <div class="tap-stat-label">SHIB Earned</div>
                     </div>
                     <div class="tap-stat-card">
                         <div class="tap-stat-value" id="next-redirect">200</div>
-                        <div class="tap-stat-label">পরবর্তী রিডাইরেক্ট</div>
+                        <div class="tap-stat-label">Next Redirect</div>
                     </div>
                 </div>
                 
                 <div class="tap-instruction">
-                    <i class="fas fa-info-circle"></i> <strong>খেলার নিয়ম:</strong> নিচের ছবিতে ট্যাপ করুন। প্রতি ১০০০ ট্যাপে ২০ পয়সা আয় করুন। নির্দিষ্ট ট্যাপে ওয়েবসাইটে রিডাইরেক্ট হবেন।
+                    <i class="fas fa-info-circle"></i> <strong>Game Rules:</strong> Tap on the image below. Earn 10 SHIB tokens for every 1000 taps. You will be redirected to a website at specific tap counts.
                 </div>
                 
-                <div class="tap-image-container" id="tap-area" onclick="showMaintenanceNotice()">
+                <div class="tap-image-container" id="tap-area">
                     <img src="https://cdn.dribbble.com/userupload/18939190/file/original-e7d75791497e24720983395d3e3d8b99.gif" alt="Tap to Earn" class="tap-image">
                     <div class="tap-overlay">
-                        <div>সাময়িকভাবে বন্ধ</div>
+                        <div>Tap Here!</div>
                     </div>
                 </div>
                 
@@ -1166,25 +1219,25 @@
                         <div class="progress-tap-fill" id="tap-progress-fill"></div>
                     </div>
                     <div class="progress-tap-text">
-                        <span>0 ট্যাপ</span>
-                        <span>1000 ট্যাপ</span>
+                        <span>0 Taps</span>
+                        <span>1000 Taps</span>
                     </div>
                 </div>
                 
                 <div class="redirect-info" id="redirect-info">
-                    <i class="fas fa-external-link-alt"></i> পরবর্তী রিডাইরেক্ট: <span id="redirect-count">200</span> ট্যাপে
+                    <i class="fas fa-external-link-alt"></i> Next redirect at: <span id="redirect-count">200</span> taps
                 </div>
             </div>
         </div>
         
-        <!-- উত্তোলন পেজ -->
+        <!-- Withdraw Page -->
         <div class="page-section" id="withdraw-page">
-            <h3 class="section-title"><i class="fas fa-wallet"></i> টাকা উত্তোলন</h3>
+            <h3 class="section-title"><i class="fas fa-wallet"></i> Withdraw SHIB Tokens</h3>
             
-            <!-- উত্তোলন নোটিশ -->
+            <!-- Withdrawal notice -->
             <div class="withdraw-notice">
-                <h3><i class="fas fa-info-circle"></i> উত্তোলন নিয়ম</h3>
-                <p>উত্তোলন শুধুমাত্র মাসের <strong>১০ ও ১১ তারিখে</strong> করা যাবে। উত্তোলন অনুরোধ করার পর তা <strong>৫ দিনের মধ্যে</strong> প্রসেস করা হবে।</p>
+                <h3><i class="fas fa-info-circle"></i> Withdrawal Rules</h3>
+                <p>Withdrawal is available only on the <strong>7th day of each week</strong> (Sunday). After submitting a withdrawal request, it will be processed within <strong>2 days</strong>.</p>
                 <div class="withdraw-gif">
                     <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Notice" style="width:100%; height:auto; border-radius:10px;">
                 </div>
@@ -1192,57 +1245,54 @@
             </div>
             
             <div class="stat-card">
-                <h3>মোট আয়</h3>
-                <p id="total-earned-withdraw">0.00 <small>টাকা</small></p>
+                <h3>Total Earned</h3>
+                <p id="total-earned-withdraw">0 <small>SHIB</small></p>
             </div>
             
             <div class="withdraw-section" id="withdraw-section">
                 <div class="form-group">
-                    <label for="withdraw-amount">পরিমাণ (টাকা)</label>
-                    <input type="number" id="withdraw-amount" class="form-control" placeholder="টাকার পরিমাণ লিখুন" min="30">
+                    <label for="withdraw-amount">Amount (SHIB)</label>
+                    <input type="number" id="withdraw-amount" class="form-control" placeholder="Enter amount" min="10000">
                 </div>
                 <div class="form-group">
-                    <label for="payment-method">পেমেন্ট মাধ্যম</label>
-                    <select id="payment-method" class="form-control">
-                        <option value="" disabled selected>পেমেন্ট মাধ্যম নির্বাচন করুন</option>
-                        <option value="bkash">bKash</option>
-                        <option value="nagad">Nagad</option>
-                        <option value="rocket">Rocket</option>
+                    <label for="payment-method">Payment Method</label>
+                    <select id="payment-method" class="form-control" disabled>
+                        <option value="shib" selected>Binance SHIB Token (ERC-20)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="withdraw-phone">মোবাইল নম্বর</label>
-                    <input type="text" id="withdraw-phone" class="form-control" placeholder="01XXXXXXXXX" pattern="01[3-9]{1}[0-9]{8}">
+                    <label for="withdraw-address">Binance SHIB Address</label>
+                    <input type="text" id="withdraw-address" class="form-control" placeholder="Enter your Binance SHIB address">
                 </div>
-                <button class="btn btn-primary" id="withdraw-submit-btn" onclick="withdrawPoints()">
-                    <i class="fas fa-paper-plane"></i> অনুরোধ পাঠান
+                <button class="btn btn-primary" id="withdraw-submit-btn" onclick="withdrawTokens()">
+                    <i class="fas fa-paper-plane"></i> Submit Request
                 </button>
                 <div id="withdraw-status"></div>
             </div>
             
             <div class="withdraw-history" id="withdraw-history">
-                <h3 class="section-title"><i class="fas fa-history"></i> উত্তোলনের ইতিহাস</h3>
+                <h3 class="section-title"><i class="fas fa-history"></i> Withdrawal History</h3>
                 <div id="withdraw-history-list">
-                    <!-- উত্তোলনের ইতিহাস এখানে যোগ হবে -->
+                    <!-- Withdrawal history will be added here -->
                 </div>
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-money-bill-wave"></i> ন্যূনতম উত্তোলন: ৩০ টাকা</p>
-                <p><i class="fas fa-clock"></i> উত্তোলন প্রসেসিং সময়: ৫ দিন</p>
+                <p><i class="fas fa-money-bill-wave"></i> Minimum withdrawal: 10000 SHIB</p>
+                <p><i class="fas fa-clock"></i> Withdrawal processing time: 2 days</p>
             </div>
         </div>
         
-        <!-- টাস্ক পেজ -->
+        <!-- Task Page -->
         <div class="page-section" id="task-page">
-            <h3 class="section-title"><i class="fas fa-tasks"></i> টাস্ক সম্পন্ন করুন</h3>
+            <h3 class="section-title"><i class="fas fa-tasks"></i> Complete Tasks</h3>
             
             <div class="task-card">
-                <h3><i class="fab fa-telegram"></i> টেলিগ্রাম চ্যানেলে জয়েন করুন</h3>
-                <p>নিচের টেলিগ্রাম চ্যানেলগুলোতে জয়েন করুন। আমাদের চ্যানেলের লিংকগুলো ১২ ঘন্টা পরপর পরিবর্তন করা হয়, তাই নিয়মিত চেক করুন।</p>
+                <h3><i class="fab fa-telegram"></i> Join Telegram Channels</h3>
+                <p>Join the Telegram channels below. Our channel links are changed every 12 hours, so check regularly.</p>
                 
                 <div class="warning-box">
-                    <i class="fas fa-exclamation-triangle"></i> টেলিগ্রাম চ্যানেলে জয়েন না থাকলে আপনাকে পেমেন্ট করা হবে না।
+                    <i class="fas fa-exclamation-triangle"></i> If you are not joined in Telegram channels, you will not receive payment.
                 </div>
                 
                 <ul class="telegram-channel-list">
@@ -1254,99 +1304,119 @@
                     <li><a href="https://t.me/AiDadaji" target="_blank">AI Dadaji</a></li>
                 </ul>
                 
-                <p class="cooldown-timer">লিংক পরিবর্তন: <span id="link-change-timer">১২:００:００</span></p>
+                <p class="cooldown-timer">Link change: <span id="link-change-timer">12:00:00</span></p>
             </div>
         </div>
         
-        <!-- নোটিশ পেজ -->
+        <!-- Notice Page -->
         <div class="page-section" id="notice-page">
-            <h3 class="section-title"><i class="fas fa-bell"></i> নোটিশ ও আপডেট</h3>
+            <h3 class="section-title"><i class="fas fa-bell"></i> Notices & Updates</h3>
             
             <div class="notification-list">
                 <div class="stat-card">
-                    <h3><i class="fas fa-info-circle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
-                    <p>আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। যারা পেমেন্ট রিকুয়েস্ট পাঠিয়েছেন তাদেরকে ১০০% পেমেন্ট করা হবে।</p>
-                    <small>আজ</small>
+                    <h3><i class="fas fa-info-circle"></i> New Update</h3>
+                    <p>Auto ad system has been launched. You can now earn SHIB tokens automatically by watching ads.</p>
+                    <small>2 days ago</small>
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
-                    <p>আমরা কিছু ত্রুটি লক্ষ করতেছি যার ফলে আমরা আমাদের BOT বন্ধ করতে বাধ্য হয়েছি। প্রয়োজনে আমাদের টেলিগ্রাম চ্যানেলে যোগাযোগ করুন।</p>
-                    <small>আজ</small>
+                    <h3><i class="fas fa-gamepad"></i> New Feature</h3>
+                    <p>Games system has been launched. You can now earn 10 SHIB tokens for every 1000 taps.</p>
+                    <small>Today</small>
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-gamepad"></i> নতুন ফিচার</h3>
-                    <p>গেমস সিস্টেম চালু হয়েছে। এখন থেকে গেমস খেলে প্রতি ঘন্টায় ২ টাকা আয় করতে পারবেন।</p>
-                    <small>২ দিন আগে</small>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
+                    <p>Minimum withdrawal is 10000 SHIB tokens. Please make sure before withdrawing.</p>
+                    <small>1 week ago</small>
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নোটিশ</h3>
-                    <p>উত্তোলনের জন্য ন্যূনতম ৩০ টাকা প্রয়োজন। দয়া করে উত্তোলন করার আগে নিশ্চিত হয়ে নিন।</p>
-                    <small>১ সপ্তাহ আগে</small>
+                    <h3><i class="fas fa-link"></i> New Feature</h3>
+                    <p>Direct link click system has been launched. Earn extra SHIB tokens by clicking links.</p>
+                    <small>Today</small>
                 </div>
                 
                 <div class="stat-card">
-                    <h3><i class="fas fa-link"></i> নতুন ফিচার</h3>
-                    <p>ডাইরেক্ট লিংক ক্লিক সিস্টেম চালু হয়েছে। এখন থেকে লিংক ক্লিক করে অতিরিক্ত টাকা আয় করুন।</p>
-                    <small>৩ দিন আগে</small>
+                    <h3><i class="fas fa-gift"></i> New Feature</h3>
+                    <p>Daily bonus system has been launched. Get 10 SHIB tokens every 3 days.</p>
+                    <small>Today</small>
                 </div>
-                
-                <div class="stat-card">
-                    <h3><i class="fas fa-gift"></i> নতুন ফিচার</h3>
-                    <p>ডেইলি বোনাস সিস্টেম চালু হয়েছে। প্রতি ৩ দিন পরপর ১ টাকা বোনাস পান।</p>
-                    <small>৫ দিন আগে</small>
-                </div>
+            </div>
+        </div>
+        
+        <!-- Admin Info Section -->
+        <div class="admin-info-section">
+            <h3 class="section-title"><i class="fas fa-info-circle"></i> Admin Information</h3>
+            
+            <div class="admin-image">
+                <img src="https://yt3.googleusercontent.com/5RjltH2V4mt3UVcFGbuEv9DyVH1JheO9-Kt3Kpr72s9bredppC7DTWQnSOHxxYhxXVzPSs1O=s160-c-k-c0x00ffffff-no-rj" alt="Admin">
+            </div>
+            
+            <p>Follow our official channels for updates and payment proofs.</p>
+            
+            <div class="admin-links">
+                <a href="http://www.youtube.com/@ProfitPathInfo" target="_blank" class="admin-link youtube-link">
+                    <i class="fab fa-youtube"></i> Subscribe to Our YouTube Channel
+                </a>
+                <a href="https://t.me/TASKSOIVEMONEY" target="_blank" class="admin-link telegram-link">
+                    <i class="fab fa-telegram"></i> Join Our Telegram Channel
+                </a>
+                <a href="https://t.me/TSMChatgroup" target="_blank" class="admin-link telegram-link">
+                    <i class="fab fa-telegram"></i> Join Our Telegram Group
+                </a>
+                <a href="https://t.me/TSMproof" target="_blank" class="admin-link proof-link">
+                    <i class="fas fa-check-circle"></i> Check Payment Proofs
+                </a>
             </div>
         </div>
         
         <div class="footer">
-            <p>© ২০২৩ টাকা আয় করুন অ্যাপ। সকল অধিকার সংরক্ষিত।</p>
+            <p>© 2023 Task Solve Money App. All rights reserved.</p>
         </div>
     </div>
 
-    <!-- নেভিগেশন বার -->
+    <!-- Bottom Navigation -->
     <div class="bottom-nav">
         <a href="#" class="nav-item active" onclick="showPage('home-page', this)">
             <i class="fas fa-home"></i>
-            <span>হোম</span>
+            <span>Home</span>
         </a>
         <a href="#" class="nav-item" onclick="showPage('earn-page', this)">
             <i class="fas fa-coins"></i>
-            <span>আর্ন</span>
+            <span>Earn</span>
         </a>
         <a href="#" class="nav-item" onclick="showPage('games-page', this)">
             <i class="fas fa-gamepad"></i>
-            <span>গেমস</span>
+            <span>Games</span>
         </a>
         <a href="#" class="nav-item" onclick="showPage('task-page', this)">
             <i class="fas fa-tasks"></i>
-            <span>টাস্ক</span>
+            <span>Tasks</span>
         </a>
         <a href="#" class="nav-item" onclick="showPage('withdraw-page', this)">
             <i class="fas fa-wallet"></i>
-            <span>উত্তোলন</span>
+            <span>Withdraw</span>
         </a>
     </div>
 
-    <!-- সাপোর্ট চ্যাট বট -->
+    <!-- Support Chat Bot -->
     <div class="support-chat-btn" onclick="toggleChat()">
         <i class="fas fa-comments"></i>
     </div>
     
     <div class="chat-popup" id="chat-popup">
         <div class="chat-header">
-            <h3><i class="fas fa-headset"></i> সাপোর্ট চ্যাট</h3>
+            <h3><i class="fas fa-headset"></i> Support Chat</h3>
             <button class="close-chat" onclick="toggleChat()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="chat-messages" id="chat-messages">
-            <!-- চ্যাট মেসেজগুলো এখানে যোগ হবে -->
+            <!-- Chat messages will be added here -->
         </div>
         <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chat-input" placeholder="আপনার মেসেজ লিখুন...">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
             <button class="send-message" onclick="sendMessage()">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -1360,18 +1430,16 @@
 
     <script>
         // Constants
-        const CENTS_PER_AD = 10; // প্রতি বিজ্ঞাপনে 10 পয়সা
-        const CENTS_TO_TAKA_RATE = 100; // 100 পয়সা = 1 টাকা
-        const GAME_EARNING_PER_HOUR = 2.00; // প্রতি ঘন্টা গেম খেলার জন্য 2 টাকা
-        const MIN_WITHDRAW_TAKA = 30; // ন্যূনতম উত্তোলন 30 টাকা
-        const DAILY_BONUS_AMOUNT = 1.00; // ডেইলি বোনাস 1 টাকা (3 টাকা থেকে 1 টাকা পরিবর্তন করা হয়েছে)
+        const TOKENS_PER_AD = 15; // 15 SHIB tokens per ad
+        const TOKENS_PER_1000_TAPS = 10; // 10 SHIB tokens per 1000 taps
+        const MIN_WITHDRAW_TOKENS = 10000; // Minimum withdrawal 10000 SHIB (Updated from 5000)
+        const DAILY_BONUS_TOKENS = 10; // Daily bonus 10 SHIB tokens (changed from 1 Taka to 10 SHIB)
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-        const AD_LIMIT = 100; // বিজ্ঞাপন দেখার লিমিট (100টি)
+        const AD_LIMIT = 100; // Ad watch limit (100 ads)
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-        const WITHDRAW_PROCESSING_TIME = 5 * 24 * 60 * 60 * 1000; // 5 days in milliseconds (5 দিন)
+        const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds (changed from 5 days)
         
-        // ট্যাপ গেম কনস্ট্যান্টস
-        const TAP_EARNING_RATE = 0.20; // প্রতি 1000 ট্যাপে 20 পয়সা
+        // Tap game constants
         const REDIRECT_WEBSITES = [
             "https://sadiyapost.blogspot.com/2025/09/blog-post_17.html",
             "https://sadiyapost.blogspot.com/2025/09/bangla-new-natok-2025-parboki-ami-vulte.html",
@@ -1387,34 +1455,33 @@
         const ADMIN_CHAT_ID = "7469964608";
         
         // Variables
-        let userCents = 0; // পয়সা
-        let earnedCents = 0.00; // টাকা (পয়সা থেকে কনভার্ট করা)
+        let userTokens = 0; // SHIB tokens
         let watchedAdsCount = 0;
         let userId = generateUserId();
         let autoAdInterval;
         let isAutoMode = false;
         let isAdLoading = false;
         
-        // ডেইলি বোনাস সম্পর্কিত ভেরিয়েবল
+        // Daily bonus related variables
         let lastBonusClaimTime = 0;
         let bonusCooldownRemaining = 0;
         
-        // ট্যাপ গেম ভেরিয়েবল
+        // Tap game variables
         let totalTaps = 0;
         let sessionTaps = 0;
-        let tapEarnings = 0.00;
+        let tapEarnings = 0;
         let nextRedirectAt = 200;
         let redirectCount = 0;
         
-        // বিজ্ঞাপন লিমিটেশন সম্পর্কিত ভেরিয়েবল
+        // Ad limitation related variables
         let adLimitReached = false;
         let adLimitStartTime = 0;
         
-        // চ্যাট সিস্টেম সম্পর্কিত ভেরিয়েবল
+        // Chat system related variables
         let chatMessages = [];
         let currentUser = null;
         
-        // উত্তোলনের ইতিহাস
+        // Withdrawal history
         let withdrawHistory = [];
 
         // Initialize the app
@@ -1423,103 +1490,185 @@
             document.getElementById('user-id').textContent = userId;
             document.getElementById('user-avatar').textContent = userId.charAt(0).toUpperCase();
             
-            // তারিখ আপডেট করুন
+            // Update date
             updateCurrentDate();
             
             // Load user data
             loadUserData();
             updateUI();
+            checkAdReady();
             
-            // টাইমার শুরু করুন
+            // Start timers
             startTimers();
             
-            // বোনাস সিস্টেম চেক করুন
+            // Check bonus system
             updateBonusButton();
             
-            // বিজ্ঞাপন লিমিটেশন চেক করুন
+            // Check ad limitation
             checkAdLimit();
             
-            // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন
+            // Initialize chat system
             initChatSystem();
             
-            // উত্তোলনের ইতিহাস লোড করুন
+            // Load withdrawal history
             loadWithdrawHistory();
             
-            // উত্তোলন উপলব্ধতা চেক করুন
-            checkWithdrawAvailability();
+            // Initialize tap game
+            initTapGame();
             
-            // বট বন্ধের বার্তা দেখান
-            showMaintenanceNotice();
+            // Check withdrawal availability
+            checkWithdrawAvailability();
         }
 
-        // বর্তমান তারিখ আপডেট করুন
+        // Update current date
         function updateCurrentDate() {
             const now = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-            const dateString = now.toLocaleDateString('bn-BD', options);
+            const dateString = now.toLocaleDateString('en-US', options);
             document.getElementById('current-date').textContent = dateString;
         }
 
-        // উত্তোলন উপলব্ধতা চেক করুন
+        // Check withdrawal availability
         function checkWithdrawAvailability() {
             const now = new Date();
-            const currentDay = now.getDate();
+            const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
             const withdrawSubmitBtn = document.getElementById('withdraw-submit-btn');
             const withdrawAvailability = document.getElementById('withdraw-availability');
             
-            // মাসের ১০ এবং ১১ তারিখে উত্তোলন সক্রিয়
-            if (currentDay === 10 || currentDay === 11) {
+            // Withdrawal available only on Sunday (day 0)
+            if (currentDay === 0) {
                 withdrawSubmitBtn.disabled = false;
-                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> উত্তোলন সক্রিয়! আজ উত্তোলন করতে পারেন।';
+                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Withdrawal active! You can withdraw today.';
                 withdrawAvailability.style.color = 'var(--success-color)';
             } else {
                 withdrawSubmitBtn.disabled = true;
                 
-                // পরবর্তী উত্তোলনের তারিখ গণনা করুন
-                let nextWithdrawDay, nextWithdrawMonth;
-                if (currentDay < 10) {
-                    nextWithdrawDay = 10;
-                    nextWithdrawMonth = now.getMonth();
-                } else {
-                    nextWithdrawDay = 10;
-                    nextWithdrawMonth = now.getMonth() + 1;
-                }
+                // Calculate next withdrawal day (Sunday)
+                const daysUntilSunday = (7 - currentDay) % 7;
+                const nextSunday = new Date(now);
+                nextSunday.setDate(now.getDate() + daysUntilSunday);
                 
-                const nextWithdrawDate = new Date(now.getFullYear(), nextWithdrawMonth, nextWithdrawDay);
-                const timeUntilNextWithdraw = nextWithdrawDate - now;
-                const daysUntilNextWithdraw = Math.ceil(timeUntilNextWithdraw / (1000 * 60 * 60 * 24));
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
                 
-                withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> উত্তোলন বন্ধ। পরবর্তী উত্তোলন ${nextWithdrawDay} তারিখে, ${daysUntilNextWithdraw} দিন বাকি।`;
+                withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Withdrawal closed. Next withdrawal on Sunday (${nextSundayString}), ${daysUntilSunday} days left.`;
                 withdrawAvailability.style.color = 'var(--warning-color)';
             }
         }
 
-        // পেজ দেখানোর ফাংশন
+        // Initialize tap game
+        function initTapGame() {
+            const tapArea = document.getElementById('tap-area');
+            tapArea.addEventListener('click', handleTap);
+            
+            // Update tap game UI
+            updateTapGameUI();
+        }
+
+        // Handle tap
+        function handleTap() {
+            totalTaps++;
+            sessionTaps++;
+            
+            // Update tap count
+            updateTapGameUI();
+            
+            // Add earnings every 1000 taps
+            if (totalTaps % 1000 === 0) {
+                tapEarnings += TOKENS_PER_1000_TAPS;
+                userTokens += TOKENS_PER_1000_TAPS;
+                showNotification(`1000 taps completed! ${TOKENS_PER_1000_TAPS} SHIB tokens added.`, 'success');
+                saveUserData();
+                updateUI();
+            }
+            
+            // Check for redirect
+            if (sessionTaps >= nextRedirectAt) {
+                redirectToRandomWebsite();
+            }
+            
+            // Add animation effect
+            createTapAnimation();
+        }
+
+        // Update tap game UI
+        function updateTapGameUI() {
+            document.getElementById('total-taps').textContent = totalTaps;
+            document.getElementById('session-taps').textContent = sessionTaps;
+            document.getElementById('tap-earnings').textContent = tapEarnings;
+            document.getElementById('next-redirect').textContent = nextRedirectAt;
+            document.getElementById('redirect-count').textContent = nextRedirectAt;
+            
+            // Update progress bar
+            const progressPercent = (totalTaps % 1000) / 10;
+            document.getElementById('tap-progress-fill').style.width = `${progressPercent}%`;
+        }
+
+        // Redirect to random website
+        function redirectToRandomWebsite() {
+            const randomIndex = Math.floor(Math.random() * REDIRECT_WEBSITES.length);
+            const website = REDIRECT_WEBSITES[randomIndex];
+            
+            // Increase redirect count
+            redirectCount++;
+            
+            // Set next redirect point (random between 200-400)
+            nextRedirectAt = sessionTaps + Math.floor(Math.random() * 200) + 200;
+            
+            // Inform user
+            showNotification(`Redirecting... ${redirectCount}th redirect`, 'info');
+            
+            // Redirect after 2 seconds
+            setTimeout(() => {
+                window.open(website, '_blank');
+            }, 2000);
+        }
+
+        // Create tap animation
+        function createTapAnimation() {
+            const tapArea = document.getElementById('tap-area');
+            const rect = tapArea.getBoundingClientRect();
+            const x = rect.left + Math.random() * rect.width;
+            const y = rect.top + Math.random() * rect.height;
+            
+            const coin = document.createElement('div');
+            coin.className = 'coin-animation';
+            coin.innerHTML = '<i class="fas fa-hand-pointer"></i>';
+            coin.style.left = `${x}px`;
+            coin.style.top = `${y}px`;
+            document.body.appendChild(coin);
+            
+            setTimeout(() => {
+                document.body.removeChild(coin);
+            }, 1000);
+        }
+
+        // Show page function
         function showPage(pageId, element) {
-            // সব পেজ লুকান
+            // Hide all pages
             document.querySelectorAll('.page-section').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // নির্বাচিত পেজ দেখান
+            // Show selected page
             document.getElementById(pageId).classList.add('active');
             
-            // সব নেভিগেশন আইটেম থেকে active ক্লাস সরান
+            // Remove active class from all navigation items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // নির্বাচিত নেভিগেশন আইটেমে active ক্লাস যোগ করুন
+            // Add active class to selected navigation item
             element.classList.add('active');
             
-            // উত্তোলন পেজে গেলে মোট আয় আপডেট করুন
+            // Update total earnings when going to withdraw page
             if (pageId === 'withdraw-page') {
-                document.getElementById('total-earned-withdraw').textContent = calculateTotalEarnings().toFixed(2);
+                document.getElementById('total-earned-withdraw').textContent = userTokens;
                 loadWithdrawHistory();
                 checkWithdrawAvailability();
             }
             
-            // আর্ন পেজে গেলে ডেটা আপডেট করুন
+            // Update data when going to earn page
             if (pageId === 'earn-page') {
                 updateBonusButton();
             }
@@ -1536,14 +1685,20 @@
             return newId.toString();
         }
 
+        // Check if Monetag ad is ready
+        function checkAdReady() {
+            if (typeof window.show_9472189 !== 'function') {
+                document.getElementById('ad-status').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Ad system loading...';
+                setTimeout(checkAdReady, 1000);
+            } else {
+                document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> Ready to watch ads';
+            }
+        }
+
         // Load user data from localStorage
         function loadUserData() {
-            if (localStorage.getItem('userCents')) {
-                userCents = parseInt(localStorage.getItem('userCents'));
-            }
-            
-            if (localStorage.getItem('earnedCents')) {
-                earnedCents = parseFloat(localStorage.getItem('earnedCents'));
+            if (localStorage.getItem('userTokens')) {
+                userTokens = parseInt(localStorage.getItem('userTokens'));
             }
             
             if (localStorage.getItem('watchedAdsCount')) {
@@ -1551,7 +1706,7 @@
             }
             
             if (localStorage.getItem('tapEarnings')) {
-                tapEarnings = parseFloat(localStorage.getItem('tapEarnings'));
+                tapEarnings = parseInt(localStorage.getItem('tapEarnings'));
             }
             
             if (localStorage.getItem('totalTaps')) {
@@ -1574,7 +1729,7 @@
                 lastBonusClaimTime = parseInt(localStorage.getItem('lastBonusClaimTime'));
             }
             
-            // বিজ্ঞাপন লিমিটেশন ডেটা লোড করুন
+            // Load ad limitation data
             if (localStorage.getItem('adLimitReached')) {
                 adLimitReached = localStorage.getItem('adLimitReached') === 'true';
             }
@@ -1583,7 +1738,7 @@
                 adLimitStartTime = parseInt(localStorage.getItem('adLimitStartTime'));
             }
             
-            // উত্তোলনের ইতিহাস লোড করুন
+            // Load withdrawal history
             if (localStorage.getItem('withdrawHistory')) {
                 withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory'));
             }
@@ -1593,10 +1748,10 @@
             const today = new Date().toDateString();
             
             if (lastVisitDate !== today) {
-                watchedAdsCount = 0; // রিসেট বিজ্ঞাপন কাউন্টার
-                sessionTaps = 0; // রিসেট সেশন ট্যাপ
-                nextRedirectAt = 200; // রিসেট রিডাইরেক্ট পয়েন্ট
-                adLimitReached = false; // রিসেট বিজ্ঞাপন লিমিট
+                watchedAdsCount = 0; // Reset ad counter
+                sessionTaps = 0; // Reset session taps
+                nextRedirectAt = 200; // Reset redirect point
+                adLimitReached = false; // Reset ad limit
                 localStorage.setItem('lastVisitDate', today);
                 localStorage.setItem('watchedAdsCount', watchedAdsCount);
                 localStorage.setItem('sessionTaps', sessionTaps);
@@ -1604,7 +1759,7 @@
                 localStorage.setItem('adLimitReached', adLimitReached);
             }
             
-            // চ্যাট মেসেজ লোড করুন
+            // Load chat messages
             if (localStorage.getItem('chatMessages')) {
                 chatMessages = JSON.parse(localStorage.getItem('chatMessages'));
                 displayChatMessages();
@@ -1613,10 +1768,9 @@
 
         // Save user data to localStorage
         function saveUserData() {
-            localStorage.setItem('userCents', userCents);
-            localStorage.setItem('earnedCents', earnedCents.toFixed(2));
+            localStorage.setItem('userTokens', userTokens);
             localStorage.setItem('watchedAdsCount', watchedAdsCount);
-            localStorage.setItem('tapEarnings', tapEarnings.toFixed(2));
+            localStorage.setItem('tapEarnings', tapEarnings);
             localStorage.setItem('totalTaps', totalTaps);
             localStorage.setItem('sessionTaps', sessionTaps);
             localStorage.setItem('nextRedirectAt', nextRedirectAt);
@@ -1630,27 +1784,21 @@
 
         // Update all UI elements
         function updateUI() {
-            document.getElementById('user-points').textContent = userCents;
-            document.getElementById('user-balance').textContent = (userCents / CENTS_TO_TAKA_RATE).toFixed(2);
-            document.getElementById('earned-money').textContent = calculateTotalEarnings().toFixed(2);
-            document.getElementById('ads-progress').textContent = `${watchedAdsCount}/${AD_LIMIT} বিজ্ঞাপন`;
+            document.getElementById('user-tokens').textContent = userTokens;
+            document.getElementById('user-balance').textContent = userTokens;
+            document.getElementById('earned-tokens').textContent = userTokens;
+            document.getElementById('withdraw-progress').textContent = `${userTokens}/${MIN_WITHDRAW_TOKENS} SHIB`;
             updateProgress();
-        }
-
-        // Calculate total earnings
-        function calculateTotalEarnings() {
-            return (userCents / CENTS_TO_TAKA_RATE) + earnedCents + tapEarnings;
         }
 
         // Update progress bar and text
         function updateProgress() {
-            const totalEarnings = calculateTotalEarnings();
-            const progressPercent = (totalEarnings / MIN_WITHDRAW_TAKA) * 100;
+            const progressPercent = (userTokens / MIN_WITHDRAW_TOKENS) * 100;
             
             document.getElementById('progress-fill').style.width = `${Math.min(progressPercent, 100)}%`;
         }
 
-        // বিজ্ঞাপন লিমিটেশন চেক করুন
+        // Check ad limitation
         function checkAdLimit() {
             const adLimitInfo = document.getElementById('ad-limit-info');
             
@@ -1664,13 +1812,21 @@
                 if (timeRemaining > 0) {
                     adLimitInfo.style.display = 'block';
                     document.getElementById('ad-limit-timer').textContent = formatTime(timeRemaining);
-                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-clock"></i> বিজ্ঞাপন লিমিট পূরণ হয়েছে। ২৪ ঘন্টা পরে আবার চেষ্টা করুন...';
+                    document.getElementById('watch-ad-btn').disabled = true;
+                    document.getElementById('watch-ad-btn-earn').disabled = true;
+                    document.getElementById('auto-ad-btn').disabled = true;
+                    document.getElementById('auto-ad-btn-earn').disabled = true;
+                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-clock"></i> Ad limit reached. Try again after 24 hours...';
                 } else {
-                    // কুলডাউন শেষ
+                    // Cooldown ended
                     adLimitReached = false;
                     watchedAdsCount = 0;
                     adLimitInfo.style.display = 'none';
-                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> বিজ্ঞাপন দেখতে প্রস্তুত';
+                    document.getElementById('watch-ad-btn').disabled = false;
+                    document.getElementById('watch-ad-btn-earn').disabled = false;
+                    document.getElementById('auto-ad-btn').disabled = false;
+                    document.getElementById('auto-ad-btn-earn').disabled = false;
+                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> Ready to watch ads';
                     saveUserData();
                 }
             } else {
@@ -1678,117 +1834,202 @@
             }
         }
 
-        // Function to watch an ad and earn cents
+        // Function to watch an ad and earn tokens
         function watchAd() {
-            showMaintenanceNotice();
+            if (isAdLoading) return;
+            
+            // Check ad limitation
+            if (watchedAdsCount >= AD_LIMIT) {
+                showNotification(`You have watched ${AD_LIMIT} ads today. Try again after 24 hours.`, 'error');
+                return;
+            }
+            
+            if (typeof window.show_9472189 !== 'function') {
+                document.getElementById('ad-status').innerHTML = '<i class="fas fa-exclamation-circle"></i> Ad system not ready. Please wait...';
+                return;
+            }
+
+            isAdLoading = true;
+            document.getElementById('watch-ad-btn').disabled = true;
+            document.getElementById('watch-ad-btn-earn').disabled = true;
+            document.getElementById('ad-status').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading ad...';
+            
+            try {
+                // Show the ad
+                window.show_9472189().then(() => {
+                    // Ad watched successfully
+                    watchedAdsCount++;
+                    userTokens += TOKENS_PER_AD;
+                    
+                    // Check ad limitation
+                    if (watchedAdsCount >= AD_LIMIT) {
+                        adLimitReached = true;
+                        adLimitStartTime = Date.now();
+                        document.getElementById('ad-limit-info').style.display = 'block';
+                    }
+                    
+                    saveUserData();
+                    updateUI();
+                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> Ad watched successfully!';
+                    
+                    // Show coin animation
+                    createCoinAnimation();
+                    
+                    // Show success notification
+                    showNotification(`${TOKENS_PER_AD} SHIB tokens added! Your balance: ${userTokens} SHIB`, 'success');
+                    
+                    // Check if earned enough for withdrawal
+                    if (userTokens >= MIN_WITHDRAW_TOKENS) {
+                        showNotification(`Congratulations! You have collected ${MIN_WITHDRAW_TOKENS} SHIB tokens for withdrawal.`, 'info');
+                    }
+                    
+                    // If in auto mode, continue after delay
+                    if (isAutoMode) {
+                        setTimeout(() => {
+                            isAdLoading = false;
+                            document.getElementById('watch-ad-btn').disabled = false;
+                            document.getElementById('watch-ad-btn-earn').disabled = false;
+                            watchAd();
+                        }, 10000); // 10 seconds delay between auto ads
+                    } else {
+                        isAdLoading = false;
+                        document.getElementById('watch-ad-btn').disabled = false;
+                        document.getElementById('watch-ad-btn-earn').disabled = false;
+                    }
+                }).catch(error => {
+                    console.error('Error showing ad:', error);
+                    document.getElementById('ad-status').innerHTML = '<i class="fas fa-times-circle"></i> Could not show ad. Please try again.';
+                    isAdLoading = false;
+                    document.getElementById('watch-ad-btn').disabled = false;
+                    document.getElementById('watch-ad-btn-earn').disabled = false;
+                    
+                    if (isAutoMode) {
+                        setTimeout(watchAd, 10000); // Retry after 10 seconds
+                    }
+                });
+            } catch (error) {
+                console.error('Error in ad system:', error);
+                document.getElementById('ad-status').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error in ad system. Please refresh the page.';
+                isAdLoading = false;
+                document.getElementById('watch-ad-btn').disabled = false;
+                document.getElementById('watch-ad-btn-earn').disabled = false;
+            }
+        }
+
+        // Create coin animation
+        function createCoinAnimation() {
+            const button = document.getElementById('watch-ad-btn');
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            const coin = document.createElement('div');
+            coin.className = 'coin-animation';
+            coin.innerHTML = '<i class="fas fa-coins"></i>';
+            coin.style.left = `${x}px`;
+            coin.style.top = `${y}px`;
+            document.body.appendChild(coin);
+            
+            setTimeout(() => {
+                document.body.removeChild(coin);
+            }, 1000);
         }
 
         // Start auto ads mode
         function startAutoAds() {
-            showMaintenanceNotice();
+            // Check ad limitation
+            if (watchedAdsCount >= AD_LIMIT) {
+                showNotification(`You have watched ${AD_LIMIT} ads today. Try again after 24 hours.`, 'error');
+                return;
+            }
+            
+            isAutoMode = true;
+            document.getElementById('auto-ad-btn').disabled = true;
+            document.getElementById('auto-ad-btn-earn').disabled = true;
+            document.getElementById('stop-auto-btn').disabled = false;
+            document.getElementById('stop-auto-btn-earn').disabled = false;
+            document.getElementById('watch-ad-btn').disabled = true;
+            document.getElementById('watch-ad-btn-earn').disabled = true;
+            document.getElementById('ad-status').innerHTML = '<i class="fas fa-robot"></i> Auto ad mode activated';
+            
+            watchAd(); // Start the first ad
         }
 
         // Stop auto ads mode
         function stopAutoAds() {
-            showMaintenanceNotice();
+            isAutoMode = false;
+            document.getElementById('auto-ad-btn').disabled = false;
+            document.getElementById('auto-ad-btn-earn').disabled = false;
+            document.getElementById('stop-auto-btn').disabled = true;
+            document.getElementById('stop-auto-btn-earn').disabled = true;
+            document.getElementById('watch-ad-btn').disabled = false;
+            document.getElementById('watch-ad-btn-earn').disabled = false;
+            document.getElementById('ad-status').innerHTML = '<i class="fas fa-check-circle"></i> Auto ad mode deactivated';
         }
 
         // Show withdraw form
         function showWithdrawForm() {
-            // উত্তোলন পেজ দেখান
+            // Show withdraw page
             showPage('withdraw-page', document.querySelector('.nav-item:nth-child(5)'));
             
-            const totalEarnings = calculateTotalEarnings();
-            
-            if (totalEarnings < MIN_WITHDRAW_TAKA) {
+            if (userTokens < MIN_WITHDRAW_TOKENS) {
                 document.getElementById('withdraw-status').textContent = 
-                    `ন্যূনতম উত্তোলন পরিমাণ ${MIN_WITHDRAW_TAKA} টাকা। আপনার আছে ${totalEarnings.toFixed(2)} টাকা।`;
+                    `Minimum withdrawal amount is ${MIN_WITHDRAW_TOKENS} SHIB. You have ${userTokens} SHIB.`;
                 document.getElementById('withdraw-status').className = 'error-message';
                 document.getElementById('withdraw-section').style.display = 'block';
                 return;
             }
             
             document.getElementById('withdraw-amount').value = '';
-            document.getElementById('withdraw-amount').placeholder = `সর্বোচ্চ: ${totalEarnings.toFixed(2)} টাকা`;
-            document.getElementById('withdraw-amount').max = totalEarnings.toFixed(2);
-            document.getElementById('withdraw-phone').value = '';
-            document.getElementById('payment-method').selectedIndex = 0;
+            document.getElementById('withdraw-amount').placeholder = `Maximum: ${userTokens} SHIB`;
+            document.getElementById('withdraw-amount').max = userTokens;
+            document.getElementById('withdraw-address').value = '';
             document.getElementById('withdraw-status').textContent = '';
             document.getElementById('withdraw-section').style.display = 'block';
         }
 
         // Handle withdrawal request
-        function withdrawPoints() {
+        function withdrawTokens() {
             const now = new Date();
-            const currentDay = now.getDate();
+            const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
             
-            // উত্তোলন শুধুমাত্র ১০ এবং ১১ তারিখে করা যাবে
-            if (currentDay !== 10 && currentDay !== 11) {
-                showNotification('উত্তোলন শুধুমাত্র মাসের ১০ ও ১১ তারিখে করা যাবে।', 'error');
+            // Withdrawal available only on Sunday (day 0)
+            if (currentDay !== 0) {
+                showNotification('Withdrawal is available only on Sundays.', 'error');
                 return;
             }
             
-            const amount = parseFloat(document.getElementById('withdraw-amount').value);
-            const paymentMethod = document.getElementById('payment-method').value;
-            const phoneNumber = document.getElementById('withdraw-phone').value;
-            const totalEarnings = calculateTotalEarnings();
+            const amount = parseInt(document.getElementById('withdraw-amount').value);
+            const address = document.getElementById('withdraw-address').value;
             const withdrawStatus = document.getElementById('withdraw-status');
             
             // Validate inputs
             if (!amount || isNaN(amount)) {
-                withdrawStatus.textContent = 'দয়া করে একটি বৈধ পরিমাণ লিখুন।';
+                withdrawStatus.textContent = 'Please enter a valid amount.';
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
-            if (amount < MIN_WITHDRAW_TAKA) {
-                withdrawStatus.textContent = `ন্যূনতম উত্তোলন পরিমাণ ${MIN_WITHDRAW_TAKA} টাকা।`;
+            if (amount < MIN_WITHDRAW_TOKENS) {
+                withdrawStatus.textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_TOKENS} SHIB.`;
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
-            if (amount > totalEarnings) {
-                withdrawStatus.textContent = `পর্যাপ্ত ব্যালেন্স নেই। আপনার আছে ${totalEarnings.toFixed(2)} টাকা।`;
+            if (amount > userTokens) {
+                withdrawStatus.textContent = `Insufficient balance. You have ${userTokens} SHIB.`;
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
-            if (!paymentMethod) {
-                withdrawStatus.textContent = 'দয়া করে একটি পেমেন্ট মাধ্যম নির্বাচন করুন।';
+            if (!address) {
+                withdrawStatus.textContent = 'Please enter your Binance SHIB address.';
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
-            if (!phoneNumber || !/^01[3-9][0-9]{8}$/.test(phoneNumber)) {
-                withdrawStatus.textContent = 'দয়া করে একটি বৈধ বাংলাদেশী মোবাইল নম্বর লিখুন।';
-                withdrawStatus.className = 'error-message';
-                return;
-            }
-            
-            // Calculate cents to deduct
-            const centsToDeduct = amount * CENTS_TO_TAKA_RATE;
-            let remainingCents = centsToDeduct;
-            
-            // First deduct from userCents
-            if (userCents > 0) {
-                const userCentsDeduction = Math.min(userCents, remainingCents);
-                userCents -= userCentsDeduction;
-                remainingCents -= userCentsDeduction;
-            }
-            
-            // Then deduct from earnedCents
-            if (earnedCents > 0 && remainingCents > 0) {
-                const earnedCentsDeduction = Math.min(earnedCents * CENTS_TO_TAKA_RATE, remainingCents);
-                earnedCents -= earnedCentsDeduction / CENTS_TO_TAKA_RATE;
-                remainingCents -= earnedCentsDeduction;
-            }
-            
-            // Finally deduct from tapEarnings
-            if (tapEarnings > 0 && remainingCents > 0) {
-                const tapDeduction = Math.min(tapEarnings * CENTS_TO_TAKA_RATE, remainingCents);
-                tapEarnings -= tapDeduction / CENTS_TO_TAKA_RATE;
-                remainingCents -= tapDeduction;
-            }
+            // Deduct tokens
+            userTokens -= amount;
             
             // Save and update UI
             saveUserData();
@@ -1798,8 +2039,7 @@
             const withdrawRequest = {
                 id: Date.now(),
                 amount: amount,
-                paymentMethod: paymentMethod,
-                phoneNumber: phoneNumber,
+                address: address,
                 status: 'pending',
                 timestamp: Date.now(),
                 processingTime: WITHDRAW_PROCESSING_TIME
@@ -1809,24 +2049,23 @@
             saveUserData();
             
             // Prepare withdrawal message
-            const message = `📌 নতুন উত্তোলন অনুরোধ 📌\n\n` +
-                             `👤 ব্যবহারকারী আইডি: ${userId}\n` +
-                             `💰 পরিমাণ: ${amount} টাকা\n` +
-                             `📱 মাধ্যম: ${paymentMethod.toUpperCase()}\n` +
-                             `📞 ফোন: ${phoneNumber}\n\n` +
-                             `📊 দেখা বিজ্ঞাপন: ${watchedAdsCount}\n` +
-                             `👆 মোট ট্যাপ: ${totalTaps}\n` +
-                             `💵 মোট আয়: ${totalEarnings.toFixed(2)} টাকা`;
+            const message = `📌 New Withdrawal Request 📌\n\n` +
+                             `👤 User ID: ${userId}\n` +
+                             `💰 Amount: ${amount} SHIB\n` +
+                             `📫 Address: ${address}\n\n` +
+                             `📊 Ads Watched: ${watchedAdsCount}\n` +
+                             `👆 Total Taps: ${totalTaps}\n` +
+                             `💵 Total Earned: ${userTokens} SHIB`;
             
             // Send to admin via Telegram
             sendWithdrawRequestToAdmin(message);
             
             // Show success message
-            withdrawStatus.textContent = 'উত্তোলন অনুরোধ সফলভাবে জমা দেওয়া হয়েছে! প্রসেসিং করতে ৫ দিন সময় লাগতে পারে।';
+            withdrawStatus.textContent = 'Withdrawal request submitted successfully! Processing may take up to 2 days.';
             withdrawStatus.className = 'success-message';
             
             // Show notification
-            showNotification('আপনার উত্তোলন অনুরোধ পাঠানো হয়েছে!', 'success');
+            showNotification('Your withdrawal request has been sent!', 'success');
             
             // Reset form after 3 seconds
             setTimeout(() => {
@@ -1837,19 +2076,19 @@
 
         // Send withdrawal request to admin via Telegram bot
         function sendWithdrawRequestToAdmin(message) {
-            // Telegram API URL তৈরি করুন
+            // Create Telegram API URL
             const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${encodeURIComponent(message)}`;
             
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     if (data.ok) {
-                        console.log('উত্তোলন অনুরোধ অ্যাডমিন에게 পাঠানো হয়েছে');
+                        console.log('Withdrawal request sent to admin');
                     } else {
-                        console.error('উত্তোলন অনুরোধ পাঠানো যায়নি:', data);
+                        console.error('Could not send withdrawal request:', data);
                     }
                 })
-                .catch(error => console.error('মেসেজ পাঠাতে ত্রুটি:', error));
+                .catch(error => console.error('Error sending message:', error));
         }
 
         // Show notification
@@ -1866,7 +2105,7 @@
             }, 3000);
         }
 
-        // সময় ফরম্যাট করার ফাংশন
+        // Format time function
         function formatTime(milliseconds) {
             const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
             const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -1874,18 +2113,42 @@
             const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
             
             if (days > 0) {
-                return `${days} দিন ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                return `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             } else {
                 return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }
         }
 
-        // ডেইলি বোনাস ক্লেইম ফাংশন
+        // Daily bonus claim function
         function claimDailyBonus() {
-            showMaintenanceNotice();
+            const now = Date.now();
+            
+            // If cooldown time hasn't passed yet
+            if (lastBonusClaimTime > 0 && (now - lastBonusClaimTime) < BONUS_COOLDOWN) {
+                showNotification('You have already claimed the bonus. Wait for the next bonus.', 'error');
+                return;
+            }
+            
+            // Give bonus
+            userTokens += DAILY_BONUS_TOKENS;
+            lastBonusClaimTime = now;
+            
+            saveUserData();
+            updateUI();
+            updateBonusButton();
+            
+            // Show coin animation
+            createCoinAnimation();
+            
+            showNotification(`10 SHIB bonus added! Your balance: ${userTokens} SHIB`, 'success');
+            
+            // Notification if enough tokens for withdrawal
+            if (userTokens >= MIN_WITHDRAW_TOKENS) {
+                showNotification(`Congratulations! You have collected ${MIN_WITHDRAW_TOKENS} SHIB tokens for withdrawal.`, 'info');
+            }
         }
 
-        // বোনাস বাটন আপডেট করুন
+        // Update bonus button
         function updateBonusButton() {
             const bonusButton = document.getElementById('daily-bonus-btn');
             const bonusTimerContainer = document.getElementById('bonus-timer-container');
@@ -1896,71 +2159,71 @@
             const cooldownRemaining = Math.max(0, BONUS_COOLDOWN - timeSinceLastBonus);
             
             if (cooldownRemaining > 0) {
-                // বোনাস নেওয়া হয়েছে, কুলডাউন চলছে
+                // Bonus claimed, cooldown in progress
                 bonusButton.disabled = true;
-                bonusButton.textContent = 'বোনাস নেওয়া হয়েছে';
+                bonusButton.textContent = 'Bonus Claimed';
                 bonusTimerContainer.style.display = 'block';
                 bonusCountdown.textContent = formatTime(cooldownRemaining);
             } else {
-                // বোনাস নেওয়ার জন্য প্রস্তুত
-                bonusButton.disabled = true;
-                bonusButton.innerHTML = '<i class="fas fa-gift"></i> ডেইলি বোনাস নিন';
+                // Ready to claim bonus
+                bonusButton.disabled = false;
+                bonusButton.innerHTML = '<i class="fas fa-gift"></i> Claim Daily Bonus';
                 bonusTimerContainer.style.display = 'none';
             }
         }
 
-        // চ্যাট সিস্টেম ইনিশিয়ালাইজ করুন
+        // Initialize chat system
         function initChatSystem() {
             currentUser = {
                 id: userId,
-                name: `ব্যবহারকারী ${userId}`
+                name: `User ${userId}`
             };
             
-            // যদি চ্যাটে কোন মেসেজ না থাকে, একটি স্বাগতম মেসেজ যোগ করুন
+            // If no messages in chat, add a welcome message
             if (chatMessages.length === 0) {
-                addMessage('সাপোর্ট', 'স্বাগতম! কিভাবে সাহায্য করতে পারি?', false);
+                addMessage('Support', 'Welcome! How can I help you?', false);
             }
         }
 
-        // চ্যাট টগল করুন
+        // Toggle chat
         function toggleChat() {
             const chatPopup = document.getElementById('chat-popup');
             chatPopup.classList.toggle('active');
         }
 
-        // মেসেজ পাঠান
+        // Send message
         function sendMessage() {
             const chatInput = document.getElementById('chat-input');
             const message = chatInput.value.trim();
             
             if (message === '') return;
             
-            // মেসেজ যোগ করুন
+            // Add message
             addMessage(currentUser.name, message, true);
             
-            // ইনপুট ফিল্ড ক্লিয়ার করুন
+            // Clear input field
             chatInput.value = '';
             
-            // অটো রিপ্লাই সিমুলেট করুন (ঐচ্ছিক)
+            // Simulate auto reply (optional)
             setTimeout(() => {
                 const replies = [
-                    'আপনার মেসেজের জন্য ধন্যবাদ। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।',
-                    'আপনার সমস্যা সমাধানের জন্য আমরা কাজ করছি।',
-                    'আপনার জন্য কীভাবে সাহায্য করতে পারি?',
-                    'আপনার অভিযোগটি আমরা নোট করে নিয়েছি।'
+                    'Thank you for your message. We will contact you soon.',
+                    'We are working to solve your problem.',
+                    'How can I help you?',
+                    'We have noted your complaint.'
                 ];
                 const randomReply = replies[Math.floor(Math.random() * replies.length)];
-                addMessage('সাপোর্ট', randomReply, false);
+                addMessage('Support', randomReply, false);
             }, 2000);
         }
 
-        // মেসেজ যোগ করুন
+        // Add message
         function addMessage(sender, text, isSent) {
             const message = {
                 id: Date.now(),
                 sender: sender,
                 text: text,
-                time: new Date().toLocaleTimeString('bn-BD', { hour: '2-digit', minute: '2-digit' }),
+                time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
                 isSent: isSent,
                 reactions: []
             };
@@ -1970,7 +2233,7 @@
             displayChatMessages();
         }
 
-        // চ্যাট মেসেজ ডিসপ্লে করুন
+        // Display chat messages
         function displayChatMessages() {
             const chatMessagesContainer = document.getElementById('chat-messages');
             chatMessagesContainer.innerHTML = '';
@@ -1993,21 +2256,21 @@
                 chatMessagesContainer.appendChild(messageElement);
             });
             
-            // স্ক্রল নিচে নিন
+            // Scroll to bottom
             chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
         }
 
-        // রিয়েকশন যোগ করুন
+        // Add reaction
         function addReaction(messageId, reaction) {
             const message = chatMessages.find(m => m.id === messageId);
             if (message) {
                 const existingReactionIndex = message.reactions.findIndex(r => r.reaction === reaction && r.userId === currentUser.id);
                 
                 if (existingReactionIndex !== -1) {
-                    // রিয়েকশন সরান
+                    // Remove reaction
                     message.reactions.splice(existingReactionIndex, 1);
                 } else {
-                    // রিয়েকশন যোগ করুন
+                    // Add reaction
                     message.reactions.push({
                         reaction: reaction,
                         userId: currentUser.id
@@ -2019,42 +2282,42 @@
             }
         }
 
-        // Enter কী দিয়ে মেসেজ পাঠান
+        // Send message with Enter key
         document.getElementById('chat-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
 
-        // টাইমার শুরু করুন
+        // Start timers
         function startTimers() {
-            // তারিখ আপডেট করুন
+            // Update date
             setInterval(() => {
                 updateCurrentDate();
-            }, 60000); // প্রতি মিনিটে আপডেট
+            }, 60000); // Update every minute
             
-            // লিংক পরিবর্তন টাইমার
+            // Link change timer
             setInterval(() => {
                 updateLinkChangeTimer();
             }, 1000);
             
-            // বোনাস টাইমার
+            // Bonus timer
             setInterval(() => {
                 updateBonusButton();
             }, 1000);
             
-            // বিজ্ঞাপন লিমিটেশন টাইমার
+            // Ad limitation timer
             setInterval(() => {
                 checkAdLimit();
             }, 1000);
             
-            // উত্তোলনের ইতিহাস টাইমার
+            // Withdrawal history timer
             setInterval(() => {
                 updateWithdrawHistoryTimers();
             }, 1000);
         }
 
-        // লিংক পরিবর্তন টাইমার আপডেট করুন
+        // Update link change timer
         function updateLinkChangeTimer() {
             const now = new Date();
             const nextChange = new Date(now);
@@ -2064,13 +2327,13 @@
             document.getElementById('link-change-timer').textContent = formatTime(timeRemaining);
         }
 
-        // উত্তোলনের ইতিহাস লোড করুন
+        // Load withdrawal history
         function loadWithdrawHistory() {
             const historyList = document.getElementById('withdraw-history-list');
             historyList.innerHTML = '';
             
             if (withdrawHistory.length === 0) {
-                historyList.innerHTML = '<p style="text-align: center; color: var(--text-muted);">কোন উত্তোলনের ইতিহাস নেই</p>';
+                historyList.innerHTML = '<p style="text-align: center; color: var(--text-muted);">No withdrawal history</p>';
                 return;
             }
             
@@ -2082,26 +2345,26 @@
                 const timeRemaining = Math.max(0, withdraw.processingTime - timeElapsed);
                 const isPaid = timeRemaining <= 0;
                 
-                // তারিখ ফরম্যাট করুন
+                // Format date
                 const requestDate = new Date(withdraw.timestamp);
-                const dateString = requestDate.toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' });
+                const dateString = requestDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
                 
                 historyItem.innerHTML = `
                     <div class="withdraw-history-header">
-                        <div class="withdraw-amount">${withdraw.amount} টাকা</div>
+                        <div class="withdraw-amount">${withdraw.amount} SHIB</div>
                         <div class="withdraw-status ${isPaid ? 'status-paid' : 'status-pending'}">
-                            ${isPaid ? 'পেইড' : 'পেন্ডিং'}
+                            ${isPaid ? 'PAID' : 'PENDING'}
                         </div>
                     </div>
                     <div class="withdraw-details">
-                        মাধ্যম: ${withdraw.paymentMethod.toUpperCase()} | ফোন: ${withdraw.phoneNumber}
+                        Address: ${withdraw.address}
                     </div>
                     <div class="withdraw-details">
-                        তারিখ: ${dateString}
+                        Date: ${dateString}
                     </div>
                     ${!isPaid ? `
                         <div class="withdraw-timer">
-                            পেমেন্ট পর্যন্ত সময়: <span id="withdraw-timer-${withdraw.id}">${formatTime(timeRemaining)}</span>
+                            Time until payment: <span id="withdraw-timer-${withdraw.id}">${formatTime(timeRemaining)}</span>
                         </div>
                     ` : ''}
                 `;
@@ -2110,7 +2373,7 @@
             });
         }
 
-        // উত্তোলনের ইতিহাস টাইমার আপডেট করুন
+        // Update withdrawal history timers
         function updateWithdrawHistoryTimers() {
             const now = Date.now();
             let needsUpdate = false;
@@ -2139,26 +2402,9 @@
             }
         }
 
-        // ব্যালেন্স রিফ্রেশ করুন
+        // Refresh balance
         function refreshBalance() {
-            // Check if we have enough cents to convert to Taka
-            if (userCents >= CENTS_TO_TAKA_RATE) {
-                const takaEarned = Math.floor(userCents / CENTS_TO_TAKA_RATE);
-                earnedCents += takaEarned;
-                userCents %= CENTS_TO_TAKA_RATE;
-                
-                saveUserData();
-                updateUI();
-                
-                showNotification(`${takaEarned} টাকা যোগ হয়েছে! আপনার ব্যালেন্স: ${calculateTotalEarnings().toFixed(2)} টাকা`, 'success');
-            } else {
-                showNotification('রিফ্রেশ করার জন্য পর্যাপ্ত পয়সা নেই।', 'info');
-            }
-        }
-        
-        // মেইনটেনেন্স নোটিশ দেখান
-        function showMaintenanceNotice() {
-            showNotification('আমাদের বটের উন্নতির জন্য সকল কার্যক্রম বন্ধ রাখা হয়েছে। দয়া করে কিছুক্ষণ পর আবার চেষ্টা করুন।', 'info');
+            showNotification('Balance refreshed!', 'info');
         }
 
         // Initialize the app when page loads
