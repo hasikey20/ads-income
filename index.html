@@ -999,6 +999,33 @@
             animation-delay: 5s;
         }
         
+        /* Sound Control Styles */
+        .sound-control {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .sound-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .sound-control.muted {
+            background: rgba(220, 53, 69, 0.8);
+        }
+        
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
@@ -1007,10 +1034,16 @@
             .nav-item i { font-size: 18px; }
             .chat-popup { width: 300px; right: 10px; }
             .tap-stats { grid-template-columns: 1fr; }
+            .sound-control { top: 10px; left: 10px; width: 40px; height: 40px; }
         }
     </style>
 </head>
 <body>
+    <!-- Sound Control Button -->
+    <div class="sound-control" id="sound-control" onclick="toggleSound()">
+        <i class="fas fa-volume-up"></i>
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1>Task Solve Money - Earn SHIB Tokens</h1>
@@ -1428,6 +1461,20 @@
         <span id="notification-text"></span>
     </div>
 
+    <!-- Audio Elements -->
+    <audio id="bgm" loop>
+        <source src="https://files.catbox.moe/4yselj.mp3" type="audio/mp3">
+    </audio>
+    <audio id="jumpSound">
+        <source src="https://files.catbox.moe/n1s302.mp3" type="audio/mp3">
+    </audio>
+    <audio id="failSound">
+        <source src="https://files.catbox.moe/yb4dqy.wav" type="audio/wav">
+    </audio>
+    <audio id="clickSound">
+        <source src="https://files.catbox.moe/jlmwed.mp3" type="audio/mp3">
+    </audio>
+
     <script>
         // Constants
         const TOKENS_PER_AD = 15; // 15 SHIB tokens per ad
@@ -1484,6 +1531,9 @@
         // Withdrawal history
         let withdrawHistory = [];
 
+        // Sound system variables
+        let soundEnabled = true;
+
         // Initialize the app
         function initApp() {
             // Set user info
@@ -1518,6 +1568,51 @@
             
             // Check withdrawal availability
             checkWithdrawAvailability();
+            
+            // Start background music
+            playBackgroundMusic();
+        }
+
+        // Sound system functions
+        function playBackgroundMusic() {
+            const bgm = document.getElementById('bgm');
+            if (bgm && soundEnabled) {
+                bgm.volume = 0.3;
+                bgm.play().catch(e => {
+                    console.log("Background music autoplay prevented. User interaction required.");
+                });
+            }
+        }
+
+        function playSound(soundId) {
+            if (!soundEnabled) return;
+            
+            const sound = document.getElementById(soundId);
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => {
+                    console.log(`Could not play sound: ${soundId}`);
+                });
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const soundControl = document.getElementById('sound-control');
+            const icon = soundControl.querySelector('i');
+            
+            if (soundEnabled) {
+                soundControl.classList.remove('muted');
+                icon.className = 'fas fa-volume-up';
+                playBackgroundMusic();
+            } else {
+                soundControl.classList.add('muted');
+                icon.className = 'fas fa-volume-mute';
+                // Pause all sounds
+                document.querySelectorAll('audio').forEach(audio => {
+                    audio.pause();
+                });
+            }
         }
 
         // Update current date
@@ -1570,6 +1665,11 @@
             totalTaps++;
             sessionTaps++;
             
+            // Play tap sound (but not too frequently to avoid overwhelming)
+            if (totalTaps % 10 === 0) {
+                playSound('clickSound');
+            }
+            
             // Update tap count
             updateTapGameUI();
             
@@ -1577,6 +1677,7 @@
             if (totalTaps % 1000 === 0) {
                 tapEarnings += TOKENS_PER_1000_TAPS;
                 userTokens += TOKENS_PER_1000_TAPS;
+                playSound('jumpSound');
                 showNotification(`1000 taps completed! ${TOKENS_PER_1000_TAPS} SHIB tokens added.`, 'success');
                 saveUserData();
                 updateUI();
@@ -1645,6 +1746,9 @@
 
         // Show page function
         function showPage(pageId, element) {
+            // Play click sound
+            playSound('clickSound');
+            
             // Hide all pages
             document.querySelectorAll('.page-section').forEach(page => {
                 page.classList.remove('active');
@@ -1838,8 +1942,12 @@
         function watchAd() {
             if (isAdLoading) return;
             
+            // Play click sound
+            playSound('clickSound');
+            
             // Check ad limitation
             if (watchedAdsCount >= AD_LIMIT) {
+                playSound('failSound');
                 showNotification(`You have watched ${AD_LIMIT} ads today. Try again after 24 hours.`, 'error');
                 return;
             }
@@ -1860,6 +1968,9 @@
                     // Ad watched successfully
                     watchedAdsCount++;
                     userTokens += TOKENS_PER_AD;
+                    
+                    // Play success sound
+                    playSound('jumpSound');
                     
                     // Check ad limitation
                     if (watchedAdsCount >= AD_LIMIT) {
@@ -1898,6 +2009,7 @@
                     }
                 }).catch(error => {
                     console.error('Error showing ad:', error);
+                    playSound('failSound');
                     document.getElementById('ad-status').innerHTML = '<i class="fas fa-times-circle"></i> Could not show ad. Please try again.';
                     isAdLoading = false;
                     document.getElementById('watch-ad-btn').disabled = false;
@@ -1909,6 +2021,7 @@
                 });
             } catch (error) {
                 console.error('Error in ad system:', error);
+                playSound('failSound');
                 document.getElementById('ad-status').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error in ad system. Please refresh the page.';
                 isAdLoading = false;
                 document.getElementById('watch-ad-btn').disabled = false;
@@ -1937,8 +2050,12 @@
 
         // Start auto ads mode
         function startAutoAds() {
+            // Play click sound
+            playSound('clickSound');
+            
             // Check ad limitation
             if (watchedAdsCount >= AD_LIMIT) {
+                playSound('failSound');
                 showNotification(`You have watched ${AD_LIMIT} ads today. Try again after 24 hours.`, 'error');
                 return;
             }
@@ -1957,6 +2074,9 @@
 
         // Stop auto ads mode
         function stopAutoAds() {
+            // Play click sound
+            playSound('clickSound');
+            
             isAutoMode = false;
             document.getElementById('auto-ad-btn').disabled = false;
             document.getElementById('auto-ad-btn-earn').disabled = false;
@@ -1969,6 +2089,9 @@
 
         // Show withdraw form
         function showWithdrawForm() {
+            // Play click sound
+            playSound('clickSound');
+            
             // Show withdraw page
             showPage('withdraw-page', document.querySelector('.nav-item:nth-child(5)'));
             
@@ -1990,11 +2113,15 @@
 
         // Handle withdrawal request
         function withdrawTokens() {
+            // Play click sound
+            playSound('clickSound');
+            
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
             
             // Withdrawal available only on Sunday (day 0)
             if (currentDay !== 0) {
+                playSound('failSound');
                 showNotification('Withdrawal is available only on Sundays.', 'error');
                 return;
             }
@@ -2005,24 +2132,28 @@
             
             // Validate inputs
             if (!amount || isNaN(amount)) {
+                playSound('failSound');
                 withdrawStatus.textContent = 'Please enter a valid amount.';
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
             if (amount < MIN_WITHDRAW_TOKENS) {
+                playSound('failSound');
                 withdrawStatus.textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_TOKENS} SHIB.`;
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
             if (amount > userTokens) {
+                playSound('failSound');
                 withdrawStatus.textContent = `Insufficient balance. You have ${userTokens} SHIB.`;
                 withdrawStatus.className = 'error-message';
                 return;
             }
             
             if (!address) {
+                playSound('failSound');
                 withdrawStatus.textContent = 'Please enter your Binance SHIB address.';
                 withdrawStatus.className = 'error-message';
                 return;
@@ -2059,6 +2190,9 @@
             
             // Send to admin via Telegram
             sendWithdrawRequestToAdmin(message);
+            
+            // Play success sound
+            playSound('jumpSound');
             
             // Show success message
             withdrawStatus.textContent = 'Withdrawal request submitted successfully! Processing may take up to 2 days.';
@@ -2121,10 +2255,14 @@
 
         // Daily bonus claim function
         function claimDailyBonus() {
+            // Play click sound
+            playSound('clickSound');
+            
             const now = Date.now();
             
             // If cooldown time hasn't passed yet
             if (lastBonusClaimTime > 0 && (now - lastBonusClaimTime) < BONUS_COOLDOWN) {
+                playSound('failSound');
                 showNotification('You have already claimed the bonus. Wait for the next bonus.', 'error');
                 return;
             }
@@ -2136,6 +2274,9 @@
             saveUserData();
             updateUI();
             updateBonusButton();
+            
+            // Play success sound
+            playSound('jumpSound');
             
             // Show coin animation
             createCoinAnimation();
@@ -2187,12 +2328,18 @@
 
         // Toggle chat
         function toggleChat() {
+            // Play click sound
+            playSound('clickSound');
+            
             const chatPopup = document.getElementById('chat-popup');
             chatPopup.classList.toggle('active');
         }
 
         // Send message
         function sendMessage() {
+            // Play click sound
+            playSound('clickSound');
+            
             const chatInput = document.getElementById('chat-input');
             const message = chatInput.value.trim();
             
@@ -2262,6 +2409,9 @@
 
         // Add reaction
         function addReaction(messageId, reaction) {
+            // Play click sound
+            playSound('clickSound');
+            
             const message = chatMessages.find(m => m.id === messageId);
             if (message) {
                 const existingReactionIndex = message.reactions.findIndex(r => r.reaction === reaction && r.userId === currentUser.id);
@@ -2404,6 +2554,9 @@
 
         // Refresh balance
         function refreshBalance() {
+            // Play click sound
+            playSound('clickSound');
+            
             showNotification('Balance refreshed!', 'info');
         }
 
