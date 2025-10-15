@@ -1128,7 +1128,7 @@
             <p>Watch ads and play games to earn Binance SHIB tokens</p>
             <div class="header-gif">
                 <div class="sliding-banner">
-                    <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU3bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU7bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF">
                     <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyOXVkOG80YWh0ejNhcHpqemIyb290dTduejRxeTA1MGp3ODk2ZjhqNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/sTb0uNOyWohZTvQQLc/giphy.gif" alt="GIF">
                 </div>
             </div>
@@ -1617,7 +1617,6 @@
             "https://sadiyapost.blogspot.com/2025/09/blog-post_17.html",
             "https://sadiyapost.blogspot.com/2025/09/blog-post.html"
         ];
-        const WEBSITE_VISIT_LIMIT = 10; // 10 websites per day
         const VISIT_TIME = 10; // 10 seconds per website
         const TOKENS_PER_VISIT = 10; // 10 SHIB tokens per website
         const VISIT_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours cooldown
@@ -1743,37 +1742,33 @@
             const now = Date.now();
             const timeSinceLastVisit = now - lastWebsiteVisitTime;
             
-            // Check if all websites are completed
-            const allWebsitesCompleted = completedWebsites.length >= WEBSITE_VISIT_LIMIT;
-            
-            if (allWebsitesCompleted && timeSinceLastVisit < VISIT_COOLDOWN) {
-                // Cooldown active after completing all websites
-                const timeRemaining = VISIT_COOLDOWN - timeSinceLastVisit;
-                document.getElementById('visit-cooldown-timer').style.display = 'block';
-                document.getElementById('cooldown-timer').textContent = formatTime(timeRemaining);
-                document.getElementById('start-visit-btn').disabled = true;
-                document.getElementById('visit-status').textContent = 'Daily limit reached. Try again after 24 hours.';
-            } else if (allWebsitesCompleted && timeSinceLastVisit >= VISIT_COOLDOWN) {
-                // Cooldown finished, reset completed websites
-                completedWebsites = [];
-                lastWebsiteVisitTime = 0;
-                saveUserData();
-                document.getElementById('visit-cooldown-timer').style.display = 'none';
-                document.getElementById('start-visit-btn').disabled = false;
-                document.getElementById('visit-status').textContent = 'Ready to start';
-                updateWebsiteListUI();
-            } else if (timeSinceLastVisit < VISIT_COOLDOWN) {
-                // Cooldown active from previous session
+            if (lastWebsiteVisitTime && timeSinceLastVisit < VISIT_COOLDOWN) {
+                // Cooldown active
                 const timeRemaining = VISIT_COOLDOWN - timeSinceLastVisit;
                 document.getElementById('visit-cooldown-timer').style.display = 'block';
                 document.getElementById('cooldown-timer').textContent = formatTime(timeRemaining);
                 document.getElementById('start-visit-btn').disabled = true;
                 document.getElementById('visit-status').textContent = 'Visit on cooldown';
+                
+                // Reset completed websites if cooldown is over
+                if (timeSinceLastVisit >= VISIT_COOLDOWN) {
+                    completedWebsites = [];
+                    updateWebsiteListUI();
+                    document.getElementById('visit-cooldown-timer').style.display = 'none';
+                    document.getElementById('start-visit-btn').disabled = false;
+                    document.getElementById('visit-status').textContent = 'Ready to start';
+                }
             } else {
                 // Ready to visit
                 document.getElementById('visit-cooldown-timer').style.display = 'none';
                 document.getElementById('start-visit-btn').disabled = false;
                 document.getElementById('visit-status').textContent = 'Ready to start';
+                
+                // Reset completed websites if cooldown is over
+                if (completedWebsites.length === WEBSITES.length) {
+                    completedWebsites = [];
+                    updateWebsiteListUI();
+                }
             }
         }
 
@@ -1785,8 +1780,18 @@
             playSound('clickSound');
             
             // Check if all websites are completed
-            if (completedWebsites.length >= WEBSITE_VISIT_LIMIT) {
-                showNotification('Daily website visit limit reached. Wait 24 hours to visit again.', 'info');
+            if (completedWebsites.length === WEBSITES.length) {
+                showNotification('All websites completed. Wait 24 hours to visit again.', 'info');
+                return;
+            }
+            
+            // Check cooldown
+            const now = Date.now();
+            const timeSinceLastVisit = now - lastWebsiteVisitTime;
+            
+            if (lastWebsiteVisitTime && timeSinceLastVisit < VISIT_COOLDOWN) {
+                const timeRemaining = VISIT_COOLDOWN - timeSinceLastVisit;
+                showNotification(`You can visit websites again in ${formatTime(timeRemaining)}`, 'error');
                 return;
             }
             
@@ -1893,6 +1898,11 @@
             websiteItem.classList.remove('active');
             websiteItem.classList.add('completed');
             
+            // Set last visit time if this is the first website visit
+            if (completedWebsites.length === 1) {
+                lastWebsiteVisitTime = Date.now();
+            }
+            
             // Save data
             saveUserData();
             updateUI();
@@ -1906,16 +1916,15 @@
             showNotification(`10 SHIB tokens added for visiting website! Your balance: ${userTokens} SHIB`, 'success');
             
             // Check if all websites are completed
-            if (completedWebsites.length >= WEBSITE_VISIT_LIMIT) {
-                // All websites completed, set cooldown
-                lastWebsiteVisitTime = Date.now();
+            if (completedWebsites.length === WEBSITES.length) {
+                // All websites completed
                 isWebsiteVisitActive = false;
-                document.getElementById('visit-status').textContent = 'Daily limit reached! Wait 24 hours to visit again.';
+                document.getElementById('visit-status').textContent = 'All websites completed! Wait 24 hours to visit again.';
                 document.getElementById('start-visit-btn').disabled = true;
                 document.getElementById('visit-cooldown-timer').style.display = 'block';
                 document.getElementById('cooldown-timer').textContent = formatTime(VISIT_COOLDOWN);
                 
-                showNotification('Daily website visit limit reached! You can visit again in 24 hours.', 'info');
+                showNotification('All websites completed! You can visit again in 24 hours.', 'info');
             } else {
                 // More websites to visit
                 isWebsiteVisitActive = false;
