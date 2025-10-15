@@ -1026,176 +1026,81 @@
             background: rgba(220, 53, 69, 0.8);
         }
         
-        /* Website Visit Popup Styles */
-        .website-visit-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .website-visit-popup.active {
-            display: flex;
-        }
-        
+        /* Website Visit Feature Styles */
         .website-visit-container {
-            background: var(--card-bg);
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background-color: var(--card-bg);
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         
-        .website-visit-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .website-visit-header h2 {
-            font-size: 20px;
-            color: white;
-        }
-        
-        .close-popup {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        
-        .close-popup:hover {
+        .visit-timer {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
             color: var(--primary-color);
         }
         
-        .website-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .website-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .website-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .website-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .website-name {
-            font-weight: bold;
-            color: white;
-            font-size: 16px;
-        }
-        
-        .website-reward {
-            color: var(--success-color);
-            font-weight: bold;
-            font-size: 14px;
-        }
-        
-        .website-timer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-        
-        .timer-display {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        
-        .timer-active {
-            color: var(--warning-color);
-            font-weight: bold;
-        }
-        
-        .timer-completed {
-            color: var(--success-color);
-            font-weight: bold;
-        }
-        
-        .timer-cooldown {
-            color: var(--danger-color);
-            font-weight: bold;
-        }
-        
-        .website-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn-small {
-            padding: 8px 15px;
-            font-size: 14px;
-            border-radius: 8px;
-        }
-        
-        .website-visit-instruction {
-            background: rgba(74, 107, 255, 0.2);
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .website-visit-instruction h3 {
-            font-size: 16px;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .website-visit-instruction ul {
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .website-visit-instruction li {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        
         .visit-progress {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 14px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
         }
         
-        .visit-progress .completed {
+        .visit-progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s linear;
+        }
+        
+        .visit-status {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+        
+        .visit-website-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .visit-website-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .visit-website-item.completed {
+            background: rgba(40, 167, 69, 0.2);
             color: var(--success-color);
         }
         
-        .visit-progress .pending {
-            color: var(--warning-color);
+        .visit-website-item.active {
+            background: rgba(74, 107, 255, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .visit-cooldown-timer {
+            background: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid var(--warning-color);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
         }
         
         @media (max-width: 400px) {
@@ -1207,7 +1112,7 @@
             .chat-popup { width: 300px; right: 10px; }
             .tap-stats { grid-template-columns: 1fr; }
             .sound-control { top: 10px; left: 10px; width: 40px; height: 40px; }
-            .website-visit-container { width: 95%; padding: 15px; }
+            .visit-website-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1217,42 +1122,15 @@
         <i class="fas fa-volume-up"></i>
     </div>
     
-    <!-- Website Visit Popup -->
-    <div class="website-visit-popup" id="website-visit-popup">
-        <div class="website-visit-container">
-            <div class="website-visit-header">
-                <h2><i class="fas fa-globe"></i> Website Visits</h2>
-                <button class="close-popup" onclick="closeWebsiteVisitPopup()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <div class="website-visit-instruction">
-                <h3>How to Earn SHIB Tokens:</h3>
-                <ul>
-                    <li>Click "Visit Website" button to open the website in a new tab</li>
-                    <li>Stay on the website for 10 seconds to earn 10 SHIB tokens</li>
-                    <li>Do not close the website tab before the timer completes</li>
-                    <li>After 10 seconds, return to this page and click "Claim Reward"</li>
-                    <li>Each website can be visited once every 12 hours</li>
-                </ul>
-            </div>
-            
-            <div class="visit-progress">
-                <div>Completed: <span class="completed" id="completed-websites">0</span>/10</div>
-                <div>Pending: <span class="pending" id="pending-websites">10</span>/10</div>
-            </div>
-            
-            <div class="website-list" id="website-list">
-                <!-- Website items will be added here dynamically -->
-            </div>
-        </div>
-    </div>
-    
     <div class="container">
         <div class="header">
+            <h1>Task Solve Money - Earn SHIB Tokens</h1>
+            <p>Watch ads and play games to earn Binance SHIB tokens</p>
             <div class="header-gif">
-                <img src="https://cdn.dribbble.com/userupload/42108440/file/original-312f3cff873d1165fa0cd276959217e3.gif" alt="SHIB Tokens">
+                <div class="sliding-banner">
+                    <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyOGIwczFzcDVvam9oYjQ0em5pODluZzc2Z3VkN2dsZGZzcGU3bjZmbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFzmqENRBkRTRfLcA/giphy.gif" alt="GIF">
+                    <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyOXVkOG80YWh0ejNhcHpqemIyb290dTduejRxeTA1MGp3ODk2ZjhqNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/sTb0uNOyWohZTvQQLc/giphy.gif" alt="GIF">
+                </div>
             </div>
             <div class="badge">Active</div>
         </div>
@@ -1260,6 +1138,38 @@
         <!-- Date display -->
         <div class="date-display">
             <i class="fas fa-calendar-alt"></i> Today's Date: <span id="current-date"></span>
+        </div>
+        
+        <!-- Website Visit Feature -->
+        <div class="website-visit-container">
+            <h3 class="section-title"><i class="fas fa-globe"></i> Visit Websites & Earn SHIB</h3>
+            <p>Visit websites for 10 seconds each to earn SHIB tokens. You can do this once every 24 hours.</p>
+            
+            <div class="visit-status" id="visit-status">Ready to start</div>
+            <div class="visit-timer" id="visit-timer">10</div>
+            <div class="visit-progress">
+                <div class="visit-progress-fill" id="visit-progress-fill"></div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="start-visit-btn" onclick="startWebsiteVisit()">
+                    <i class="fas fa-play"></i> Start Website Visit
+                </button>
+                <button class="btn btn-success" id="go-to-website-btn" onclick="goToWebsite()" disabled>
+                    <i class="fas fa-external-link-alt"></i> Go to Website
+                </button>
+                <button class="btn btn-warning" id="claim-visit-btn" onclick="claimVisitReward()" disabled>
+                    <i class="fas fa-coins"></i> Claim 10 SHIB
+                </button>
+            </div>
+            
+            <div class="visit-website-list" id="visit-website-list">
+                <!-- Website list will be populated by JavaScript -->
+            </div>
+            
+            <div class="visit-cooldown-timer" id="visit-cooldown-timer" style="display: none;">
+                <i class="fas fa-clock"></i> Next available in: <span id="cooldown-timer">24:00:00</span>
+            </div>
         </div>
         
         <!-- Ad limit info -->
@@ -1346,9 +1256,6 @@
                 <button class="btn btn-danger" id="stop-auto-btn" onclick="stopAutoAds()" disabled>
                     <i class="fas fa-stop"></i> Stop
                 </button>
-                <button class="btn btn-secondary" onclick="showWebsiteVisitPopup()">
-                    <i class="fas fa-globe"></i> Visit Websites
-                </button>
                 <button class="btn btn-secondary" onclick="showWithdrawForm()">
                     <i class="fas fa-wallet"></i> Withdraw
                 </button>
@@ -1391,9 +1298,6 @@
                 </button>
                 <button class="btn btn-danger" id="stop-auto-btn-earn" onclick="stopAutoAds()" disabled>
                     <i class="fas fa-stop"></i> Stop
-                </button>
-                <button class="btn btn-secondary" onclick="showWebsiteVisitPopup()">
-                    <i class="fas fa-globe"></i> Visit Websites (10 SHIB each)
                 </button>
             </div>
             
@@ -1547,19 +1451,6 @@
                 
                 <p class="cooldown-timer">Link change: <span id="link-change-timer">12:00:00</span></p>
             </div>
-            
-            <div class="task-card">
-                <h3><i class="fas fa-globe"></i> Visit Websites</h3>
-                <p>Visit websites to earn SHIB tokens. Each website visit gives you 10 SHIB tokens.</p>
-                
-                <div class="reward">
-                    <i class="fas fa-coins"></i> Reward: 10 SHIB tokens per website
-                </div>
-                
-                <button class="btn btn-primary" onclick="showWebsiteVisitPopup()">
-                    <i class="fas fa-globe"></i> Start Visiting Websites
-                </button>
-            </div>
         </div>
         
         <!-- Notice Page -->
@@ -1712,9 +1603,23 @@
         const AD_LIMIT = 100; // Ad watch limit (100 ads)
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds (changed from 5 days)
-        const WEBSITE_VISIT_REWARD = 10; // 10 SHIB tokens per website visit
-        const WEBSITE_VISIT_TIME = 10; // 10 seconds per website visit
-        const WEBSITE_COOLDOWN = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+        
+        // Website Visit Feature Constants
+        const WEBSITES = [
+            "https://thenationus.blogspot.com/2025/10/in-memoriam-athletes-who-died-in-2025.html",
+            "https://thenationus.blogspot.com/2025/10/celebrity-couples-who-broke-up-in-2025.html",
+            "https://thenationus.blogspot.com/2025/10/celebs-whove-had-their-implants-or.html",
+            "https://thenationus.blogspot.com/2025/10/what-celebrities-look-like-without.html",
+            "https://thenationus.blogspot.com/",
+            "https://newnatokx.blogspot.com/",
+            "https://newnatokx.blogspot.com/2025/09/i-new-update-bengali-drama-2025.html",
+            "https://sadiyapost.blogspot.com/",
+            "https://sadiyapost.blogspot.com/2025/09/blog-post_17.html",
+            "https://sadiyapost.blogspot.com/2025/09/blog-post.html"
+        ];
+        const VISIT_TIME = 10; // 10 seconds per website
+        const TOKENS_PER_VISIT = 10; // 10 SHIB tokens per website
+        const VISIT_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours cooldown
         
         // Tap game constants
         const REDIRECT_WEBSITES = [
@@ -1725,60 +1630,6 @@
             "https://sadiyapost.blogspot.com/2025/09/blog-post.html",
             "https://sadiyapost.blogspot.com/",
             "https://thenationus.blogspot.com/"
-        ];
-        
-        // Website visit constants
-        const WEBSITES = [
-            {
-                id: 1,
-                url: "https://thenationus.blogspot.com/2025/10/in-memoriam-athletes-who-died-in-2025.html",
-                name: "In Memoriam: Athletes Who Died in 2025"
-            },
-            {
-                id: 2,
-                url: "https://thenationus.blogspot.com/2025/10/celebrity-couples-who-broke-up-in-2025.html",
-                name: "Celebrity Couples Who Broke Up in 2025"
-            },
-            {
-                id: 3,
-                url: "https://thenationus.blogspot.com/2025/10/celebs-whove-had-their-implants-or.html",
-                name: "Celebs Who've Had Their Implants or Fillers Removed"
-            },
-            {
-                id: 4,
-                url: "https://thenationus.blogspot.com/2025/10/what-celebrities-look-like-without.html",
-                name: "What Celebrities Look Like Without Makeup"
-            },
-            {
-                id: 5,
-                url: "https://thenationus.blogspot.com/",
-                name: "The Nation US Blog"
-            },
-            {
-                id: 6,
-                url: "https://newnatokx.blogspot.com/",
-                name: "New Natok X Blog"
-            },
-            {
-                id: 7,
-                url: "https://newnatokx.blogspot.com/2025/09/i-new-update-bengali-drama-2025.html",
-                name: "Bengali Drama 2025 Update"
-            },
-            {
-                id: 8,
-                url: "https://sadiyapost.blogspot.com/",
-                name: "Sadiya Post Blog"
-            },
-            {
-                id: 9,
-                url: "https://sadiyapost.blogspot.com/2025/09/blog-post_17.html",
-                name: "Sadiya Post Article"
-            },
-            {
-                id: 10,
-                url: "https://sadiyapost.blogspot.com/2025/09/blog-post.html",
-                name: "Sadiya Post Latest Article"
-            }
         ];
         
         // Telegram Bot Configuration
@@ -1817,11 +1668,14 @@
 
         // Sound system variables
         let soundEnabled = true;
-        
-        // Website visit variables
-        let websiteVisits = [];
-        let websiteTimers = {};
-        let activeWebsiteVisit = null;
+
+        // Website Visit Feature Variables
+        let websiteVisitTimer = null;
+        let websiteVisitTimeLeft = VISIT_TIME;
+        let currentWebsiteIndex = 0;
+        let completedWebsites = [];
+        let lastWebsiteVisitTime = 0;
+        let isWebsiteVisitActive = false;
 
         // Initialize the app
         function initApp() {
@@ -1858,292 +1712,216 @@
             // Check withdrawal availability
             checkWithdrawAvailability();
             
-            // Initialize website visits
-            initWebsiteVisits();
-            
             // Start background music
             playBackgroundMusic();
+            
+            // Initialize website visit feature
+            initWebsiteVisit();
         }
 
-        // Initialize website visits
-        function initWebsiteVisits() {
-            // Load website visits data
-            if (localStorage.getItem('websiteVisits')) {
-                websiteVisits = JSON.parse(localStorage.getItem('websiteVisits'));
-            } else {
-                // Initialize website visits
-                WEBSITES.forEach(website => {
-                    websiteVisits.push({
-                        id: website.id,
-                        url: website.url,
-                        name: website.name,
-                        lastVisitTime: 0,
-                        completed: false,
-                        activeTimer: false,
-                        timerStartTime: 0
-                    });
-                });
-                saveWebsiteVisits();
-            }
-            
-            // Check for active timers
-            websiteVisits.forEach(website => {
-                if (website.activeTimer) {
-                    const timeElapsed = Date.now() - website.timerStartTime;
-                    const timeRemaining = Math.max(0, WEBSITE_VISIT_TIME * 1000 - timeElapsed);
-                    
-                    if (timeRemaining <= 0) {
-                        // Timer completed
-                        website.activeTimer = false;
-                        website.completed = true;
-                        saveWebsiteVisits();
-                    } else {
-                        // Timer still running
-                        startWebsiteTimer(website.id, timeRemaining);
-                    }
-                }
-            });
-            
-            // Update website visit popup
-            updateWebsiteVisitPopup();
-        }
-
-        // Save website visits data
-        function saveWebsiteVisits() {
-            localStorage.setItem('websiteVisits', JSON.stringify(websiteVisits));
-        }
-
-        // Show website visit popup
-        function showWebsiteVisitPopup() {
-            // Play click sound
-            playSound('clickSound');
-            
-            // Update website visit popup
-            updateWebsiteVisitPopup();
-            
-            // Show popup
-            document.getElementById('website-visit-popup').classList.add('active');
-        }
-
-        // Close website visit popup
-        function closeWebsiteVisitPopup() {
-            // Play click sound
-            playSound('clickSound');
-            
-            // Hide popup
-            document.getElementById('website-visit-popup').classList.remove('active');
-        }
-
-        // Update website visit popup
-        function updateWebsiteVisitPopup() {
-            const websiteList = document.getElementById('website-list');
+        // Initialize website visit feature
+        function initWebsiteVisit() {
+            // Populate website list
+            const websiteList = document.getElementById('visit-website-list');
             websiteList.innerHTML = '';
             
-            let completedCount = 0;
-            let pendingCount = 0;
-            
-            websiteVisits.forEach(website => {
+            WEBSITES.forEach((website, index) => {
                 const websiteItem = document.createElement('div');
-                websiteItem.className = 'website-item';
-                
-                const websiteInfo = document.createElement('div');
-                websiteInfo.className = 'website-info';
-                
-                const websiteName = document.createElement('div');
-                websiteName.className = 'website-name';
-                websiteName.textContent = website.name;
-                
-                const websiteReward = document.createElement('div');
-                websiteReward.className = 'website-reward';
-                websiteReward.innerHTML = `<i class="fas fa-coins"></i> ${WEBSITE_VISIT_REWARD} SHIB`;
-                
-                websiteInfo.appendChild(websiteName);
-                websiteInfo.appendChild(websiteReward);
-                
-                const websiteTimer = document.createElement('div');
-                websiteTimer.className = 'website-timer';
-                
-                const timerDisplay = document.createElement('div');
-                timerDisplay.className = 'timer-display';
-                timerDisplay.id = `timer-${website.id}`;
-                
-                const websiteActions = document.createElement('div');
-                websiteActions.className = 'website-actions';
-                
-                // Check if website is on cooldown
-                const timeSinceLastVisit = Date.now() - website.lastVisitTime;
-                const cooldownRemaining = Math.max(0, WEBSITE_COOLDOWN - timeSinceLastVisit);
-                
-                if (website.activeTimer) {
-                    // Timer is active
-                    timerDisplay.textContent = 'Timer running...';
-                    timerDisplay.className = 'timer-display timer-active';
-                    
-                    const claimButton = document.createElement('button');
-                    claimButton.className = 'btn btn-success btn-small';
-                    claimButton.innerHTML = '<i class="fas fa-check"></i> Claim';
-                    claimButton.onclick = () => claimWebsiteReward(website.id);
-                    
-                    websiteActions.appendChild(claimButton);
-                    pendingCount++;
-                } else if (cooldownRemaining > 0 && website.completed) {
-                    // On cooldown
-                    timerDisplay.textContent = `Cooldown: ${formatTime(cooldownRemaining)}`;
-                    timerDisplay.className = 'timer-display timer-cooldown';
-                    
-                    const visitButton = document.createElement('button');
-                    visitButton.className = 'btn btn-secondary btn-small';
-                    visitButton.innerHTML = '<i class="fas fa-clock"></i> Wait';
-                    visitButton.disabled = true;
-                    
-                    websiteActions.appendChild(visitButton);
-                    completedCount++;
-                } else if (website.completed) {
-                    // Completed and ready for next visit
-                    timerDisplay.textContent = 'Ready to visit';
-                    timerDisplay.className = 'timer-display timer-completed';
-                    
-                    const visitButton = document.createElement('button');
-                    visitButton.className = 'btn btn-primary btn-small';
-                    visitButton.innerHTML = '<i class="fas fa-globe"></i> Visit';
-                    visitButton.onclick = () => startWebsiteVisit(website.id);
-                    
-                    websiteActions.appendChild(visitButton);
-                    completedCount++;
-                } else {
-                    // Not visited yet
-                    timerDisplay.textContent = 'Not visited yet';
-                    timerDisplay.className = 'timer-display';
-                    
-                    const visitButton = document.createElement('button');
-                    visitButton.className = 'btn btn-primary btn-small';
-                    visitButton.innerHTML = '<i class="fas fa-globe"></i> Visit';
-                    visitButton.onclick = () => startWebsiteVisit(website.id);
-                    
-                    websiteActions.appendChild(visitButton);
-                    pendingCount++;
-                }
-                
-                websiteTimer.appendChild(timerDisplay);
-                websiteTimer.appendChild(websiteActions);
-                
-                websiteItem.appendChild(websiteInfo);
-                websiteItem.appendChild(websiteTimer);
-                
+                websiteItem.className = 'visit-website-item';
+                websiteItem.id = `website-${index}`;
+                websiteItem.textContent = `Website ${index + 1}`;
                 websiteList.appendChild(websiteItem);
             });
             
-            // Update progress
-            document.getElementById('completed-websites').textContent = completedCount;
-            document.getElementById('pending-websites').textContent = pendingCount;
+            // Check if user can visit websites
+            checkWebsiteVisitAvailability();
+        }
+
+        // Check if website visit is available
+        function checkWebsiteVisitAvailability() {
+            const now = Date.now();
+            const timeSinceLastVisit = now - lastWebsiteVisitTime;
+            
+            if (timeSinceLastVisit < VISIT_COOLDOWN) {
+                // Cooldown active
+                const timeRemaining = VISIT_COOLDOWN - timeSinceLastVisit;
+                document.getElementById('visit-cooldown-timer').style.display = 'block';
+                document.getElementById('cooldown-timer').textContent = formatTime(timeRemaining);
+                document.getElementById('start-visit-btn').disabled = true;
+                document.getElementById('visit-status').textContent = 'Visit on cooldown';
+            } else {
+                // Ready to visit
+                document.getElementById('visit-cooldown-timer').style.display = 'none';
+                document.getElementById('start-visit-btn').disabled = false;
+                document.getElementById('visit-status').textContent = 'Ready to start';
+                
+                // Reset completed websites if cooldown is over
+                if (completedWebsites.length === WEBSITES.length) {
+                    completedWebsites = [];
+                    updateWebsiteListUI();
+                }
+            }
         }
 
         // Start website visit
-        function startWebsiteVisit(websiteId) {
+        function startWebsiteVisit() {
+            if (isWebsiteVisitActive) return;
+            
             // Play click sound
             playSound('clickSound');
             
-            const website = websiteVisits.find(w => w.id === websiteId);
-            if (!website) return;
-            
-            // Open website in new tab
-            window.open(website.url, '_blank');
-            
-            // Start timer
-            website.activeTimer = true;
-            website.timerStartTime = Date.now();
-            saveWebsiteVisits();
-            
-            // Start countdown
-            startWebsiteTimer(websiteId, WEBSITE_VISIT_TIME * 1000);
-            
-            // Update popup
-            updateWebsiteVisitPopup();
-            
-            // Show notification
-            showNotification(`Website visit started! Stay on the website for ${WEBSITE_VISIT_TIME} seconds.`, 'info');
-        }
-
-        // Start website timer
-        function startWebsiteTimer(websiteId, duration) {
-            // Clear existing timer
-            if (websiteTimers[websiteId]) {
-                clearInterval(websiteTimers[websiteId]);
+            // Check if all websites are completed
+            if (completedWebsites.length === WEBSITES.length) {
+                showNotification('All websites completed. Wait 24 hours to visit again.', 'info');
+                return;
             }
             
-            const startTime = Date.now();
-            const endTime = startTime + duration;
+            // Find next website to visit
+            currentWebsiteIndex = 0;
+            while (completedWebsites.includes(currentWebsiteIndex) && currentWebsiteIndex < WEBSITES.length) {
+                currentWebsiteIndex++;
+            }
             
-            websiteTimers[websiteId] = setInterval(() => {
-                const now = Date.now();
-                const timeRemaining = Math.max(0, endTime - now);
+            if (currentWebsiteIndex >= WEBSITES.length) {
+                showNotification('All websites completed. Wait 24 hours to visit again.', 'info');
+                return;
+            }
+            
+            isWebsiteVisitActive = true;
+            websiteVisitTimeLeft = VISIT_TIME;
+            
+            // Update UI
+            document.getElementById('start-visit-btn').disabled = true;
+            document.getElementById('go-to-website-btn').disabled = false;
+            document.getElementById('claim-visit-btn').disabled = true;
+            document.getElementById('visit-status').textContent = 'Click "Go to Website" to start';
+            
+            // Update website list UI
+            updateWebsiteListUI();
+            
+            showNotification('Website visit started. Click "Go to Website" to open the website.', 'info');
+        }
+
+        // Go to website
+        function goToWebsite() {
+            if (!isWebsiteVisitActive) return;
+            
+            // Play click sound
+            playSound('clickSound');
+            
+            // Open website in new tab
+            const websiteUrl = WEBSITES[currentWebsiteIndex];
+            window.open(websiteUrl, '_blank');
+            
+            // Start timer
+            document.getElementById('visit-status').textContent = 'Stay on website for 10 seconds';
+            document.getElementById('go-to-website-btn').disabled = true;
+            
+            // Update website in list
+            const websiteItem = document.getElementById(`website-${currentWebsiteIndex}`);
+            websiteItem.classList.add('active');
+            
+            // Start countdown
+            startVisitCountdown();
+        }
+
+        // Start visit countdown
+        function startVisitCountdown() {
+            if (websiteVisitTimer) {
+                clearInterval(websiteVisitTimer);
+            }
+            
+            websiteVisitTimer = setInterval(() => {
+                websiteVisitTimeLeft--;
+                document.getElementById('visit-timer').textContent = websiteVisitTimeLeft;
                 
-                const timerDisplay = document.getElementById(`timer-${websiteId}`);
-                if (timerDisplay) {
-                    if (timeRemaining > 0) {
-                        timerDisplay.textContent = `Time left: ${Math.ceil(timeRemaining / 1000)}s`;
-                        timerDisplay.className = 'timer-display timer-active';
-                    } else {
-                        // Timer completed
-                        timerDisplay.textContent = 'Ready to claim!';
-                        timerDisplay.className = 'timer-display timer-completed';
-                        clearInterval(websiteTimers[websiteId]);
-                        
-                        // Update website status
-                        const website = websiteVisits.find(w => w.id === websiteId);
-                        if (website) {
-                            website.activeTimer = false;
-                            saveWebsiteVisits();
-                        }
-                        
-                        // Play notification sound
-                        playSound('jumpSound');
-                        
-                        // Show notification
-                        showNotification(`Website visit completed! Claim your ${WEBSITE_VISIT_REWARD} SHIB tokens.`, 'success');
-                    }
+                // Update progress bar
+                const progressPercent = ((VISIT_TIME - websiteVisitTimeLeft) / VISIT_TIME) * 100;
+                document.getElementById('visit-progress-fill').style.width = `${progressPercent}%`;
+                
+                if (websiteVisitTimeLeft <= 0) {
+                    clearInterval(websiteVisitTimer);
+                    websiteVisitTimeLeft = VISIT_TIME;
+                    
+                    // Enable claim button
+                    document.getElementById('claim-visit-btn').disabled = false;
+                    document.getElementById('visit-status').textContent = '10 seconds completed! Claim your reward';
+                    
+                    // Play success sound
+                    playSound('jumpSound');
+                    
+                    showNotification('Website visit completed! Claim your 10 SHIB tokens.', 'success');
                 }
             }, 1000);
         }
 
-        // Claim website reward
-        function claimWebsiteReward(websiteId) {
+        // Claim visit reward
+        function claimVisitReward() {
+            if (!isWebsiteVisitActive) return;
+            
             // Play click sound
             playSound('clickSound');
             
-            const website = websiteVisits.find(w => w.id === websiteId);
-            if (!website || !website.activeTimer) return;
+            // Add tokens
+            userTokens += TOKENS_PER_VISIT;
             
-            // Check if timer has completed
-            const timeElapsed = Date.now() - website.timerStartTime;
-            if (timeElapsed < WEBSITE_VISIT_TIME * 1000) {
-                showNotification(`Please wait ${Math.ceil((WEBSITE_VISIT_TIME * 1000 - timeElapsed) / 1000)} more seconds.`, 'error');
-                return;
-            }
-            
-            // Give reward
-            userTokens += WEBSITE_VISIT_REWARD;
-            website.completed = true;
-            website.lastVisitTime = Date.now();
-            website.activeTimer = false;
-            saveWebsiteVisits();
+            // Mark website as completed
+            completedWebsites.push(currentWebsiteIndex);
             
             // Update UI
+            document.getElementById('claim-visit-btn').disabled = true;
+            document.getElementById('visit-status').textContent = 'Reward claimed!';
+            document.getElementById('visit-timer').textContent = VISIT_TIME;
+            document.getElementById('visit-progress-fill').style.width = '0%';
+            
+            // Update website in list
+            const websiteItem = document.getElementById(`website-${currentWebsiteIndex}`);
+            websiteItem.classList.remove('active');
+            websiteItem.classList.add('completed');
+            
+            // Save data
+            saveUserData();
             updateUI();
             
             // Play success sound
             playSound('jumpSound');
             
-            // Show notification
-            showNotification(`${WEBSITE_VISIT_REWARD} SHIB tokens added for visiting ${website.name}!`, 'success');
+            // Show coin animation
+            createCoinAnimation();
             
-            // Update popup
-            updateWebsiteVisitPopup();
+            showNotification(`10 SHIB tokens added for visiting website! Your balance: ${userTokens} SHIB`, 'success');
             
-            // Check if earned enough for withdrawal
-            if (userTokens >= MIN_WITHDRAW_TOKENS) {
-                showNotification(`Congratulations! You have collected ${MIN_WITHDRAW_TOKENS} SHIB tokens for withdrawal.`, 'info');
+            // Check if all websites are completed
+            if (completedWebsites.length === WEBSITES.length) {
+                // All websites completed, set cooldown
+                lastWebsiteVisitTime = Date.now();
+                isWebsiteVisitActive = false;
+                document.getElementById('visit-status').textContent = 'All websites completed! Wait 24 hours to visit again.';
+                document.getElementById('start-visit-btn').disabled = true;
+                document.getElementById('visit-cooldown-timer').style.display = 'block';
+                document.getElementById('cooldown-timer').textContent = formatTime(VISIT_COOLDOWN);
+                
+                showNotification('All websites completed! You can visit again in 24 hours.', 'info');
+            } else {
+                // More websites to visit
+                isWebsiteVisitActive = false;
+                document.getElementById('start-visit-btn').disabled = false;
+                document.getElementById('visit-status').textContent = 'Ready for next website';
             }
+        }
+
+        // Update website list UI
+        function updateWebsiteListUI() {
+            WEBSITES.forEach((website, index) => {
+                const websiteItem = document.getElementById(`website-${index}`);
+                websiteItem.classList.remove('active', 'completed');
+                
+                if (completedWebsites.includes(index)) {
+                    websiteItem.classList.add('completed');
+                } else if (isWebsiteVisitActive && index === currentWebsiteIndex) {
+                    websiteItem.classList.add('active');
+                }
+            });
         }
 
         // Sound system functions
@@ -2420,6 +2198,15 @@
                 withdrawHistory = JSON.parse(localStorage.getItem('withdrawHistory'));
             }
             
+            // Load website visit data
+            if (localStorage.getItem('completedWebsites')) {
+                completedWebsites = JSON.parse(localStorage.getItem('completedWebsites'));
+            }
+            
+            if (localStorage.getItem('lastWebsiteVisitTime')) {
+                lastWebsiteVisitTime = parseInt(localStorage.getItem('lastWebsiteVisitTime'));
+            }
+            
             // Reset daily visits and clicks if it's a new day
             const lastVisitDate = localStorage.getItem('lastVisitDate');
             const today = new Date().toDateString();
@@ -2457,6 +2244,8 @@
             localStorage.setItem('adLimitStartTime', adLimitStartTime);
             localStorage.setItem('withdrawHistory', JSON.stringify(withdrawHistory));
             localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+            localStorage.setItem('completedWebsites', JSON.stringify(completedWebsites));
+            localStorage.setItem('lastWebsiteVisitTime', lastWebsiteVisitTime);
         }
 
         // Update all UI elements
@@ -3041,7 +2830,7 @@
             
             // Website visit cooldown timer
             setInterval(() => {
-                updateWebsiteVisitPopup();
+                checkWebsiteVisitAvailability();
             }, 1000);
         }
 
