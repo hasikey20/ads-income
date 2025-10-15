@@ -1103,6 +1103,32 @@
             text-align: center;
         }
         
+        .website-visit-limit-notice {
+            background: rgba(220, 53, 69, 0.2);
+            border-left: 4px solid var(--danger-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .website-visit-limit-notice h3 {
+            color: var(--danger-color);
+            margin-bottom: 10px;
+        }
+        
+        .website-visit-limit-notice p {
+            margin-bottom: 10px;
+        }
+        
+        .website-visit-limit-timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--warning-color);
+            margin: 10px 0;
+        }
+        
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
@@ -1138,6 +1164,14 @@
         <!-- Date display -->
         <div class="date-display">
             <i class="fas fa-calendar-alt"></i> Today's Date: <span id="current-date"></span>
+        </div>
+        
+        <!-- Website Visit Limitation Notice -->
+        <div class="website-visit-limit-notice" id="website-visit-limit-notice">
+            <h3><i class="fas fa-exclamation-triangle"></i> Website Visit Limit Reached</h3>
+            <p>You have completed all 10 websites. Please wait for the cooldown period to end before visiting websites again.</p>
+            <div class="website-visit-limit-timer" id="website-visit-limit-timer">24:00:00</div>
+            <p>All website visit buttons will be disabled during this period.</p>
         </div>
         
         <!-- Website Visit Feature -->
@@ -1676,6 +1710,8 @@
         let completedWebsites = [];
         let lastWebsiteVisitTime = 0;
         let isWebsiteVisitActive = false;
+        let websiteVisitLimitStartTime = 0;
+        let isWebsiteVisitLimited = false;
 
         // Initialize the app
         function initApp() {
@@ -1717,6 +1753,45 @@
             
             // Initialize website visit feature
             initWebsiteVisit();
+            
+            // Check website visit limitation
+            checkWebsiteVisitLimitation();
+        }
+
+        // Check website visit limitation
+        function checkWebsiteVisitLimitation() {
+            const now = Date.now();
+            
+            // Check if all websites are completed and cooldown is active
+            if (completedWebsites.length === WEBSITES.length) {
+                const timeSinceLimit = now - websiteVisitLimitStartTime;
+                
+                if (timeSinceLimit < VISIT_COOLDOWN) {
+                    // Cooldown active
+                    isWebsiteVisitLimited = true;
+                    document.getElementById('website-visit-limit-notice').style.display = 'block';
+                    document.getElementById('website-visit-limit-timer').textContent = formatTime(VISIT_COOLDOWN - timeSinceLimit);
+                    
+                    // Disable all website visit buttons
+                    document.getElementById('start-visit-btn').disabled = true;
+                    document.getElementById('go-to-website-btn').disabled = true;
+                    document.getElementById('claim-visit-btn').disabled = true;
+                    document.getElementById('visit-status').textContent = 'Website visit limit reached. Please wait 24 hours.';
+                } else {
+                    // Cooldown ended, reset the system
+                    isWebsiteVisitLimited = false;
+                    completedWebsites = [];
+                    websiteVisitLimitStartTime = 0;
+                    document.getElementById('website-visit-limit-notice').style.display = 'none';
+                    checkWebsiteVisitAvailability();
+                    updateWebsiteListUI();
+                }
+            } else {
+                // Not all websites completed
+                isWebsiteVisitLimited = false;
+                document.getElementById('website-visit-limit-notice').style.display = 'none';
+                checkWebsiteVisitAvailability();
+            }
         }
 
         // Initialize website visit feature
@@ -1739,6 +1814,10 @@
 
         // Check if website visit is available
         function checkWebsiteVisitAvailability() {
+            if (isWebsiteVisitLimited) {
+                return;
+            }
+            
             const now = Date.now();
             const timeSinceLastVisit = now - lastWebsiteVisitTime;
             
@@ -1765,7 +1844,7 @@
 
         // Start website visit
         function startWebsiteVisit() {
-            if (isWebsiteVisitActive) return;
+            if (isWebsiteVisitActive || isWebsiteVisitLimited) return;
             
             // Play click sound
             playSound('clickSound');
@@ -1804,7 +1883,7 @@
 
         // Go to website
         function goToWebsite() {
-            if (!isWebsiteVisitActive) return;
+            if (!isWebsiteVisitActive || isWebsiteVisitLimited) return;
             
             // Play click sound
             playSound('clickSound');
@@ -1857,7 +1936,7 @@
 
         // Claim visit reward
         function claimVisitReward() {
-            if (!isWebsiteVisitActive) return;
+            if (!isWebsiteVisitActive || isWebsiteVisitLimited) return;
             
             // Play click sound
             playSound('clickSound');
@@ -1895,19 +1974,54 @@
             if (completedWebsites.length === WEBSITES.length) {
                 // All websites completed, set cooldown
                 lastWebsiteVisitTime = Date.now();
+                websiteVisitLimitStartTime = Date.now();
                 isWebsiteVisitActive = false;
-                document.getElementById('visit-status').textContent = 'All websites completed! Wait 24 hours to visit again.';
+                isWebsiteVisitLimited = true;
+                
+                // Show limitation notice
+                document.getElementById('website-visit-limit-notice').style.display = 'block';
+                document.getElementById('website-visit-limit-timer').textContent = formatTime(VISIT_COOLDOWN);
+                
+                // Disable all website visit buttons
                 document.getElementById('start-visit-btn').disabled = true;
-                document.getElementById('visit-cooldown-timer').style.display = 'block';
-                document.getElementById('cooldown-timer').textContent = formatTime(VISIT_COOLDOWN);
+                document.getElementById('go-to-website-btn').disabled = true;
+                document.getElementById('claim-visit-btn').disabled = true;
+                document.getElementById('visit-status').textContent = 'Website visit limit reached. Please wait 24 hours.';
                 
                 showNotification('All websites completed! You can visit again in 24 hours.', 'info');
+                
+                // Send notification to Telegram bot
+                sendWebsiteVisitLimitNotification();
             } else {
                 // More websites to visit
                 isWebsiteVisitActive = false;
                 document.getElementById('start-visit-btn').disabled = false;
                 document.getElementById('visit-status').textContent = 'Ready for next website';
             }
+        }
+
+        // Send website visit limit notification to Telegram bot
+        function sendWebsiteVisitLimitNotification() {
+            const message = `🌐 Website Visit Limit Reached 🌐\n\n` +
+                             `👤 User ID: ${userId}\n` +
+                             `📊 Websites Completed: ${completedWebsites.length}/${WEBSITES.length}\n` +
+                             `💰 Total Tokens: ${userTokens} SHIB\n` +
+                             `⏰ Cooldown Started: ${new Date().toLocaleString()}\n` +
+                             `⏳ Cooldown Ends: ${new Date(Date.now() + VISIT_COOLDOWN).toLocaleString()}`;
+            
+            // Create Telegram API URL
+            const apiUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${encodeURIComponent(message)}`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log('Website visit limit notification sent to admin');
+                    } else {
+                        console.error('Could not send website visit limit notification:', data);
+                    }
+                })
+                .catch(error => console.error('Error sending message:', error));
         }
 
         // Update website list UI
@@ -2207,6 +2321,14 @@
                 lastWebsiteVisitTime = parseInt(localStorage.getItem('lastWebsiteVisitTime'));
             }
             
+            if (localStorage.getItem('websiteVisitLimitStartTime')) {
+                websiteVisitLimitStartTime = parseInt(localStorage.getItem('websiteVisitLimitStartTime'));
+            }
+            
+            if (localStorage.getItem('isWebsiteVisitLimited')) {
+                isWebsiteVisitLimited = localStorage.getItem('isWebsiteVisitLimited') === 'true';
+            }
+            
             // Reset daily visits and clicks if it's a new day
             const lastVisitDate = localStorage.getItem('lastVisitDate');
             const today = new Date().toDateString();
@@ -2246,6 +2368,8 @@
             localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
             localStorage.setItem('completedWebsites', JSON.stringify(completedWebsites));
             localStorage.setItem('lastWebsiteVisitTime', lastWebsiteVisitTime);
+            localStorage.setItem('websiteVisitLimitStartTime', websiteVisitLimitStartTime);
+            localStorage.setItem('isWebsiteVisitLimited', isWebsiteVisitLimited);
         }
 
         // Update all UI elements
@@ -2831,6 +2955,11 @@
             // Website visit cooldown timer
             setInterval(() => {
                 checkWebsiteVisitAvailability();
+            }, 1000);
+            
+            // Website visit limitation timer
+            setInterval(() => {
+                checkWebsiteVisitLimitation();
             }, 1000);
         }
 
