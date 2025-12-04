@@ -7,6 +7,96 @@
     <script src='//libtl.com/sdk.js' data-zone='9472189' data-sdk='show_9472189'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Intro Animation Styles */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite, colorChange 3s infinite alternate;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .intro-subtitle {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            animation: fadeIn 2s ease;
+        }
+
+        .intro-loader {
+            width: 200px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .intro-loader-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, #4a6bff, #ff7d4a);
+            border-radius: 10px;
+            animation: loading 5s linear forwards;
+        }
+
+        .intro-timer {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes colorChange {
+            0% { background: linear-gradient(45deg, #FFD700, #FFA500); }
+            50% { background: linear-gradient(45deg, #4a6bff, #ff7d4a); }
+            100% { background: linear-gradient(45deg, #FF8C00, #FF4500); }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.8; }
+        }
+
+        /* Existing styles remain the same */
         :root {
             --primary-color: #4a6bff;
             --secondary-color: #ff7d4a;
@@ -36,6 +126,12 @@
             flex-direction: column;
             padding: 15px;
             padding-bottom: 70px;
+            opacity: 0;
+            animation: fadeInBody 0.5s ease forwards;
+        }
+
+        @keyframes fadeInBody {
+            to { opacity: 1; }
         }
         
         .container {
@@ -1474,6 +1570,96 @@
             gap: 10px;
             justify-content: center;
         }
+
+        /* Bkash Conversion Styles */
+        .bkash-conversion-container {
+            background-color: var(--card-bg);
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .conversion-rate {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid var(--warning-color);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .conversion-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .conversion-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .conversion-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .conversion-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .bkash-form {
+            margin-top: 20px;
+        }
+
+        .payment-method-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .payment-method-btn.active {
+            background: var(--primary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .payment-method-btn i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .bkash-info {
+            background: rgba(227, 18, 96, 0.2);
+            border-left: 4px solid #E31260;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
         
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
@@ -1488,10 +1674,21 @@
             .referral-popup { width: 300px; }
             .task-visit-website-list { grid-template-columns: repeat(2, 1fr); }
             .target-visitors-select { grid-template-columns: repeat(2, 1fr); }
+            .payment-method-buttons { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <!-- Intro Overlay -->
+    <div class="intro-overlay" id="intro-overlay">
+        <div class="intro-logo">TASK SOLVE MONEY</div>
+        <div class="intro-subtitle">Earn SHIB Tokens & Convert to Bkash</div>
+        <div class="intro-loader">
+            <div class="intro-loader-fill"></div>
+        </div>
+        <div class="intro-timer">Loading... <span id="intro-countdown">5</span></div>
+    </div>
+
     <!-- Sound Control Button -->
     <div class="sound-control" id="sound-control" onclick="toggleSound()">
         <i class="fas fa-volume-up"></i>
@@ -1574,7 +1771,7 @@
             </button>
         </div>
     </div>
-    
+
     <div class="container">
         <div class="header">
             <h1>Task Solve Money - Earn SHIB Tokens</h1>
@@ -1591,6 +1788,68 @@
         <!-- Date display -->
         <div class="date-display">
             <i class="fas fa-calendar-alt"></i> Today's Date: <span id="current-date"></span>
+        </div>
+        
+        <!-- Bkash Conversion Section -->
+        <div class="bkash-conversion-container">
+            <h3 class="section-title"><i class="fas fa-exchange-alt"></i> SHIB to Bkash Conversion</h3>
+            
+            <div class="conversion-rate">
+                <i class="fas fa-info-circle"></i> Conversion Rate: 5000 SHIB = 10 Taka Bkash
+            </div>
+            
+            <div class="conversion-details">
+                <div class="conversion-item">
+                    <div class="conversion-value" id="shib-balance">0</div>
+                    <div class="conversion-label">Your SHIB Balance</div>
+                </div>
+                <div class="conversion-item">
+                    <div class="conversion-value" id="bkash-value">0</div>
+                    <div class="conversion-label">Bkash Value (Taka)</div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="convert-to-bkash-btn" onclick="showBkashConversionForm()">
+                <i class="fas fa-exchange-alt"></i> Convert to Bkash
+            </button>
+            
+            <div class="bkash-form" id="bkash-form" style="display: none;">
+                <div class="bkash-info">
+                    <i class="fas fa-money-bill-wave"></i> Minimum conversion: 5000 SHIB = 10 Taka Bkash
+                </div>
+                
+                <div class="payment-method-buttons">
+                    <div class="payment-method-btn active" data-method="binance" onclick="selectPaymentMethod('binance')">
+                        <i class="fab fa-btc"></i>
+                        <div>Binance</div>
+                        <small>10,000 SHIB</small>
+                    </div>
+                    <div class="payment-method-btn" data-method="bkash" onclick="selectPaymentMethod('bkash')">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>Bkash</div>
+                        <small>5,000 SHIB</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="conversion-amount">Amount (SHIB)</label>
+                    <input type="number" id="conversion-amount" class="form-control" placeholder="Enter SHIB amount" min="5000" oninput="updateConversionValue()">
+                </div>
+                
+                <div class="form-group" id="bkash-number-group" style="display: none;">
+                    <label for="bkash-phone">Bkash Phone Number</label>
+                    <input type="text" id="bkash-phone" class="form-control" placeholder="01XXXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label for="conversion-value">Bkash Amount (Taka)</label>
+                    <input type="text" id="conversion-value" class="form-control" readonly>
+                </div>
+                
+                <button class="btn btn-success" id="submit-conversion-btn" onclick="submitConversion()" disabled>
+                    <i class="fas fa-exchange-alt"></i> Convert Now
+                </button>
+            </div>
         </div>
         
         <!-- Website Visit Feature -->
@@ -1676,8 +1935,8 @@
                     <p id="user-tokens">0</p>
                 </div>
                 <div class="stat-card">
-                    <h3>Earned Tokens</h3>
-                    <p id="earned-tokens">0 <small>SHIB</small></p>
+                    <h3>Bkash Value</h3>
+                    <p id="bkash-taka">0 <small>Taka</small></p>
                 </div>
             </div>
             
@@ -1732,7 +1991,7 @@
             
             <div class="rate-info">
                 <p><i class="fas fa-ad"></i> Per ad = 15 SHIB tokens</p>
-                <p><i class="fas fa-money-bill-wave"></i> Minimum withdrawal: 10000 SHIB</p>
+                <p><i class="fas fa-money-bill-wave"></i> Binance: 10000 SHIB | Bkash: 5000 SHIB = 10 Taka</p>
                 <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
                 <p><i class="fas fa-globe"></i> Per website visit = 10 SHIB tokens</p>
             </div>
@@ -1835,7 +2094,8 @@
             <!-- Withdrawal notice -->
             <div class="withdraw-notice">
                 <h3><i class="fas fa-info-circle"></i> Withdrawal Rules</h3>
-                <p>Withdrawal is available only on the <strong>7th day of each week</strong> (Sunday). After submitting a withdrawal request, it will be processed within <strong>2 days</strong>.</p>
+                <p>Binance withdrawal: Minimum 10,000 SHIB (Available only on Sunday)<br>
+                Bkash withdrawal: Minimum 5,000 SHIB = 10 Taka (Available anytime)</p>
                 <div class="withdraw-gif">
                     <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Notice" style="width:100%; height:auto; border-radius:10px;">
                 </div>
@@ -1847,20 +2107,32 @@
                 <p id="total-earned-withdraw">0 <small>SHIB</small></p>
             </div>
             
+            <!-- Payment Method Selection -->
+            <div class="payment-method-buttons" style="margin: 15px;">
+                <div class="payment-method-btn active" data-method="binance" onclick="selectWithdrawMethod('binance')">
+                    <i class="fab fa-btc"></i>
+                    <div>Binance</div>
+                    <small>Min: 10,000 SHIB</small>
+                </div>
+                <div class="payment-method-btn" data-method="bkash" onclick="selectWithdrawMethod('bkash')">
+                    <i class="fas fa-mobile-alt"></i>
+                    <div>Bkash</div>
+                    <small>Min: 5,000 SHIB</small>
+                </div>
+            </div>
+            
             <div class="withdraw-section" id="withdraw-section">
                 <div class="form-group">
                     <label for="withdraw-amount">Amount (SHIB)</label>
-                    <input type="number" id="withdraw-amount" class="form-control" placeholder="Enter amount" min="10000">
+                    <input type="number" id="withdraw-amount" class="form-control" placeholder="Enter amount" min="5000">
                 </div>
-                <div class="form-group">
-                    <label for="payment-method">Payment Method</label>
-                    <select id="payment-method" class="form-control" disabled>
-                        <option value="shib" selected>Binance SHIB Token (ERC-20)</option>
-                    </select>
-                </div>
-                <div class="form-group">
+                <div class="form-group" id="binance-address-group">
                     <label for="withdraw-address">Binance SHIB Address</label>
                     <input type="text" id="withdraw-address" class="form-control" placeholder="Enter your Binance SHIB address">
+                </div>
+                <div class="form-group" id="bkash-phone-group" style="display: none;">
+                    <label for="withdraw-bkash-phone">Bkash Phone Number</label>
+                    <input type="text" id="withdraw-bkash-phone" class="form-control" placeholder="01XXXXXXXXX">
                 </div>
                 <button class="btn btn-primary" id="withdraw-submit-btn" onclick="withdrawTokens()">
                     <i class="fas fa-paper-plane"></i> Submit Request
@@ -1876,8 +2148,9 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-money-bill-wave"></i> Minimum withdrawal: 10000 SHIB</p>
-                <p><i class="fas fa-clock"></i> Withdrawal processing time: 2 days</p>
+                <p><i class="fab fa-btc"></i> Binance withdrawal: 10,000 SHIB (Sunday only)</p>
+                <p><i class="fas fa-mobile-alt"></i> Bkash withdrawal: 5,000 SHIB = 10 Taka (Anytime)</p>
+                <p><i class="fas fa-clock"></i> Processing time: 2 days</p>
             </div>
         </div>
         
@@ -2012,6 +2285,12 @@
             
             <div class="notification-list">
                 <div class="stat-card">
+                    <h3><i class="fas fa-exchange-alt"></i> New Payment Method</h3>
+                    <p>Now you can convert 5000 SHIB tokens to 10 Taka Bkash anytime!</p>
+                    <small>Today</small>
+                </div>
+                
+                <div class="stat-card">
                     <h3><i class="fas fa-info-circle"></i> New Update</h3>
                     <p>Auto ad system has been launched. You can now earn SHIB tokens automatically by watching ads.</p>
                     <small>2 days ago</small>
@@ -2025,7 +2304,7 @@
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
-                    <p>Minimum withdrawal is 10000 SHIB tokens. Please make sure before withdrawing.</p>
+                    <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Anytime)</p>
                     <small>1 week ago</small>
                 </div>
                 
@@ -2156,12 +2435,15 @@
         // Constants
         const TOKENS_PER_AD = 15; // 15 SHIB tokens per ad
         const TOKENS_PER_1000_TAPS = 10; // 10 SHIB tokens per 1000 taps
-        const MIN_WITHDRAW_TOKENS = 10000; // Minimum withdrawal 10000 SHIB (Updated from 5000)
-        const DAILY_BONUS_TOKENS = 10; // Daily bonus 10 SHIB tokens (changed from 1 Taka to 10 SHIB)
+        const MIN_BINANCE_WITHDRAW_TOKENS = 10000; // Minimum Binance withdrawal 10000 SHIB
+        const MIN_BKASH_WITHDRAW_TOKENS = 5000; // Minimum Bkash withdrawal 5000 SHIB
+        const BKASH_CONVERSION_RATE = 5000; // 5000 SHIB = 10 Taka Bkash
+        const BKASH_VALUE_PER_5000 = 10; // 10 Taka for 5000 SHIB
+        const DAILY_BONUS_TOKENS = 10; // Daily bonus 10 SHIB tokens
         const BONUS_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
         const AD_LIMIT = 100; // Ad watch limit (100 ads)
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-        const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds (changed from 5 days)
+        const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds
         
         // Website Visit Feature Constants
         const WEBSITES = [
@@ -2178,7 +2460,7 @@
         ];
         const VISIT_TIME = 10; // 10 seconds per website
         const TOKENS_PER_VISIT = 10; // 10 SHIB tokens per website
-        const VISIT_COOLDOWN = 10 * 60 * 1000; // 10 minutes cooldown (changed from 24 hours)
+        const VISIT_COOLDOWN = 10 * 60 * 1000; // 10 minutes cooldown
         
         // Task Website Visit Feature Constants
         const TASK_WEBSITES = [
@@ -2274,8 +2556,15 @@
         let lastTelegramPopupTime = 0;
         const TELEGRAM_POPUP_COOLDOWN = 5 * 60 * 1000; // 5 minutes
 
+        // Payment method variables
+        let selectedPaymentMethod = 'binance';
+        let selectedWithdrawMethod = 'binance';
+
         // Initialize the app
         function initApp() {
+            // Start intro
+            startIntro();
+            
             // Set user info
             document.getElementById('user-id').textContent = userId;
             document.getElementById('user-avatar').textContent = userId.charAt(0).toUpperCase();
@@ -2329,6 +2618,28 @@
             initTargetVisitors();
         }
 
+        // Start intro animation
+        function startIntro() {
+            let countdown = 5;
+            const introOverlay = document.getElementById('intro-overlay');
+            const countdownElement = document.getElementById('intro-countdown');
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    introOverlay.classList.add('hidden');
+                    
+                    // Show main content after intro
+                    setTimeout(() => {
+                        document.body.style.opacity = '1';
+                    }, 500);
+                }
+            }, 1000);
+        }
+
         // Show telegram popup
         function showTelegramPopup() {
             const now = Date.now();
@@ -2357,6 +2668,182 @@
         function closeAdvertiserPopup() {
             const advertiserPopup = document.getElementById('advertiser-popup');
             advertiserPopup.classList.remove('active');
+        }
+
+        // Select payment method for conversion
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Update UI
+            document.querySelectorAll('.payment-method-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.payment-method-btn[data-method="${method}"]`).classList.add('active');
+            
+            // Show/hide fields
+            const bkashNumberGroup = document.getElementById('bkash-number-group');
+            if (method === 'bkash') {
+                bkashNumberGroup.style.display = 'block';
+                document.getElementById('conversion-amount').min = MIN_BKASH_WITHDRAW_TOKENS;
+                document.getElementById('conversion-amount').placeholder = `Min: ${MIN_BKASH_WITHDRAW_TOKENS} SHIB`;
+            } else {
+                bkashNumberGroup.style.display = 'none';
+                document.getElementById('conversion-amount').min = MIN_BINANCE_WITHDRAW_TOKENS;
+                document.getElementById('conversion-amount').placeholder = `Min: ${MIN_BINANCE_WITHDRAW_TOKENS} SHIB`;
+            }
+            
+            // Update conversion value
+            updateConversionValue();
+        }
+
+        // Select withdrawal method
+        function selectWithdrawMethod(method) {
+            selectedWithdrawMethod = method;
+            
+            // Update UI
+            document.querySelectorAll('#withdraw-page .payment-method-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`#withdraw-page .payment-method-btn[data-method="${method}"]`).classList.add('active');
+            
+            // Show/hide fields
+            const binanceGroup = document.getElementById('binance-address-group');
+            const bkashGroup = document.getElementById('bkash-phone-group');
+            
+            if (method === 'bkash') {
+                binanceGroup.style.display = 'none';
+                bkashGroup.style.display = 'block';
+                document.getElementById('withdraw-amount').min = MIN_BKASH_WITHDRAW_TOKENS;
+                document.getElementById('withdraw-amount').placeholder = `Min: ${MIN_BKASH_WITHDRAW_TOKENS} SHIB`;
+            } else {
+                binanceGroup.style.display = 'block';
+                bkashGroup.style.display = 'none';
+                document.getElementById('withdraw-amount').min = MIN_BINANCE_WITHDRAW_TOKENS;
+                document.getElementById('withdraw-amount').placeholder = `Min: ${MIN_BINANCE_WITHDRAW_TOKENS} SHIB`;
+            }
+            
+            // Check withdrawal availability for Binance
+            if (method === 'binance') {
+                checkWithdrawAvailability();
+            } else {
+                // Bkash is available anytime
+                document.getElementById('withdraw-submit-btn').disabled = false;
+            }
+        }
+
+        // Show Bkash conversion form
+        function showBkashConversionForm() {
+            const bkashForm = document.getElementById('bkash-form');
+            const convertBtn = document.getElementById('convert-to-bkash-btn');
+            
+            if (bkashForm.style.display === 'none' || bkashForm.style.display === '') {
+                bkashForm.style.display = 'block';
+                convertBtn.innerHTML = '<i class="fas fa-times"></i> Cancel Conversion';
+                
+                // Update values
+                updateConversionValue();
+            } else {
+                bkashForm.style.display = 'none';
+                convertBtn.innerHTML = '<i class="fas fa-exchange-alt"></i> Convert to Bkash';
+            }
+        }
+
+        // Update conversion value
+        function updateConversionValue() {
+            const amountInput = document.getElementById('conversion-amount');
+            const amount = parseInt(amountInput.value) || 0;
+            const conversionValue = document.getElementById('conversion-value');
+            const submitBtn = document.getElementById('submit-conversion-btn');
+            
+            // Calculate Bkash value
+            let bkashValue = 0;
+            if (amount >= MIN_BKASH_WITHDRAW_TOKENS) {
+                bkashValue = Math.floor(amount / BKASH_CONVERSION_RATE) * BKASH_VALUE_PER_5000;
+            }
+            
+            conversionValue.value = `${bkashValue} Taka`;
+            
+            // Enable/disable submit button
+            if (amount >= MIN_BKASH_WITHDRAW_TOKENS && amount <= userTokens) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        // Submit conversion request
+        function submitConversion() {
+            const amount = parseInt(document.getElementById('conversion-amount').value) || 0;
+            const bkashPhone = document.getElementById('bkash-phone').value;
+            
+            // Validation
+            if (amount < MIN_BKASH_WITHDRAW_TOKENS) {
+                showNotification(`Minimum conversion amount is ${MIN_BKASH_WITHDRAW_TOKENS} SHIB`, 'error');
+                return;
+            }
+            
+            if (amount > userTokens) {
+                showNotification(`Insufficient balance. You have ${userTokens} SHIB`, 'error');
+                return;
+            }
+            
+            if (selectedPaymentMethod === 'bkash' && !bkashPhone) {
+                showNotification('Please enter your Bkash phone number', 'error');
+                return;
+            }
+            
+            // Calculate Bkash value
+            const bkashValue = Math.floor(amount / BKASH_CONVERSION_RATE) * BKASH_VALUE_PER_5000;
+            
+            // Deduct tokens
+            userTokens -= amount;
+            
+            // Save and update UI
+            saveUserData();
+            updateUI();
+            
+            // Prepare conversion message
+            const message = `💰 New Conversion Request 💰\n\n` +
+                             `👤 User ID: ${userId}\n` +
+                             `📊 SHIB Amount: ${amount} SHIB\n` +
+                             `💵 Bkash Value: ${bkashValue} Taka\n` +
+                             `📱 Bkash Number: ${bkashPhone || 'N/A (Binance)'}\n\n` +
+                             `📈 Current Balance: ${userTokens} SHIB`;
+            
+            // Send to admin via Telegram
+            sendConversionRequestToAdmin(message);
+            
+            // Play success sound
+            playSound('jumpSound');
+            
+            // Show success message
+            showNotification(`Conversion request submitted! ${bkashValue} Taka will be sent to your Bkash within 2 days.`, 'success');
+            
+            // Reset form
+            document.getElementById('conversion-amount').value = '';
+            document.getElementById('bkash-phone').value = '';
+            document.getElementById('conversion-value').value = '';
+            document.getElementById('submit-conversion-btn').disabled = true;
+            document.getElementById('bkash-form').style.display = 'none';
+            document.getElementById('convert-to-bkash-btn').innerHTML = '<i class="fas fa-exchange-alt"></i> Convert to Bkash';
+        }
+
+        // Send conversion request to admin
+        function sendConversionRequestToAdmin(message) {
+            const apiUrl = `https://api.telegram.org/bot${WITHDRAW_BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${encodeURIComponent(message)}`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log('Conversion request sent to admin');
+                    } else {
+                        console.error('Could not send conversion request:', data);
+                    }
+                })
+                .catch(error => console.error('Error sending message:', error));
         }
 
         // Initialize task website visit feature
@@ -3065,24 +3552,31 @@
             const withdrawSubmitBtn = document.getElementById('withdraw-submit-btn');
             const withdrawAvailability = document.getElementById('withdraw-availability');
             
-            // Withdrawal available only on Sunday (day 0)
-            if (currentDay === 0) {
-                withdrawSubmitBtn.disabled = false;
-                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Withdrawal active! You can withdraw today.';
-                withdrawAvailability.style.color = 'var(--success-color)';
+            if (selectedWithdrawMethod === 'binance') {
+                // Binance withdrawal available only on Sunday (day 0)
+                if (currentDay === 0) {
+                    withdrawSubmitBtn.disabled = false;
+                    withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Binance withdrawal active! You can withdraw today.';
+                    withdrawAvailability.style.color = 'var(--success-color)';
+                } else {
+                    withdrawSubmitBtn.disabled = true;
+                    
+                    // Calculate next withdrawal day (Sunday)
+                    const daysUntilSunday = (7 - currentDay) % 7;
+                    const nextSunday = new Date(now);
+                    nextSunday.setDate(now.getDate() + daysUntilSunday);
+                    
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
+                    
+                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Binance withdrawal closed. Next withdrawal on Sunday (${nextSundayString}), ${daysUntilSunday} days left.`;
+                    withdrawAvailability.style.color = 'var(--warning-color)';
+                }
             } else {
-                withdrawSubmitBtn.disabled = true;
-                
-                // Calculate next withdrawal day (Sunday)
-                const daysUntilSunday = (7 - currentDay) % 7;
-                const nextSunday = new Date(now);
-                nextSunday.setDate(now.getDate() + daysUntilSunday);
-                
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
-                
-                withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Withdrawal closed. Next withdrawal on Sunday (${nextSundayString}), ${daysUntilSunday} days left.`;
-                withdrawAvailability.style.color = 'var(--warning-color)';
+                // Bkash withdrawal available anytime
+                withdrawSubmitBtn.disabled = false;
+                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Bkash withdrawal active anytime!';
+                withdrawAvailability.style.color = 'var(--success-color)';
             }
         }
 
@@ -3369,14 +3863,21 @@
         function updateUI() {
             document.getElementById('user-tokens').textContent = userTokens;
             document.getElementById('user-balance').textContent = userTokens;
-            document.getElementById('earned-tokens').textContent = userTokens;
-            document.getElementById('withdraw-progress').textContent = `${userTokens}/${MIN_WITHDRAW_TOKENS} SHIB`;
+            document.getElementById('total-earned-withdraw').textContent = userTokens;
+            document.getElementById('shib-balance').textContent = userTokens;
+            
+            // Calculate Bkash value
+            const bkashValue = Math.floor(userTokens / BKASH_CONVERSION_RATE) * BKASH_VALUE_PER_5000;
+            document.getElementById('bkash-value').textContent = bkashValue;
+            document.getElementById('bkash-taka').textContent = bkashValue;
+            
+            document.getElementById('withdraw-progress').textContent = `${userTokens}/${MIN_BINANCE_WITHDRAW_TOKENS} SHIB`;
             updateProgress();
         }
 
         // Update progress bar and text
         function updateProgress() {
-            const progressPercent = (userTokens / MIN_WITHDRAW_TOKENS) * 100;
+            const progressPercent = (userTokens / MIN_BINANCE_WITHDRAW_TOKENS) * 100;
             
             document.getElementById('progress-fill').style.width = `${Math.min(progressPercent, 100)}%`;
         }
@@ -3469,8 +3970,12 @@
                     showNotification(`${TOKENS_PER_AD} SHIB tokens added! Your balance: ${userTokens} SHIB`, 'success');
                     
                     // Check if earned enough for withdrawal
-                    if (userTokens >= MIN_WITHDRAW_TOKENS) {
-                        showNotification(`Congratulations! You have collected ${MIN_WITHDRAW_TOKENS} SHIB tokens for withdrawal.`, 'info');
+                    if (userTokens >= MIN_BINANCE_WITHDRAW_TOKENS) {
+                        showNotification(`Congratulations! You have collected ${MIN_BINANCE_WITHDRAW_TOKENS} SHIB tokens for Binance withdrawal.`, 'info');
+                    }
+                    
+                    if (userTokens >= MIN_BKASH_WITHDRAW_TOKENS) {
+                        showNotification(`You can now convert ${MIN_BKASH_WITHDRAW_TOKENS} SHIB tokens to ${BKASH_VALUE_PER_5000} Taka Bkash!`, 'info');
                     }
                     
                     // If in auto mode, continue after delay
@@ -3574,9 +4079,12 @@
             // Show withdraw page
             showPage('withdraw-page', document.querySelector('.nav-item:nth-child(5)'));
             
-            if (userTokens < MIN_WITHDRAW_TOKENS) {
+            // Check minimum amount based on selected method
+            const minAmount = selectedWithdrawMethod === 'bkash' ? MIN_BKASH_WITHDRAW_TOKENS : MIN_BINANCE_WITHDRAW_TOKENS;
+            
+            if (userTokens < minAmount) {
                 document.getElementById('withdraw-status').textContent = 
-                    `Minimum withdrawal amount is ${MIN_WITHDRAW_TOKENS} SHIB. You have ${userTokens} SHIB.`;
+                    `Minimum withdrawal amount is ${minAmount} SHIB. You have ${userTokens} SHIB.`;
                 document.getElementById('withdraw-status').className = 'error-message';
                 document.getElementById('withdraw-section').style.display = 'block';
                 return;
@@ -3586,6 +4094,7 @@
             document.getElementById('withdraw-amount').placeholder = `Maximum: ${userTokens} SHIB`;
             document.getElementById('withdraw-amount').max = userTokens;
             document.getElementById('withdraw-address').value = '';
+            document.getElementById('withdraw-bkash-phone').value = '';
             document.getElementById('withdraw-status').textContent = '';
             document.getElementById('withdraw-section').style.display = 'block';
         }
@@ -3597,19 +4106,46 @@
             
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-            
-            // Withdrawal available only on Sunday (day 0)
-            if (currentDay !== 0) {
-                playSound('failSound');
-                showNotification('Withdrawal is available only on Sundays.', 'error');
-                return;
-            }
-            
             const amount = parseInt(document.getElementById('withdraw-amount').value);
             const address = document.getElementById('withdraw-address').value;
+            const bkashPhone = document.getElementById('withdraw-bkash-phone').value;
             const withdrawStatus = document.getElementById('withdraw-status');
             
-            // Validate inputs
+            // Validate inputs based on payment method
+            let minAmount, paymentMethod, paymentInfo;
+            
+            if (selectedWithdrawMethod === 'bkash') {
+                minAmount = MIN_BKASH_WITHDRAW_TOKENS;
+                paymentMethod = 'Bkash';
+                paymentInfo = bkashPhone;
+                
+                if (!bkashPhone) {
+                    playSound('failSound');
+                    withdrawStatus.textContent = 'Please enter your Bkash phone number.';
+                    withdrawStatus.className = 'error-message';
+                    return;
+                }
+            } else {
+                minAmount = MIN_BINANCE_WITHDRAW_TOKENS;
+                paymentMethod = 'Binance';
+                paymentInfo = address;
+                
+                // Binance withdrawal available only on Sunday
+                if (currentDay !== 0) {
+                    playSound('failSound');
+                    showNotification('Binance withdrawal is available only on Sundays.', 'error');
+                    return;
+                }
+                
+                if (!address) {
+                    playSound('failSound');
+                    withdrawStatus.textContent = 'Please enter your Binance SHIB address.';
+                    withdrawStatus.className = 'error-message';
+                    return;
+                }
+            }
+            
+            // Validate amount
             if (!amount || isNaN(amount)) {
                 playSound('failSound');
                 withdrawStatus.textContent = 'Please enter a valid amount.';
@@ -3617,9 +4153,9 @@
                 return;
             }
             
-            if (amount < MIN_WITHDRAW_TOKENS) {
+            if (amount < minAmount) {
                 playSound('failSound');
-                withdrawStatus.textContent = `Minimum withdrawal amount is ${MIN_WITHDRAW_TOKENS} SHIB.`;
+                withdrawStatus.textContent = `Minimum withdrawal amount is ${minAmount} SHIB.`;
                 withdrawStatus.className = 'error-message';
                 return;
             }
@@ -3631,13 +4167,6 @@
                 return;
             }
             
-            if (!address) {
-                playSound('failSound');
-                withdrawStatus.textContent = 'Please enter your Binance SHIB address.';
-                withdrawStatus.className = 'error-message';
-                return;
-            }
-            
             // Deduct tokens
             userTokens -= amount;
             
@@ -3645,11 +4174,19 @@
             saveUserData();
             updateUI();
             
+            // Calculate Bkash value if applicable
+            let bkashValue = 0;
+            if (selectedWithdrawMethod === 'bkash') {
+                bkashValue = Math.floor(amount / BKASH_CONVERSION_RATE) * BKASH_VALUE_PER_5000;
+            }
+            
             // Add to withdraw history
             const withdrawRequest = {
                 id: Date.now(),
                 amount: amount,
-                address: address,
+                paymentMethod: selectedWithdrawMethod,
+                address: paymentInfo,
+                bkashValue: bkashValue,
                 status: 'pending',
                 timestamp: Date.now(),
                 processingTime: WITHDRAW_PROCESSING_TIME
@@ -3662,10 +4199,12 @@
             const message = `📌 New Withdrawal Request 📌\n\n` +
                              `👤 User ID: ${userId}\n` +
                              `💰 Amount: ${amount} SHIB\n` +
-                             `📫 Address: ${address}\n\n` +
+                             `🏦 Method: ${paymentMethod}\n` +
+                             `${selectedWithdrawMethod === 'bkash' ? `💵 Bkash Value: ${bkashValue} Taka\n` : ''}` +
+                             `${selectedWithdrawMethod === 'bkash' ? `📱 Bkash: ${paymentInfo}\n` : `📫 Address: ${paymentInfo}\n`}` +
                              `📊 Ads Watched: ${watchedAdsCount}\n` +
                              `👆 Total Taps: ${totalTaps}\n` +
-                             `💵 Total Earned: ${userTokens} SHIB`;
+                             `💵 Current Balance: ${userTokens} SHIB`;
             
             // Send to admin via Telegram
             sendWithdrawRequestToAdmin(message);
@@ -3674,7 +4213,11 @@
             playSound('jumpSound');
             
             // Show success message
-            withdrawStatus.textContent = 'Withdrawal request submitted successfully! Processing may take up to 2 days.';
+            const successMsg = selectedWithdrawMethod === 'bkash' 
+                ? `Withdrawal request submitted successfully! ${bkashValue} Taka will be sent to your Bkash within 2 days.`
+                : 'Withdrawal request submitted successfully! Processing may take up to 2 days.';
+            
+            withdrawStatus.textContent = successMsg;
             withdrawStatus.className = 'success-message';
             
             // Show notification
@@ -3765,8 +4308,12 @@
             showNotification(`10 SHIB bonus added! Your balance: ${userTokens} SHIB`, 'success');
             
             // Notification if enough tokens for withdrawal
-            if (userTokens >= MIN_WITHDRAW_TOKENS) {
-                showNotification(`Congratulations! You have collected ${MIN_WITHDRAW_TOKENS} SHIB tokens for withdrawal.`, 'info');
+            if (userTokens >= MIN_BINANCE_WITHDRAW_TOKENS) {
+                showNotification(`Congratulations! You have collected ${MIN_BINANCE_WITHDRAW_TOKENS} SHIB tokens for Binance withdrawal.`, 'info');
+            }
+            
+            if (userTokens >= MIN_BKASH_WITHDRAW_TOKENS) {
+                showNotification(`You can now convert ${MIN_BKASH_WITHDRAW_TOKENS} SHIB tokens to ${BKASH_VALUE_PER_5000} Taka Bkash!`, 'info');
             }
         }
 
@@ -3998,8 +4545,13 @@
                         </div>
                     </div>
                     <div class="withdraw-details">
-                        Address: ${withdraw.address}
+                        Method: ${withdraw.paymentMethod === 'bkash' ? 'Bkash' : 'Binance'}
                     </div>
+                    ${withdraw.paymentMethod === 'bkash' ? `
+                        <div class="withdraw-details">
+                            Bkash Value: ${withdraw.bkashValue} Taka
+                        </div>
+                    ` : ''}
                     <div class="withdraw-details">
                         Date: ${dateString}
                     </div>
@@ -4056,4 +4608,3 @@
     </script>
 </body>
 </html>
-
