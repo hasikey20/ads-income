@@ -7,7 +7,7 @@
     <script src='//libtl.com/sdk.js' data-zone='9472189' data-sdk='show_9472189'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Intro Animation Styles */
+        /* Intro Animation Styles - No Change */
         .intro-overlay {
             position: fixed;
             top: 0;
@@ -96,7 +96,7 @@
             to { opacity: 0.8; }
         }
 
-        /* Existing styles remain the same */
+        /* Existing styles remain the same - Only adding new styles for help button */
         :root {
             --primary-color: #4a6bff;
             --secondary-color: #ff7d4a;
@@ -453,12 +453,6 @@
         
         .notification.info {
             border-left: 4px solid var(--primary-color);
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
         
         .pulse { 
@@ -1661,6 +1655,89 @@
             font-size: 13px;
         }
         
+        /* NEW: Help Button Styles */
+        .help-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(22, 33, 62, 0.9);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .help-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+        }
+        
+        /* NEW: Help Popup Styles */
+        .help-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .help-popup.active {
+            display: flex;
+        }
+        
+        .help-popup-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        
+        .help-popup h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .help-popup p {
+            margin-bottom: 10px;
+            color: var(--text-color);
+            text-align: left;
+        }
+        
+        .help-popup ol {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .help-popup li {
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .help-popup-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
@@ -1675,6 +1752,7 @@
             .task-visit-website-list { grid-template-columns: repeat(2, 1fr); }
             .target-visitors-select { grid-template-columns: repeat(2, 1fr); }
             .payment-method-buttons { grid-template-columns: 1fr; }
+            .help-btn { top: 10px; right: 10px; width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -1692,6 +1770,50 @@
     <!-- Sound Control Button -->
     <div class="sound-control" id="sound-control" onclick="toggleSound()">
         <i class="fas fa-volume-up"></i>
+    </div>
+    
+    <!-- NEW: Help Button -->
+    <div class="help-btn" onclick="showHelpPopup()">
+        <i class="fas fa-info-circle"></i>
+    </div>
+    
+    <!-- NEW: Help Popup -->
+    <div class="help-popup" id="help-popup">
+        <div class="help-popup-content">
+            <h3><i class="fas fa-info-circle"></i> How to Use This Bot</h3>
+            <p>Welcome to Task Solve Money! Follow these steps to earn and withdraw SHIB tokens:</p>
+            
+            <ol>
+                <li><strong>Watch Ads:</strong> Click "Watch Ad" button to earn 15 SHIB per ad. You can watch up to 100 ads per day.</li>
+                <li><strong>Auto Ads:</strong> Use "Auto Ads" feature to automatically watch ads and earn SHIB.</li>
+                <li><strong>Tap Game:</strong> Go to "Games" section and tap on the image to earn 10 SHIB per 1000 taps.</li>
+                <li><strong>Visit Websites:</strong> In "Home" section, visit websites for 10 seconds each to earn 10 SHIB per website.</li>
+                <li><strong>Complete Tasks:</strong> Go to "Tasks" section and join Telegram channels to earn rewards.</li>
+                <li><strong>Task Website Visit:</strong> Visit 15 websites for 10 seconds each in "Tasks" section to earn SHIB.</li>
+                <li><strong>Daily Bonus:</strong> Claim 10 SHIB bonus every 3 days from "Earn" section.</li>
+                <li><strong>Convert to Bkash:</strong> In "Home" section, convert your SHIB to Bkash Taka (5000 SHIB = 10 Taka).</li>
+                <li><strong>Withdraw Rules:</strong>
+                    <ul style="padding-left: 20px; margin-top: 5px;">
+                        <li><strong>Binance:</strong> Minimum 10,000 SHIB (Available only on Sundays)</li>
+                        <li><strong>Bkash:</strong> Minimum 5,000 SHIB = 10 Taka (Available every 3 days after previous withdrawal)</li>
+                    </ul>
+                </li>
+                <li><strong>Advertiser:</strong> In "Tasks" section, you can promote your website by paying minimum 10 Taka.</li>
+                <li><strong>Referral:</strong> Share your referral link with friends to earn more (Note: We don't pay for referrals, you're only responsible for sharing).</li>
+                <li><strong>Support:</strong> Click the chat bubble icon for customer support.</li>
+                <li><strong>Important:</strong> You must join our Telegram channels to receive payments.</li>
+            </ol>
+            
+            <p style="color: var(--warning-color); font-weight: bold;">
+                <i class="fas fa-exclamation-triangle"></i> Remember: Bkash withdrawal is available every 3 days after your last withdrawal.
+            </p>
+            
+            <div class="help-popup-buttons">
+                <button class="btn btn-success" onclick="closeHelpPopup()">
+                    <i class="fas fa-check"></i> I Understand
+                </button>
+            </div>
+        </div>
     </div>
     
     <!-- Telegram Popup -->
@@ -2095,11 +2217,12 @@
             <div class="withdraw-notice">
                 <h3><i class="fas fa-info-circle"></i> Withdrawal Rules</h3>
                 <p>Binance withdrawal: Minimum 10,000 SHIB (Available only on Sunday)<br>
-                Bkash withdrawal: Minimum 5,000 SHIB = 10 Taka (Available anytime)</p>
+                Bkash withdrawal: Minimum 5,000 SHIB = 10 Taka (Available every 3 days after previous withdrawal)</p>
                 <div class="withdraw-gif">
                     <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Notice" style="width:100%; height:auto; border-radius:10px;">
                 </div>
                 <p id="withdraw-availability"></p>
+                <p id="withdraw-cooldown-info" style="color: var(--warning-color); font-weight: bold;"></p>
             </div>
             
             <div class="stat-card">
@@ -2149,7 +2272,7 @@
             
             <div class="rate-info">
                 <p><i class="fab fa-btc"></i> Binance withdrawal: 10,000 SHIB (Sunday only)</p>
-                <p><i class="fas fa-mobile-alt"></i> Bkash withdrawal: 5,000 SHIB = 10 Taka (Anytime)</p>
+                <p><i class="fas fa-mobile-alt"></i> Bkash withdrawal: 5,000 SHIB = 10 Taka (Every 3 days)</p>
                 <p><i class="fas fa-clock"></i> Processing time: 2 days</p>
             </div>
         </div>
@@ -2304,7 +2427,7 @@
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
-                    <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Anytime)</p>
+                    <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Every 3 days)</p>
                     <small>1 week ago</small>
                 </div>
                 
@@ -2445,6 +2568,9 @@
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds
         
+        // NEW: Withdrawal cooldown for Bkash (3 days)
+        const BKASH_WITHDRAW_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+        
         // Website Visit Feature Constants
         const WEBSITES = [
             "https://thenationus.blogspot.com/2025/10/in-memoriam-athletes-who-died-in-2025.html",
@@ -2559,6 +2685,10 @@
         // Payment method variables
         let selectedPaymentMethod = 'binance';
         let selectedWithdrawMethod = 'binance';
+        
+        // NEW: Withdrawal cooldown variables
+        let lastBkashWithdrawTime = 0;
+        let lastBinanceWithdrawTime = 0;
 
         // Initialize the app
         function initApp() {
@@ -2638,6 +2768,24 @@
                     }, 500);
                 }
             }, 1000);
+        }
+
+        // NEW: Show help popup
+        function showHelpPopup() {
+            // Play click sound
+            playSound('clickSound');
+            
+            const helpPopup = document.getElementById('help-popup');
+            helpPopup.classList.add('active');
+        }
+
+        // NEW: Close help popup
+        function closeHelpPopup() {
+            // Play click sound
+            playSound('clickSound');
+            
+            const helpPopup = document.getElementById('help-popup');
+            helpPopup.classList.remove('active');
         }
 
         // Show telegram popup
@@ -2724,13 +2872,8 @@
                 document.getElementById('withdraw-amount').placeholder = `Min: ${MIN_BINANCE_WITHDRAW_TOKENS} SHIB`;
             }
             
-            // Check withdrawal availability for Binance
-            if (method === 'binance') {
-                checkWithdrawAvailability();
-            } else {
-                // Bkash is available anytime
-                document.getElementById('withdraw-submit-btn').disabled = false;
-            }
+            // Check withdrawal availability
+            checkWithdrawAvailability();
         }
 
         // Show Bkash conversion form
@@ -3545,38 +3688,75 @@
             document.getElementById('current-date').textContent = dateString;
         }
 
-        // Check withdrawal availability
+        // NEW: Check withdrawal availability with 3-day cooldown for Bkash
         function checkWithdrawAvailability() {
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
             const withdrawSubmitBtn = document.getElementById('withdraw-submit-btn');
             const withdrawAvailability = document.getElementById('withdraw-availability');
+            const withdrawCooldownInfo = document.getElementById('withdraw-cooldown-info');
+            
+            // Check Bkash cooldown
+            const bkashCooldownRemaining = lastBkashWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (now.getTime() - lastBkashWithdrawTime) : 0;
+            const canWithdrawBkash = lastBkashWithdrawTime === 0 || bkashCooldownRemaining <= 0;
+            
+            // Check Binance cooldown
+            const binanceCooldownRemaining = lastBinanceWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (now.getTime() - lastBinanceWithdrawTime) : 0;
+            const canWithdrawBinance = lastBinanceWithdrawTime === 0 || binanceCooldownRemaining <= 0;
             
             if (selectedWithdrawMethod === 'binance') {
-                // Binance withdrawal available only on Sunday (day 0)
-                if (currentDay === 0) {
+                // Binance withdrawal available only on Sunday and after cooldown
+                if (currentDay === 0 && canWithdrawBinance) {
                     withdrawSubmitBtn.disabled = false;
                     withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Binance withdrawal active! You can withdraw today.';
                     withdrawAvailability.style.color = 'var(--success-color)';
+                    
+                    if (lastBinanceWithdrawTime > 0) {
+                        withdrawCooldownInfo.innerHTML = '<i class="fas fa-clock"></i> Next Binance withdrawal available now!';
+                    }
                 } else {
                     withdrawSubmitBtn.disabled = true;
+                    let message = '';
                     
-                    // Calculate next withdrawal day (Sunday)
-                    const daysUntilSunday = (7 - currentDay) % 7;
-                    const nextSunday = new Date(now);
-                    nextSunday.setDate(now.getDate() + daysUntilSunday);
+                    if (currentDay !== 0) {
+                        // রবিবার না হলে
+                        const daysUntilSunday = (7 - currentDay) % 7;
+                        const nextSunday = new Date(now);
+                        nextSunday.setDate(now.getDate() + daysUntilSunday);
+                        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
+                        message += `Binance withdrawal closed. Next withdrawal on Sunday (${nextSundayString}). `;
+                    }
                     
-                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
+                    if (!canWithdrawBinance && binanceCooldownRemaining > 0) {
+                        // কুলডাউন না পার হলে
+                        const nextWithdrawDate = new Date(now.getTime() + binanceCooldownRemaining);
+                        message += `Next withdrawal available in: ${formatTime(binanceCooldownRemaining)}`;
+                        withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Binance cooldown: ${formatTime(binanceCooldownRemaining)} remaining`;
+                    }
                     
-                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Binance withdrawal closed. Next withdrawal on Sunday (${nextSundayString}), ${daysUntilSunday} days left.`;
+                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> ${message}`;
                     withdrawAvailability.style.color = 'var(--warning-color)';
                 }
             } else {
-                // Bkash withdrawal available anytime
-                withdrawSubmitBtn.disabled = false;
-                withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Bkash withdrawal active anytime!';
-                withdrawAvailability.style.color = 'var(--success-color)';
+                // Bkash withdrawal available every 3 days
+                if (canWithdrawBkash) {
+                    withdrawSubmitBtn.disabled = false;
+                    withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Bkash withdrawal active!';
+                    withdrawAvailability.style.color = 'var(--success-color)';
+                    
+                    if (lastBkashWithdrawTime > 0) {
+                        withdrawCooldownInfo.innerHTML = '<i class="fas fa-clock"></i> Next Bkash withdrawal available now!';
+                    }
+                } else {
+                    withdrawSubmitBtn.disabled = true;
+                    const nextWithdrawDate = new Date(now.getTime() + bkashCooldownRemaining);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const nextWithdrawString = nextWithdrawDate.toLocaleDateString('en-US', options);
+                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Next Bkash withdrawal available in: ${formatTime(bkashCooldownRemaining)}`;
+                    withdrawAvailability.style.color = 'var(--warning-color)';
+                    withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Bkash cooldown: ${formatTime(bkashCooldownRemaining)} remaining (3 days between withdrawals)`;
+                }
             }
         }
 
@@ -3813,6 +3993,15 @@
                 lastTelegramPopupTime = parseInt(localStorage.getItem('lastTelegramPopupTime'));
             }
             
+            // NEW: Load withdrawal cooldown data
+            if (localStorage.getItem('lastBkashWithdrawTime')) {
+                lastBkashWithdrawTime = parseInt(localStorage.getItem('lastBkashWithdrawTime'));
+            }
+            
+            if (localStorage.getItem('lastBinanceWithdrawTime')) {
+                lastBinanceWithdrawTime = parseInt(localStorage.getItem('lastBinanceWithdrawTime'));
+            }
+            
             // Reset daily visits and clicks if it's a new day
             const lastVisitDate = localStorage.getItem('lastVisitDate');
             const today = new Date().toDateString();
@@ -3857,6 +4046,9 @@
             localStorage.setItem('referralCount', referralCount);
             localStorage.setItem('referralEarnings', referralEarnings);
             localStorage.setItem('lastTelegramPopupTime', lastTelegramPopupTime);
+            // NEW: Save withdrawal cooldown data
+            localStorage.setItem('lastBkashWithdrawTime', lastBkashWithdrawTime);
+            localStorage.setItem('lastBinanceWithdrawTime', lastBinanceWithdrawTime);
         }
 
         // Update all UI elements
@@ -4119,6 +4311,14 @@
                 paymentMethod = 'Bkash';
                 paymentInfo = bkashPhone;
                 
+                // NEW: Check Bkash cooldown (3 days)
+                const bkashCooldownRemaining = lastBkashWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (Date.now() - lastBkashWithdrawTime) : 0;
+                if (lastBkashWithdrawTime > 0 && bkashCooldownRemaining > 0) {
+                    playSound('failSound');
+                    showNotification(`Bkash withdrawal cooldown active. Next withdrawal available in ${formatTime(bkashCooldownRemaining)}`, 'error');
+                    return;
+                }
+                
                 if (!bkashPhone) {
                     playSound('failSound');
                     withdrawStatus.textContent = 'Please enter your Bkash phone number.';
@@ -4134,6 +4334,14 @@
                 if (currentDay !== 0) {
                     playSound('failSound');
                     showNotification('Binance withdrawal is available only on Sundays.', 'error');
+                    return;
+                }
+                
+                // NEW: Check Binance cooldown (3 days)
+                const binanceCooldownRemaining = lastBinanceWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (Date.now() - lastBinanceWithdrawTime) : 0;
+                if (lastBinanceWithdrawTime > 0 && binanceCooldownRemaining > 0) {
+                    playSound('failSound');
+                    showNotification(`Binance withdrawal cooldown active. Next withdrawal available in ${formatTime(binanceCooldownRemaining)}`, 'error');
                     return;
                 }
                 
@@ -4169,6 +4377,13 @@
             
             // Deduct tokens
             userTokens -= amount;
+            
+            // NEW: Update last withdrawal time
+            if (selectedWithdrawMethod === 'bkash') {
+                lastBkashWithdrawTime = Date.now();
+            } else {
+                lastBinanceWithdrawTime = Date.now();
+            }
             
             // Save and update UI
             saveUserData();
@@ -4214,14 +4429,17 @@
             
             // Show success message
             const successMsg = selectedWithdrawMethod === 'bkash' 
-                ? `Withdrawal request submitted successfully! ${bkashValue} Taka will be sent to your Bkash within 2 days.`
-                : 'Withdrawal request submitted successfully! Processing may take up to 2 days.';
+                ? `Withdrawal request submitted successfully! ${bkashValue} Taka will be sent to your Bkash within 2 days. Next Bkash withdrawal available in 3 days.`
+                : 'Withdrawal request submitted successfully! Processing may take up to 2 days. Next Binance withdrawal available in 3 days.';
             
             withdrawStatus.textContent = successMsg;
             withdrawStatus.className = 'success-message';
             
             // Show notification
             showNotification('Your withdrawal request has been sent!', 'success');
+            
+            // Update withdrawal availability
+            checkWithdrawAvailability();
             
             // Reset form after 3 seconds
             setTimeout(() => {
@@ -4269,11 +4487,13 @@
             const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
             
             if (days > 0) {
-                return `${days} days ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                return `${days}d ${hours}h ${minutes}m`;
             } else if (hours > 0) {
-                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                return `${hours}h ${minutes}m ${seconds}s`;
+            } else if (minutes > 0) {
+                return `${minutes}m ${seconds}s`;
             } else {
-                return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                return `${seconds}s`;
             }
         }
 
@@ -4502,6 +4722,11 @@
             // Task website visit cooldown timer
             setInterval(() => {
                 checkTaskWebsiteVisitAvailability();
+            }, 1000);
+            
+            // NEW: Withdrawal cooldown timer
+            setInterval(() => {
+                checkWithdrawAvailability();
             }, 1000);
         }
 
