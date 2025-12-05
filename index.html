@@ -7,7 +7,7 @@
     <script src='//libtl.com/sdk.js' data-zone='9472189' data-sdk='show_9472189'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Intro Animation Styles - No Change */
+        /* Intro Animation Styles */
         .intro-overlay {
             position: fixed;
             top: 0;
@@ -1795,7 +1795,7 @@
                 <li><strong>Withdraw Rules:</strong>
                     <ul style="padding-left: 20px; margin-top: 5px;">
                         <li><strong>Binance:</strong> Minimum 10,000 SHIB (Available only on Sundays)</li>
-                        <li><strong>Bkash:</strong> Minimum 5,000 SHIB = 10 Taka (Available every 3 days after previous withdrawal)</li>
+                        <li><strong>Bkash:</strong> Minimum 5,000 SHIB = 10 Taka (Available only on Tuesdays, once per week)</li>
                     </ul>
                 </li>
                 <li><strong>Advertiser:</strong> In "Tasks" section, you can promote your website by paying minimum 10 Taka.</li>
@@ -1805,7 +1805,7 @@
             </ol>
             
             <p style="color: var(--warning-color); font-weight: bold;">
-                <i class="fas fa-exclamation-triangle"></i> Remember: Bkash withdrawal is available every 3 days after your last withdrawal.
+                <i class="fas fa-exclamation-triangle"></i> Remember: Bkash withdrawal is available only on Tuesdays, once per week.
             </p>
             
             <div class="help-popup-buttons">
@@ -2217,7 +2217,7 @@
             <div class="withdraw-notice">
                 <h3><i class="fas fa-info-circle"></i> Withdrawal Rules</h3>
                 <p>Binance withdrawal: Minimum 10,000 SHIB (Available only on Sunday)<br>
-                Bkash withdrawal: Minimum 5,000 SHIB = 10 Taka (Available every 3 days after previous withdrawal)</p>
+                Bkash withdrawal: Minimum 5,000 SHIB = 10 Taka (Available only on Tuesday, once per week)</p>
                 <div class="withdraw-gif">
                     <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyMW52cXJxN29xb2lhcDU2YTd1bW1jdm9tcWcyM2xodHJia2gyZmFhbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/TUEvrVHhGnkAH3OtMc/giphy.gif" alt="Withdraw Notice" style="width:100%; height:auto; border-radius:10px;">
                 </div>
@@ -2272,7 +2272,7 @@
             
             <div class="rate-info">
                 <p><i class="fab fa-btc"></i> Binance withdrawal: 10,000 SHIB (Sunday only)</p>
-                <p><i class="fas fa-mobile-alt"></i> Bkash withdrawal: 5,000 SHIB = 10 Taka (Every 3 days)</p>
+                <p><i class="fas fa-mobile-alt"></i> Bkash withdrawal: 5,000 SHIB = 10 Taka (Tuesday only, once per week)</p>
                 <p><i class="fas fa-clock"></i> Processing time: 2 days</p>
             </div>
         </div>
@@ -2427,7 +2427,7 @@
                 
                 <div class="stat-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
-                    <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Every 3 days)</p>
+                    <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Tuesday only, once per week)</p>
                     <small>1 week ago</small>
                 </div>
                 
@@ -2568,8 +2568,9 @@
         const AD_COOLDOWN = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
         const WITHDRAW_PROCESSING_TIME = 2 * 24 * 60 * 60 * 1000; // 2 days in milliseconds
         
-        // NEW: Withdrawal cooldown for Bkash (3 days)
-        const BKASH_WITHDRAW_COOLDOWN = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+        // CHANGED: Bkash withdrawal available only on Tuesday (2 = Tuesday, 0 = Sunday)
+        const BKASH_WITHDRAW_DAY = 2; // Tuesday (0 = Sunday, 1 = Monday, 2 = Tuesday)
+        const BINANCE_WITHDRAW_DAY = 0; // Sunday
         
         // Website Visit Feature Constants
         const WEBSITES = [
@@ -2686,9 +2687,10 @@
         let selectedPaymentMethod = 'binance';
         let selectedWithdrawMethod = 'binance';
         
-        // NEW: Withdrawal cooldown variables
+        // NEW: Withdrawal cooldown variables - CHANGED to weekly system
         let lastBkashWithdrawTime = 0;
         let lastBinanceWithdrawTime = 0;
+        const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
         // Initialize the app
         function initApp() {
@@ -3688,7 +3690,7 @@
             document.getElementById('current-date').textContent = dateString;
         }
 
-        // NEW: Check withdrawal availability with 3-day cooldown for Bkash
+        // CHANGED: Check withdrawal availability with new Tuesday-only system for Bkash
         function checkWithdrawAvailability() {
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
@@ -3696,66 +3698,53 @@
             const withdrawAvailability = document.getElementById('withdraw-availability');
             const withdrawCooldownInfo = document.getElementById('withdraw-cooldown-info');
             
-            // Check Bkash cooldown
-            const bkashCooldownRemaining = lastBkashWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (now.getTime() - lastBkashWithdrawTime) : 0;
-            const canWithdrawBkash = lastBkashWithdrawTime === 0 || bkashCooldownRemaining <= 0;
-            
-            // Check Binance cooldown
-            const binanceCooldownRemaining = lastBinanceWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (now.getTime() - lastBinanceWithdrawTime) : 0;
-            const canWithdrawBinance = lastBinanceWithdrawTime === 0 || binanceCooldownRemaining <= 0;
-            
             if (selectedWithdrawMethod === 'binance') {
-                // Binance withdrawal available only on Sunday and after cooldown
-                if (currentDay === 0 && canWithdrawBinance) {
+                // Binance withdrawal available only on Sunday
+                if (currentDay === BINANCE_WITHDRAW_DAY) {
                     withdrawSubmitBtn.disabled = false;
                     withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Binance withdrawal active! You can withdraw today.';
                     withdrawAvailability.style.color = 'var(--success-color)';
-                    
-                    if (lastBinanceWithdrawTime > 0) {
-                        withdrawCooldownInfo.innerHTML = '<i class="fas fa-clock"></i> Next Binance withdrawal available now!';
-                    }
+                    withdrawCooldownInfo.innerHTML = '';
                 } else {
                     withdrawSubmitBtn.disabled = true;
-                    let message = '';
-                    
-                    if (currentDay !== 0) {
-                        // রবিবার না হলে
-                        const daysUntilSunday = (7 - currentDay) % 7;
-                        const nextSunday = new Date(now);
-                        nextSunday.setDate(now.getDate() + daysUntilSunday);
-                        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                        const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
-                        message += `Binance withdrawal closed. Next withdrawal on Sunday (${nextSundayString}). `;
-                    }
-                    
-                    if (!canWithdrawBinance && binanceCooldownRemaining > 0) {
-                        // কুলডাউন না পার হলে
-                        const nextWithdrawDate = new Date(now.getTime() + binanceCooldownRemaining);
-                        message += `Next withdrawal available in: ${formatTime(binanceCooldownRemaining)}`;
-                        withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Binance cooldown: ${formatTime(binanceCooldownRemaining)} remaining`;
-                    }
-                    
-                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> ${message}`;
+                    const daysUntilSunday = (7 - currentDay) % 7;
+                    const nextSunday = new Date(now);
+                    nextSunday.setDate(now.getDate() + daysUntilSunday);
+                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    const nextSundayString = nextSunday.toLocaleDateString('en-US', options);
+                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Binance withdrawal closed. Next withdrawal on Sunday (${nextSundayString}).`;
                     withdrawAvailability.style.color = 'var(--warning-color)';
+                    
+                    // Calculate time until next Sunday
+                    const nextSundayTime = new Date(now);
+                    nextSundayTime.setDate(now.getDate() + daysUntilSunday);
+                    nextSundayTime.setHours(0, 0, 0, 0);
+                    const timeUntilNextSunday = nextSundayTime.getTime() - now.getTime();
+                    withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Time until next Binance withdrawal: ${formatTime(timeUntilNextSunday)}`;
                 }
             } else {
-                // Bkash withdrawal available every 3 days
-                if (canWithdrawBkash) {
+                // Bkash withdrawal available only on Tuesday
+                if (currentDay === BKASH_WITHDRAW_DAY) {
                     withdrawSubmitBtn.disabled = false;
-                    withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Bkash withdrawal active!';
+                    withdrawAvailability.innerHTML = '<i class="fas fa-check-circle"></i> Bkash withdrawal active! You can withdraw today.';
                     withdrawAvailability.style.color = 'var(--success-color)';
-                    
-                    if (lastBkashWithdrawTime > 0) {
-                        withdrawCooldownInfo.innerHTML = '<i class="fas fa-clock"></i> Next Bkash withdrawal available now!';
-                    }
+                    withdrawCooldownInfo.innerHTML = '';
                 } else {
                     withdrawSubmitBtn.disabled = true;
-                    const nextWithdrawDate = new Date(now.getTime() + bkashCooldownRemaining);
+                    const daysUntilTuesday = (BKASH_WITHDRAW_DAY - currentDay + 7) % 7;
+                    const nextTuesday = new Date(now);
+                    nextTuesday.setDate(now.getDate() + daysUntilTuesday);
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    const nextWithdrawString = nextWithdrawDate.toLocaleDateString('en-US', options);
-                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Next Bkash withdrawal available in: ${formatTime(bkashCooldownRemaining)}`;
+                    const nextTuesdayString = nextTuesday.toLocaleDateString('en-US', options);
+                    withdrawAvailability.innerHTML = `<i class="fas fa-clock"></i> Bkash withdrawal closed. Next withdrawal on Tuesday (${nextTuesdayString}).`;
                     withdrawAvailability.style.color = 'var(--warning-color)';
-                    withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Bkash cooldown: ${formatTime(bkashCooldownRemaining)} remaining (3 days between withdrawals)`;
+                    
+                    // Calculate time until next Tuesday
+                    const nextTuesdayTime = new Date(now);
+                    nextTuesdayTime.setDate(now.getDate() + daysUntilTuesday);
+                    nextTuesdayTime.setHours(0, 0, 0, 0);
+                    const timeUntilNextTuesday = nextTuesdayTime.getTime() - now.getTime();
+                    withdrawCooldownInfo.innerHTML = `<i class="fas fa-clock"></i> Time until next Bkash withdrawal: ${formatTime(timeUntilNextTuesday)}`;
                 }
             }
         }
@@ -3993,7 +3982,7 @@
                 lastTelegramPopupTime = parseInt(localStorage.getItem('lastTelegramPopupTime'));
             }
             
-            // NEW: Load withdrawal cooldown data
+            // Load withdrawal cooldown data
             if (localStorage.getItem('lastBkashWithdrawTime')) {
                 lastBkashWithdrawTime = parseInt(localStorage.getItem('lastBkashWithdrawTime'));
             }
@@ -4046,7 +4035,7 @@
             localStorage.setItem('referralCount', referralCount);
             localStorage.setItem('referralEarnings', referralEarnings);
             localStorage.setItem('lastTelegramPopupTime', lastTelegramPopupTime);
-            // NEW: Save withdrawal cooldown data
+            // Save withdrawal cooldown data
             localStorage.setItem('lastBkashWithdrawTime', lastBkashWithdrawTime);
             localStorage.setItem('lastBinanceWithdrawTime', lastBinanceWithdrawTime);
         }
@@ -4311,11 +4300,10 @@
                 paymentMethod = 'Bkash';
                 paymentInfo = bkashPhone;
                 
-                // NEW: Check Bkash cooldown (3 days)
-                const bkashCooldownRemaining = lastBkashWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (Date.now() - lastBkashWithdrawTime) : 0;
-                if (lastBkashWithdrawTime > 0 && bkashCooldownRemaining > 0) {
+                // CHANGED: Check if today is Tuesday
+                if (currentDay !== BKASH_WITHDRAW_DAY) {
                     playSound('failSound');
-                    showNotification(`Bkash withdrawal cooldown active. Next withdrawal available in ${formatTime(bkashCooldownRemaining)}`, 'error');
+                    showNotification('Bkash withdrawal is available only on Tuesdays.', 'error');
                     return;
                 }
                 
@@ -4331,17 +4319,9 @@
                 paymentInfo = address;
                 
                 // Binance withdrawal available only on Sunday
-                if (currentDay !== 0) {
+                if (currentDay !== BINANCE_WITHDRAW_DAY) {
                     playSound('failSound');
                     showNotification('Binance withdrawal is available only on Sundays.', 'error');
-                    return;
-                }
-                
-                // NEW: Check Binance cooldown (3 days)
-                const binanceCooldownRemaining = lastBinanceWithdrawTime > 0 ? BKASH_WITHDRAW_COOLDOWN - (Date.now() - lastBinanceWithdrawTime) : 0;
-                if (lastBinanceWithdrawTime > 0 && binanceCooldownRemaining > 0) {
-                    playSound('failSound');
-                    showNotification(`Binance withdrawal cooldown active. Next withdrawal available in ${formatTime(binanceCooldownRemaining)}`, 'error');
                     return;
                 }
                 
@@ -4378,7 +4358,7 @@
             // Deduct tokens
             userTokens -= amount;
             
-            // NEW: Update last withdrawal time
+            // Update last withdrawal time
             if (selectedWithdrawMethod === 'bkash') {
                 lastBkashWithdrawTime = Date.now();
             } else {
@@ -4429,8 +4409,8 @@
             
             // Show success message
             const successMsg = selectedWithdrawMethod === 'bkash' 
-                ? `Withdrawal request submitted successfully! ${bkashValue} Taka will be sent to your Bkash within 2 days. Next Bkash withdrawal available in 3 days.`
-                : 'Withdrawal request submitted successfully! Processing may take up to 2 days. Next Binance withdrawal available in 3 days.';
+                ? `Withdrawal request submitted successfully! ${bkashValue} Taka will be sent to your Bkash within 2 days. Next Bkash withdrawal available next Tuesday.`
+                : 'Withdrawal request submitted successfully! Processing may take up to 2 days. Next Binance withdrawal available next Sunday.';
             
             withdrawStatus.textContent = successMsg;
             withdrawStatus.className = 'success-message';
@@ -4724,7 +4704,7 @@
                 checkTaskWebsiteVisitAvailability();
             }, 1000);
             
-            // NEW: Withdrawal cooldown timer
+            // Withdrawal cooldown timer
             setInterval(() => {
                 checkWithdrawAvailability();
             }, 1000);
@@ -4831,5 +4811,5 @@
         // Initialize the app when page loads
         window.onload = initApp;
     </script>
-</body>
+</body> 
 </html>
