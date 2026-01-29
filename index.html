@@ -1890,7 +1890,7 @@
             
             <p>Follow these simple steps to start earning:</p>
             <ol style="text-align: left; padding-left: 20px; margin-bottom: 20px;">
-                <li>Watch ads to earn 15 SHIB per ad</li>
+                <li>Watch ads to earn 10 SHIB per ad</li>
                 <li>Play tap game to earn extra SHIB</li>
                 <li>Visit websites for additional earnings</li>
                 <li>Complete tasks and join Telegram channels</li>
@@ -1912,10 +1912,10 @@
             <p>Welcome to Task Solve Money! Follow these steps to earn and withdraw SHIB tokens:</p>
             
             <ol>
-                <li><strong>Watch Ads:</strong> Click "Watch Ad" button to earn 15 SHIB per ad. You can watch up to 100 ads per day.</li>
+                <li><strong>Watch Ads:</strong> Click "Watch Ad" button to earn 10 SHIB per ad. You can watch up to 100 ads per day.</li>
                 <li><strong>Auto Ads:</strong> Use "Auto Ads" feature to automatically watch ads and earn SHIB.</li>
                 <li><strong>Tap Game:</strong> Go to "Games" section and tap on the image to earn 10 SHIB per 1000 taps.</li>
-                <li><strong>Visit Websites:</strong> In "Home" section, visit websites for 10 seconds each to earn 10 SHIB per website.</li>
+                <li><strong>Visit Websites:</strong> In "Home" section, visit websites for 10 seconds each to earn 5 SHIB per website.</li>
                 <li><strong>Complete Tasks:</strong> Go to "Tasks" section and join Telegram channels to earn rewards.</li>
                 <li><strong>Task Website Visit:</strong> Visit 15 websites for 10 seconds each in "Tasks" section to earn SHIB.</li>
                 <li><strong>Daily Bonus:</strong> Claim 10 SHIB bonus every 3 days from "Earn" section.</li>
@@ -2133,7 +2133,7 @@
                     <i class="fas fa-external-link-alt"></i> Go to Website
                 </button>
                 <button class="btn btn-warning" id="claim-visit-btn" onclick="claimVisitReward()" disabled>
-                    <i class="fas fa-coins"></i> Claim 10 SHIB
+                    <i class="fas fa-coins"></i> Claim 5 SHIB
                 </button>
             </div>
             
@@ -2256,10 +2256,10 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> Per ad = 15 SHIB tokens</p>
+                <p><i class="fas fa-ad"></i> Per ad = 10 SHIB tokens</p>
                 <p><i class="fas fa-money-bill-wave"></i> Binance: 10000 SHIB | Bkash: 5000 SHIB = 10 Taka</p>
                 <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
-                <p><i class="fas fa-globe"></i> Per website visit = 10 SHIB tokens</p>
+                <p><i class="fas fa-globe"></i> Per website visit = 5 SHIB tokens</p>
             </div>
         </div>
         
@@ -2269,7 +2269,7 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="watchAd()">
-                    <i class="fas fa-play"></i> Watch Ad (15 SHIB)
+                    <i class="fas fa-play"></i> Watch Ad (10 SHIB)
                 </button>
                 <button class="btn btn-success" id="auto-ad-btn-earn" onclick="startAutoAds()">
                     <i class="fas fa-robot"></i> Auto Ads
@@ -2295,10 +2295,10 @@
             </div>
             
             <div class="rate-info">
-                <p><i class="fas fa-ad"></i> Per ad = 15 SHIB tokens</p>
+                <p><i class="fas fa-ad"></i> Per ad = 10 SHIB tokens</p>
                 <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
                 <p><i class="fas fa-gift"></i> Daily Bonus = 10 SHIB (every 3 days)</p>
-                <p><i class="fas fa-globe"></i> Per website visit = 10 SHIB tokens</p>
+                <p><i class="fas fa-globe"></i> Per website visit = 5 SHIB tokens</p>
             </div>
         </div>
 		<script
@@ -2484,7 +2484,7 @@
                         <i class="fas fa-external-link-alt"></i> Go to Website
                     </button>
                     <button class="btn btn-warning" id="claim-task-visit-btn" onclick="claimTaskVisitReward()" disabled>
-                        <i class="fas fa-coins"></i> Claim 10 SHIB
+                        <i class="fas fa-coins"></i> Claim 5 SHIB
                     </button>
                 </div>
                 
@@ -2611,9 +2611,9 @@
                     <small>Today</small>
                 </div>
                 
-                <div class="stat-card {
+                <div class="stat-card">
             <h3><i class="fas fa-globe"></i> New Feature</h3>
-            <p>Website visit system has been launched. Earn 10 SHIB tokens for each website you visit for 10 seconds.</p>
+            <p>Website visit system has been launched. Earn 5 SHIB tokens for each website you visit for 10 seconds.</p>
             <small>Today</small>
         </div>
         
@@ -2733,7 +2733,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
 
 <script>
     // Constants
-    const TOKENS_PER_AD = 15; // 15 SHIB tokens per ad
+    const TOKENS_PER_AD = 10; // 10 SHIB tokens per ad (Changed from 15 to 10)
     const TOKENS_PER_1000_TAPS = 10; // 10 SHIB tokens per 1000 taps
     const MIN_BINANCE_WITHDRAW_TOKENS = 10000; // Minimum Binance withdrawal 10000 SHIB
     const MIN_BKASH_WITHDRAW_TOKENS = 5000; // Minimum Bkash withdrawal 5000 SHIB
@@ -2763,7 +2763,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
         "https://newnatokx.blogspot.com/"
     ];
     const VISIT_TIME = 10; // 10 seconds per website
-    const TOKENS_PER_VISIT = 10; // 10 SHIB tokens per website
+    const TOKENS_PER_VISIT = 5; // 5 SHIB tokens per website (Changed from 10 to 5)
     const VISIT_COOLDOWN = 10 * 60 * 1000; // 10 minutes cooldown
     
     // Task Website Visit Feature Constants
@@ -3336,7 +3336,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
                 // Play success sound
                 playSound('jumpSound');
                 
-                showNotification('Task website visit completed! Claim your 10 SHIB tokens.', 'success');
+                showNotification('Task website visit completed! Claim your 5 SHIB tokens.', 'success');
             }
         }, 1000);
     }
@@ -3380,7 +3380,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
         // Show coin animation
         createCoinAnimation();
         
-        showNotification(`10 SHIB tokens added for visiting task website! Your balance: ${userTokens} SHIB`, 'success');
+        showNotification(`5 SHIB tokens added for visiting task website! Your balance: ${userTokens} SHIB`, 'success');
         
         // Check if all task websites are completed
         if (completedTaskWebsites.length === TASK_WEBSITES.length) {
@@ -3757,7 +3757,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
                 // Play success sound
                 playSound('jumpSound');
                 
-                showNotification('Website visit completed! Claim your 10 SHIB tokens.', 'success');
+                showNotification('Website visit completed! Claim your 5 SHIB tokens.', 'success');
             }
         }, 1000);
     }
@@ -3801,7 +3801,7 @@ src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"
         // Show coin animation
         createCoinAnimation();
         
-        showNotification(`10 SHIB tokens added for visiting website! Your balance: ${userTokens} SHIB`, 'success');
+        showNotification(`5 SHIB tokens added for visiting website! Your balance: ${userTokens} SHIB`, 'success');
         
         // Check if all websites are completed
         if (completedWebsites.length === WEBSITES.length) {
