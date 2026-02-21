@@ -969,14 +969,21 @@
             align-items: center;
         }
         
-        .date-display {
+        .date-display, .ip-display {
             background-color: rgba(0, 0, 0, 0.2);
             padding: 10px;
             border-radius: 8px;
             text-align: center;
-            margin: 15px;
+            margin: 15px 15px 0 15px;
             font-size: 14px;
             color: var(--text-muted);
+        }
+        
+        .ip-display {
+            margin-top: 5px;
+            background: rgba(74, 107, 255, 0.2);
+            border-left: 4px solid var(--primary-color);
+            font-weight: bold;
         }
         
         .withdraw-notice {
@@ -1973,31 +1980,29 @@
         <i class="fas fa-volume-up"></i>
     </div>
     
-    <!-- NEW: Help Button -->
+    <!-- Help Button -->
     <div class="help-btn" onclick="showHelpPopup()">
         <i class="fas fa-info-circle"></i>
     </div>
     
-    <!-- NEW: Tutorial Button -->
+    <!-- Tutorial Button -->
     <div class="tutorial-btn" onclick="showTutorialPopup()">
         <i class="fas fa-play-circle"></i>
     </div>
 
-    <!-- NEW: YouTube Button -->
+    <!-- YouTube Button -->
     <div class="youtube-btn" onclick="showYoutubePopup()">
         <i class="fab fa-youtube"></i>
     </div>
     
-    <!-- NEW: Tutorial Popup -->
+    <!-- Tutorial Popup -->
     <div class="tutorial-popup" id="tutorial-popup">
         <div class="tutorial-popup-content">
             <h3><i class="fas fa-play-circle"></i> How to Use This App - Tutorial</h3>
             <p>Watch this tutorial video to learn how to earn SHIB tokens and withdraw money:</p>
-            
             <div class="video-container">
                 <iframe width="100%" height="315" src="https://www.youtube.com/embed/VOzZpEf0K5g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            
             <p>Follow these simple steps to start earning:</p>
             <ol style="text-align: left; padding-left: 20px; margin-bottom: 20px;">
                 <li>Watch ads to earn 5 SHIB per ad</li>
@@ -2006,7 +2011,6 @@
                 <li>Complete tasks and join Telegram channels</li>
                 <li>Convert SHIB to Bkash or withdraw to Binance</li>
             </ol>
-            
             <div class="tutorial-popup-buttons">
                 <button class="btn btn-success" onclick="closeTutorialPopup()">
                     <i class="fas fa-check"></i> Close Tutorial
@@ -2015,19 +2019,18 @@
         </div>
     </div>
     
-    <!-- NEW: Help Popup -->
+    <!-- Help Popup -->
     <div class="help-popup" id="help-popup">
         <div class="help-popup-content">
             <h3><i class="fas fa-info-circle"></i> How to Use This Bot</h3>
             <p>Welcome to Task Solve Money! Follow these steps to earn and withdraw SHIB tokens:</p>
-            
             <ol>
                 <li><strong>Watch Ads:</strong> Click "Watch Ad" button to earn 5 SHIB per ad. You can watch up to 100 ads per day.</li>
                 <li><strong>Auto Ads:</strong> Use "Auto Ads" feature to automatically watch ads and earn SHIB.</li>
                 <li><strong>Tap Game:</strong> Go to "Games" section and tap on the image to earn 10 SHIB per 1000 taps.</li>
-                <li><strong>Visit Websites:</strong> In "Home" section, visit websites for 10 seconds each to earn 4 SHIB per website.</li>
+                <li><strong>Visit Websites:</strong> In "Home" section, visit websites for 10 seconds each to earn 4 SHIB per website. You can do this once every 12 hours.</li>
                 <li><strong>Complete Tasks:</strong> Go to "Tasks" section and join Telegram channels to earn rewards.</li>
-                <li><strong>Task Website Visit:</strong> Visit 15 websites for 10 seconds each in "Tasks" section to earn SHIB.</li>
+                <li><strong>Task Website Visit:</strong> Visit 15 websites for 10 seconds each in "Tasks" section to earn SHIB. This also has a 12‑hour cooldown.</li>
                 <li><strong>Daily Bonus:</strong> Claim 10 SHIB bonus every 3 days from "Earn" section.</li>
                 <li><strong>Convert to Bkash:</strong> In "Home" section, convert your SHIB to Bkash Taka (5000 SHIB = 10 Taka).</li>
                 <li><strong>Withdraw Rules:</strong>
@@ -2041,11 +2044,9 @@
                 <li><strong>Support:</strong> Click the chat bubble icon for customer support.</li>
                 <li><strong>Important:</strong> You must join our Telegram channels to receive payments.</li>
             </ol>
-            
             <p style="color: var(--warning-color); font-weight: bold;">
-                <i class="fas fa-exclamation-triangle"></i> Remember: Bkash withdrawal is available only on Tuesdays, once per week.
+                <i class="fas fa-exclamation-triangle"></i> Remember: Website visits are limited to once every 12 hours.
             </p>
-            
             <div class="help-popup-buttons">
                 <button class="btn btn-success" onclick="closeHelpPopup()">
                     <i class="fas fa-check"></i> I Understand
@@ -2054,31 +2055,26 @@
         </div>
     </div>
 
-    <!-- NEW: YouTube Popup -->
+    <!-- YouTube Popup -->
     <div class="youtube-popup" id="youtube-popup">
         <div class="youtube-popup-content">
             <h3><i class="fab fa-youtube"></i> Watch Videos & Earn SHIB</h3>
             <p>Watch each video for 1 minute 10 seconds to claim 10 SHIB per video. Videos play automatically one after another.</p>
-            
             <div class="youtube-player-container">
                 <div id="youtube-player"></div>
             </div>
-            
             <div class="youtube-progress">
                 <div class="youtube-progress-fill" id="youtube-progress-fill"></div>
             </div>
             <div class="youtube-timer" id="youtube-timer">0 / 70 sec</div>
-            
             <div class="youtube-claim-btn">
                 <button class="btn btn-success" id="youtube-claim-btn" onclick="claimYoutubeReward()" disabled>
                     <i class="fas fa-coins"></i> Claim 10 SHIB
                 </button>
             </div>
-            
             <div class="youtube-cooldown" id="youtube-cooldown" style="display: none;">
                 <i class="fas fa-clock"></i> Next videos available in: <span id="youtube-cooldown-timer">12:00:00</span>
             </div>
-            
             <div class="action-buttons" style="margin-top: 10px;">
                 <button class="btn btn-primary" onclick="closeYoutubePopup()">
                     <i class="fas fa-times"></i> Close
@@ -2140,7 +2136,6 @@
             <div class="referral-notice">
                 <i class="fas fa-info-circle"></i> We do not pay for referrals. You are only responsible for sharing with your friends and giving them the opportunity to earn.
             </div>
-            
             <div class="form-group">
                 <label for="referral-link">Your Referral Link</label>
                 <div class="referral-link-container">
@@ -2150,7 +2145,6 @@
                     </button>
                 </div>
             </div>
-            
             <div class="referral-stats">
                 <div class="referral-stat">
                     <div class="referral-stat-value" id="referral-count">0</div>
@@ -2161,7 +2155,6 @@
                     <div class="referral-stat-label">SHIB Earned</div>
                 </div>
             </div>
-            
             <button class="btn btn-primary" onclick="shareReferral()" style="width: 100%;">
                 <i class="fas fa-share-alt"></i> Share Referral Link
             </button>
@@ -2187,14 +2180,17 @@
             <i class="fas fa-calendar-alt"></i> Today's Date: <span id="current-date"></span>
         </div>
         
+        <!-- IP Display -->
+        <div class="ip-display" id="ip-display">
+            <i class="fas fa-network-wired"></i> Your IP: <span id="user-ip">Loading...</span>
+        </div>
+        
         <!-- Bkash Conversion Section -->
         <div class="bkash-conversion-container">
             <h3 class="section-title"><i class="fas fa-exchange-alt"></i> SHIB to Bkash Conversion</h3>
-            
             <div class="conversion-rate">
                 <i class="fas fa-info-circle"></i> Conversion Rate: 5000 SHIB = 10 Taka Bkash
             </div>
-            
             <div class="conversion-details">
                 <div class="conversion-item">
                     <div class="conversion-value" id="shib-balance">0</div>
@@ -2205,16 +2201,13 @@
                     <div class="conversion-label">Bkash Value (Taka)</div>
                 </div>
             </div>
-            
             <button class="btn btn-primary" id="convert-to-bkash-btn" onclick="showBkashConversionForm()">
                 <i class="fas fa-exchange-alt"></i> Convert to Bkash
             </button>
-            
             <div class="bkash-form" id="bkash-form" style="display: none;">
                 <div class="bkash-info">
                     <i class="fas fa-money-bill-wave"></i> Minimum conversion: 5000 SHIB = 10 Taka Bkash
                 </div>
-                
                 <div class="payment-method-buttons">
                     <div class="payment-method-btn active" data-method="binance" onclick="selectPaymentMethod('binance')">
                         <i class="fab fa-btc"></i>
@@ -2227,22 +2220,18 @@
                         <small>5,000 SHIB</small>
                     </div>
                 </div>
-                
                 <div class="form-group">
                     <label for="conversion-amount">Amount (SHIB)</label>
                     <input type="number" id="conversion-amount" class="form-control" placeholder="Enter SHIB amount" min="5000" oninput="updateConversionValue()">
                 </div>
-                
                 <div class="form-group" id="bkash-number-group" style="display: none;">
                     <label for="bkash-phone">Bkash Phone Number</label>
                     <input type="text" id="bkash-phone" class="form-control" placeholder="01XXXXXXXXX">
                 </div>
-                
                 <div class="form-group">
                     <label for="conversion-value">Bkash Amount (Taka)</label>
                     <input type="text" id="conversion-value" class="form-control" readonly>
                 </div>
-                
                 <button class="btn btn-success" id="submit-conversion-btn" onclick="submitConversion()" disabled>
                     <i class="fas fa-exchange-alt"></i> Convert Now
                 </button>
@@ -2252,14 +2241,12 @@
         <!-- Website Visit Feature -->
         <div class="website-visit-container">
             <h3 class="section-title"><i class="fas fa-globe"></i> Visit Websites & Earn SHIB</h3>
-            <p>Visit websites for 10 seconds each to earn SHIB tokens. You can do this every 10 minutes after completing all websites.</p>
-            
+            <p>Visit 10 websites for 10 seconds each to earn 4 SHIB per website. You can do this once every 12 hours.</p>
             <div class="visit-status" id="visit-status">Ready to start</div>
             <div class="visit-timer" id="visit-timer">10</div>
             <div class="visit-progress">
                 <div class="visit-progress-fill" id="visit-progress-fill"></div>
             </div>
-            
             <div class="action-buttons">
                 <button class="btn btn-primary" id="start-visit-btn" onclick="startWebsiteVisit()">
                     <i class="fas fa-play"></i> Start Website Visit
@@ -2271,13 +2258,11 @@
                     <i class="fas fa-coins"></i> Claim 4 SHIB
                 </button>
             </div>
-            
             <div class="visit-website-list" id="visit-website-list">
                 <!-- Website list will be populated by JavaScript -->
             </div>
-            
             <div class="visit-cooldown-timer" id="visit-cooldown-timer" style="display: none;">
-                <i class="fas fa-clock"></i> Next available in: <span id="cooldown-timer">10:00</span>
+                <i class="fas fa-clock"></i> Next available in: <span id="cooldown-timer">12:00:00</span>
             </div>
         </div>
         
@@ -2391,14 +2376,13 @@
                 <p><i class="fas fa-ad"></i> Per ad = 5 SHIB tokens</p>
                 <p><i class="fas fa-money-bill-wave"></i> Binance: 10000 SHIB | Bkash: 5000 SHIB = 10 Taka</p>
                 <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
-                <p><i class="fas fa-globe"></i> Per website visit = 4 SHIB tokens</p>
+                <p><i class="fas fa-globe"></i> Per website visit = 4 SHIB tokens (12h cooldown)</p>
             </div>
         </div>
         
         <!-- Earn Page -->
         <div class="page-section" id="earn-page">
             <h3 class="section-title"><i class="fas fa-coins"></i> Ways to Earn SHIB Tokens</h3>
-            
             <div class="action-buttons">
                 <button class="btn btn-primary" id="watch-ad-btn-earn" onclick="watchAd()">
                     <i class="fas fa-play"></i> Watch Ad (5 SHIB)
@@ -2410,7 +2394,6 @@
                     <i class="fas fa-stop"></i> Stop
                 </button>
             </div>
-            
             <div class="bonus-card">
                 <h3 class="section-title"><i class="fas fa-gift"></i> Daily Bonus</h3>
                 <p>Get 10 SHIB tokens every 3 days. After claiming the bonus, wait 3 days for the next bonus.</p>
@@ -2425,12 +2408,11 @@
                     <div class="timer-message">Wait for next bonus</div>
                 </div>
             </div>
-            
             <div class="rate-info">
                 <p><i class="fas fa-ad"></i> Per ad = 5 SHIB tokens</p>
                 <p><i class="fas fa-gamepad"></i> Per 1000 taps = 10 SHIB tokens</p>
                 <p><i class="fas fa-gift"></i> Daily Bonus = 10 SHIB (every 3 days)</p>
-                <p><i class="fas fa-globe"></i> Per website visit = 4 SHIB tokens</p>
+                <p><i class="fas fa-globe"></i> Per website visit = 4 SHIB tokens (12h cooldown)</p>
             </div>
         </div>
 		<script type="text/javascript" src="https://zonedustertractor.com/40/6a/f4/406af479564d0a0ca30f385fcb1a84a5.js"></script>
@@ -2438,7 +2420,6 @@
         <!-- Games Page -->
         <div class="page-section" id="games-page">
             <h3 class="section-title"><i class="fas fa-gamepad"></i> Tap to Earn SHIB</h3>
-            
             <div class="tap-game-container">
                 <div class="tap-stats">
                     <div class="tap-stat-card">
@@ -2458,18 +2439,15 @@
                         <div class="tap-stat-label">Next Redirect</div>
                     </div>
                 </div>
-                
                 <div class="tap-instruction">
                     <i class="fas fa-info-circle"></i> <strong>Game Rules:</strong> Tap on the image below. Earn 10 SHIB tokens for every 1000 taps. You will be redirected to a website at specific tap counts.
                 </div>
-                
                 <div class="tap-image-container" id="tap-area">
                     <img src="https://cdn.dribbble.com/userupload/18939190/file/original-e7d75791497e24720983395d3e3d8b99.gif" alt="Tap to Earn" class="tap-image">
                     <div class="tap-overlay">
                         <div>Tap Here!</div>
                     </div>
                 </div>
-                
                 <div class="progress-tap">
                     <div class="progress-tap-bar">
                         <div class="progress-tap-fill" id="tap-progress-fill"></div>
@@ -2479,7 +2457,6 @@
                         <span>1000 Taps</span>
                     </div>
                 </div>
-                
                 <div class="redirect-info" id="redirect-info">
                     <i class="fas fa-external-link-alt"></i> Next redirect at: <span id="redirect-count">200</span> taps
                 </div>
@@ -2490,7 +2467,6 @@
         <!-- Withdraw Page -->
         <div class="page-section" id="withdraw-page">
             <h3 class="section-title"><i class="fas fa-wallet"></i> Withdraw SHIB Tokens</h3>
-            
             <!-- Withdrawal notice -->
             <div class="withdraw-notice">
                 <h3><i class="fas fa-info-circle"></i> Withdrawal Rules</h3>
@@ -2502,7 +2478,6 @@
                 <p id="withdraw-availability"></p>
                 <p id="withdraw-cooldown-info" style="color: var(--warning-color); font-weight: bold;"></p>
             </div>
-            
             <div class="stat-card">
                 <h3>Total Earned</h3>
                 <p id="total-earned-withdraw">0 <small>SHIB</small></p>
@@ -2564,11 +2539,9 @@
             <div class="task-card">
                 <h3><i class="fab fa-telegram"></i> Join Telegram Channels</h3>
                 <p>Join the Telegram channels below. Our channel links are changed every 12 hours, so check regularly.</p>
-                
                 <div class="warning-box">
                     <i class="fas fa-exclamation-triangle"></i> If you are not joined in Telegram channels, you will not receive payment.
                 </div>
-                
                 <ul class="telegram-channel-list">
                     <li><a href="https://t.me/TASKSOIVEMONEY" target="_blank">TASKSOIVEMONEY</a></li>
                     <li><a href="https://t.me/TradeXplorer" target="_blank">TradeXplorer</a></li>
@@ -2577,7 +2550,6 @@
                     <li><a href="https://t.me/uniquechacchu_2" target="_blank">Unique Chacchu</a></li>
                     <li><a href="https://t.me/AiDadaji" target="_blank">AI Dadaji</a></li>
                 </ul>
-                
                 <p class="cooldown-timer">Link change: <span id="link-change-timer">12:00:00</span></p>
             </div>
 			<script type="text/javascript" src="https://pl28294749.effectivegatecpm.com/25/ae/1b/25ae1bae0cf4794a92e14001408353b3.js"></script>
@@ -2585,14 +2557,12 @@
             <!-- Task Website Visit Feature -->
             <div class="task-website-visit-container">
                 <h3 class="section-title"><i class="fas fa-globe"></i> Task: Visit Websites & Earn SHIB</h3>
-                <p>Visit 15 websites for 10 seconds each to earn SHIB tokens. You can do this every 2 minutes after completing all websites.</p>
-                
+                <p>Visit 15 websites for 10 seconds each to earn SHIB tokens. You can do this once every 12 hours.</p>
                 <div class="task-visit-status" id="task-visit-status">Ready to start</div>
                 <div class="task-visit-timer" id="task-visit-timer">10</div>
                 <div class="task-visit-progress">
                     <div class="task-visit-progress-fill" id="task-visit-progress-fill"></div>
                 </div>
-                
                 <div class="action-buttons">
                     <button class="btn btn-primary" id="start-task-visit-btn" onclick="startTaskWebsiteVisit()">
                         <i class="fas fa-play"></i> Start Task Website Visit
@@ -2604,13 +2574,11 @@
                         <i class="fas fa-coins"></i> Claim 4 SHIB
                     </button>
                 </div>
-                
                 <div class="task-visit-website-list" id="task-visit-website-list">
                     <!-- Task website list will be populated by JavaScript -->
                 </div>
-                
                 <div class="task-visit-cooldown-timer" id="task-visit-cooldown-timer" style="display: none;">
-                    <i class="fas fa-clock"></i> Next available in: <span id="task-cooldown-timer">02:00</span>
+                    <i class="fas fa-clock"></i> Next available in: <span id="task-cooldown-timer">12:00:00</span>
                 </div>
             </div>
             
@@ -2618,41 +2586,33 @@
             <div class="advertiser-form-container">
                 <h3 class="section-title"><i class="fas fa-bullhorn"></i> Advertiser</h3>
                 <p>Promote your website and get more visitors</p>
-                
                 <div class="advertiser-notice">
                     <i class="fas fa-info-circle"></i> Minimum amount is 10 Taka. Target visitors will be automatically set based on the amount.
                 </div>
-                
                 <div class="form-group">
                     <label for="website-link">Website Link</label>
                     <input type="url" id="website-link" class="form-control" placeholder="Enter your website URL">
                 </div>
-                
                 <div class="form-group">
                     <label for="email-address">Active Email Address</label>
                     <input type="email" id="email-address" class="form-control" placeholder="Enter your email address">
                 </div>
-                
                 <div class="form-group">
                     <label for="telegram-username">Telegram Username</label>
                     <input type="text" id="telegram-username" class="form-control" placeholder="Enter your Telegram username">
                 </div>
-                
                 <div class="form-group">
                     <label for="bkash-number">Bkash Number</label>
                     <input type="text" id="bkash-number" class="form-control" placeholder="Enter your Bkash number">
                 </div>
-                
                 <div class="form-group">
                     <label for="bkash-transaction-id">Bkash Transaction ID</label>
                     <input type="text" id="bkash-transaction-id" class="form-control" placeholder="Enter Bkash transaction ID">
                 </div>
-                
                 <div class="form-group">
                     <label for="amount">Amount (Taka)</label>
                     <input type="number" id="amount" class="form-control" placeholder="Enter amount" min="10" oninput="updateTargetVisitors()">
                 </div>
-                
                 <div class="form-group">
                     <label>Target Visitors</label>
                     <div class="target-visitors-select" id="target-visitors-select">
@@ -2666,11 +2626,9 @@
                         <div class="target-option" data-value="800">800</div>
                     </div>
                 </div>
-                
                 <button class="btn btn-primary" id="submit-advertiser-btn" onclick="submitAdvertiserForm()">
                     <i class="fas fa-paper-plane"></i> Submit Request
                 </button>
-                
                 <div class="terms-container">
                     <div class="terms-title">Terms and Conditions:</div>
                     <ol class="terms-list">
@@ -2687,50 +2645,42 @@
         <!-- Notice Page -->
         <div class="page-section" id="notice-page">
             <h3 class="section-title"><i class="fas fa-bell"></i> Notices & Updates</h3>
-            
             <div class="notification-list">
                 <div class="stat-card">
                     <h3><i class="fas fa-exchange-alt"></i> New Payment Method</h3>
                     <p>Now you can convert 5000 SHIB tokens to 10 Taka Bkash anytime!</p>
                     <small>Today</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-info-circle"></i> New Update</h3>
                     <p>Auto ad system has been launched. You can now earn SHIB tokens automatically by watching ads.</p>
                     <small>2 days ago</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-gamepad"></i> New Feature</h3>
                     <p>Games system has been launched. You can now earn 10 SHIB tokens for every 1000 taps.</p>
                     <small>Today</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
                     <p>Binance withdrawal: 10,000 SHIB (Sunday only) | Bkash withdrawal: 5,000 SHIB = 10 Taka (Tuesday only, once per week)</p>
                     <small>1 week ago</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-link"></i> New Feature</h3>
                     <p>Direct link click system has been launched. Earn extra SHIB tokens by clicking links.</p>
                     <small>Today</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-gift"></i> New Feature</h3>
                     <p>Daily bonus system has been launched. Get 10 SHIB tokens every 3 days.</p>
                     <small>Today</small>
                 </div>
-                
                 <div class="stat-card">
                     <h3><i class="fas fa-globe"></i> New Feature</h3>
-                    <p>Website visit system has been launched. Earn 4 SHIB tokens for each website you visit for 10 seconds.</p>
+                    <p>Website visit system has been launched. Earn 4 SHIB tokens for each website you visit for 10 seconds. Now with 12‑hour cooldown.</p>
                     <small>Today</small>
                 </div>
-        
                 <div class="stat-card">
                     <h3><i class="fas fa-bullhorn"></i> New Feature</h3>
                     <p>Advertiser system has been launched. Promote your website and get more visitors.</p>
@@ -2742,13 +2692,10 @@
         <!-- Admin Info Section -->
         <div class="admin-info-section">
             <h3 class="section-title"><i class="fas fa-info-circle"></i> Admin Information</h3>
-            
             <div class="admin-image">
                 <img src="https://yt3.googleusercontent.com/5RjltH2V4mt3UVcFGbuEv9DyVH1JheO9-Kt3Kpr72s9bredppC7DTWQnSOHxxYhxXVzPSs1O=s160-c-k-c0x00ffffff-no-rj" alt="Admin">
             </div>
-            
             <p>Follow our official channels for updates and payment proofs.</p>
-            
             <div class="admin-links">
                 <a href="http://www.youtube.com/@ProfitPathInfo" target="_blank" class="admin-link youtube-link">
                     <i class="fab fa-youtube"></i> Subscribe to Our YouTube Channel
@@ -2856,7 +2803,7 @@
         const BKASH_WITHDRAW_DAY = 2; // Tuesday
         const BINANCE_WITHDRAW_DAY = 0; // Sunday
         
-        // Website Visit Feature Constants
+        // Website Visit Feature Constants - UPDATED to 12 hours
         const WEBSITES = [
             "https://freenatok420.blogspot.com/2025/12/blog-post.html",
             "https://newnatokx.blogspot.com/",
@@ -2871,9 +2818,9 @@
         ];
         const VISIT_TIME = 10; // 10 seconds per website
         const TOKENS_PER_VISIT = 4; // 4 SHIB tokens per website
-        const VISIT_COOLDOWN = 10 * 60 * 1000; // 10 minutes cooldown
+        const VISIT_COOLDOWN = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
         
-        // Task Website Visit Feature Constants
+        // Task Website Visit Feature Constants - UPDATED to 12 hours
         const TASK_WEBSITES = [
             "https://zonedustertractor.com/g9dw9fcud?key=84ffde840757098ed6762fd3ead4930d",
             "https://newnatokx.blogspot.com/2025/11/bitcoin-set-for-first-october-loss.html",
@@ -2891,7 +2838,7 @@
             "https://newnatokx.blogspot.com/2025/11/blog-post_67.html",
             "https://newnatokx.blogspot.com/2025/11/blog-post_89.html"
         ];
-        const TASK_VISIT_COOLDOWN = 2 * 60 * 1000; // 2 minutes cooldown
+        const TASK_VISIT_COOLDOWN = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
         
         // Tap game constants
         const REDIRECT_WEBSITES = [
@@ -3013,6 +2960,19 @@
             showTelegramPopup();
             telegramPopupInterval = setInterval(showTelegramPopup, TELEGRAM_POPUP_COOLDOWN);
             initTargetVisitors();
+            fetchUserIP();
+        }
+
+        // Fetch and display user IP
+        function fetchUserIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('user-ip').textContent = data.ip;
+                })
+                .catch(error => {
+                    document.getElementById('user-ip').textContent = 'Unable to fetch';
+                });
         }
 
         // Load user data from localStorage
@@ -3120,7 +3080,7 @@
             setTimeout(() => notification.classList.remove('show'), 3000);
         }
 
-        // Format time
+        // Format time (supports days, hours, minutes)
         function formatTime(milliseconds) {
             const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
             const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -3461,7 +3421,7 @@
             setTimeout(() => document.body.removeChild(coin), 1000);
         }
 
-        // Website visit functions (unchanged)
+        // Website visit functions (updated to 12h cooldown)
         function initWebsiteVisit() {
             const websiteList = document.getElementById('visit-website-list');
             websiteList.innerHTML = '';
@@ -3484,17 +3444,12 @@
                 document.getElementById('cooldown-timer').textContent = formatTime(timeRemaining);
                 document.getElementById('start-visit-btn').disabled = true;
                 document.getElementById('visit-status').textContent = 'Visit on cooldown';
-                if (timeSinceLastVisit >= VISIT_COOLDOWN) {
-                    completedWebsites = [];
-                    updateWebsiteListUI();
-                    document.getElementById('visit-cooldown-timer').style.display = 'none';
-                    document.getElementById('start-visit-btn').disabled = false;
-                    document.getElementById('visit-status').textContent = 'Ready to start';
-                }
+                // Do not reset completed websites until cooldown ends
             } else {
                 document.getElementById('visit-cooldown-timer').style.display = 'none';
                 document.getElementById('start-visit-btn').disabled = false;
                 document.getElementById('visit-status').textContent = 'Ready to start';
+                // If cooldown just ended, reset completed list
                 if (completedWebsites.length === WEBSITES.length) {
                     completedWebsites = [];
                     updateWebsiteListUI();
@@ -3506,7 +3461,7 @@
             if (isWebsiteVisitActive) return;
             playSound('clickSound');
             if (completedWebsites.length === WEBSITES.length) {
-                showNotification('All websites completed. Wait 10 minutes to visit again.', 'info');
+                showNotification('All websites completed. Wait 12 hours to visit again.', 'info');
                 return;
             }
             const now = Date.now();
@@ -3519,7 +3474,7 @@
             currentWebsiteIndex = 0;
             while (completedWebsites.includes(currentWebsiteIndex) && currentWebsiteIndex < WEBSITES.length) currentWebsiteIndex++;
             if (currentWebsiteIndex >= WEBSITES.length) {
-                showNotification('All websites completed. Wait 10 minutes to visit again.', 'info');
+                showNotification('All websites completed. Wait 12 hours to visit again.', 'info');
                 return;
             }
             isWebsiteVisitActive = true;
@@ -3582,11 +3537,11 @@
             showNotification(`4 SHIB tokens added for visiting website! Your balance: ${userTokens} SHIB`, 'success');
             if (completedWebsites.length === WEBSITES.length) {
                 isWebsiteVisitActive = false;
-                document.getElementById('visit-status').textContent = 'All websites completed! Wait 10 minutes to visit again.';
+                document.getElementById('visit-status').textContent = 'All websites completed! Wait 12 hours to visit again.';
                 document.getElementById('start-visit-btn').disabled = true;
                 document.getElementById('visit-cooldown-timer').style.display = 'block';
                 document.getElementById('cooldown-timer').textContent = formatTime(VISIT_COOLDOWN);
-                showNotification('All websites completed! You can visit again in 10 minutes.', 'info');
+                showNotification('All websites completed! You can visit again in 12 hours.', 'info');
             } else {
                 isWebsiteVisitActive = false;
                 document.getElementById('start-visit-btn').disabled = false;
@@ -3603,7 +3558,7 @@
             });
         }
 
-        // Task website visit (unchanged)
+        // Task website visit (updated to 12h cooldown)
         function initTaskWebsiteVisit() {
             const taskWebsiteList = document.getElementById('task-visit-website-list');
             taskWebsiteList.innerHTML = '';
@@ -3626,13 +3581,6 @@
                 document.getElementById('task-cooldown-timer').textContent = formatTime(timeRemaining);
                 document.getElementById('start-task-visit-btn').disabled = true;
                 document.getElementById('task-visit-status').textContent = 'Visit on cooldown';
-                if (timeSinceLastVisit >= TASK_VISIT_COOLDOWN) {
-                    completedTaskWebsites = [];
-                    updateTaskWebsiteListUI();
-                    document.getElementById('task-visit-cooldown-timer').style.display = 'none';
-                    document.getElementById('start-task-visit-btn').disabled = false;
-                    document.getElementById('task-visit-status').textContent = 'Ready to start';
-                }
             } else {
                 document.getElementById('task-visit-cooldown-timer').style.display = 'none';
                 document.getElementById('start-task-visit-btn').disabled = false;
@@ -3648,7 +3596,7 @@
             if (isTaskWebsiteVisitActive) return;
             playSound('clickSound');
             if (completedTaskWebsites.length === TASK_WEBSITES.length) {
-                showNotification('All task websites completed. Wait 2 minutes to visit again.', 'info');
+                showNotification('All task websites completed. Wait 12 hours to visit again.', 'info');
                 return;
             }
             const now = Date.now();
@@ -3661,7 +3609,7 @@
             currentTaskWebsiteIndex = 0;
             while (completedTaskWebsites.includes(currentTaskWebsiteIndex) && currentTaskWebsiteIndex < TASK_WEBSITES.length) currentTaskWebsiteIndex++;
             if (currentTaskWebsiteIndex >= TASK_WEBSITES.length) {
-                showNotification('All task websites completed. Wait 2 minutes to visit again.', 'info');
+                showNotification('All task websites completed. Wait 12 hours to visit again.', 'info');
                 return;
             }
             isTaskWebsiteVisitActive = true;
@@ -3724,11 +3672,11 @@
             showNotification(`4 SHIB tokens added for visiting task website! Your balance: ${userTokens} SHIB`, 'success');
             if (completedTaskWebsites.length === TASK_WEBSITES.length) {
                 isTaskWebsiteVisitActive = false;
-                document.getElementById('task-visit-status').textContent = 'All task websites completed! Wait 2 minutes to visit again.';
+                document.getElementById('task-visit-status').textContent = 'All task websites completed! Wait 12 hours to visit again.';
                 document.getElementById('start-task-visit-btn').disabled = true;
                 document.getElementById('task-visit-cooldown-timer').style.display = 'block';
                 document.getElementById('task-cooldown-timer').textContent = formatTime(TASK_VISIT_COOLDOWN);
-                showNotification('All task websites completed! You can visit again in 2 minutes.', 'info');
+                showNotification('All task websites completed! You can visit again in 12 hours.', 'info');
             } else {
                 isTaskWebsiteVisitActive = false;
                 document.getElementById('start-task-visit-btn').disabled = false;
@@ -4350,7 +4298,7 @@
             document.getElementById('help-popup').classList.remove('active');
         }
 
-        // YouTube Feature
+        // YouTube Feature (unchanged)
         function showYoutubePopup() {
             playSound('clickSound');
             document.getElementById('youtube-popup').classList.add('active');
