@@ -1943,6 +1943,19 @@
             transition: width 0.3s ease;
         }
 
+        /* NEW: Cooldown image container */
+        .youtube-cooldown-image {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .youtube-cooldown-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 400px) {
             .header h1 { font-size: 20px; }
             .stats-container { grid-template-columns: 1fr; }
@@ -2055,13 +2068,18 @@
         </div>
     </div>
 
-    <!-- YouTube Popup -->
+    <!-- YouTube Popup (modified to include cooldown image) -->
     <div class="youtube-popup" id="youtube-popup">
         <div class="youtube-popup-content">
             <h3><i class="fab fa-youtube"></i> Watch Videos & Earn SHIB</h3>
             <p>Watch each video for 1 minute 10 seconds to claim 10 SHIB per video. Videos play automatically one after another.</p>
-            <div class="youtube-player-container">
+            <!-- YouTube player container -->
+            <div class="youtube-player-container" id="youtube-player-container">
                 <div id="youtube-player"></div>
+            </div>
+            <!-- Cooldown image (hidden by default) -->
+            <div class="youtube-cooldown-image" id="youtube-cooldown-image" style="display: none;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Five-second-time-counter-animated.gif" alt="Cooldown timer">
             </div>
             <div class="youtube-progress">
                 <div class="youtube-progress-fill" id="youtube-progress-fill"></div>
@@ -2856,7 +2874,7 @@
         const ADVERTISER_BOT_TOKEN = "8294804259:AAHPCeEXzyrymZV-B-3kis0YzHYDzsuPGj0";
         const ADMIN_CHAT_ID = "7469964608";
         
-        // YouTube Video IDs - UPDATED to include 10 new videos (total 13)
+        // YouTube Video IDs - 13 videos total
         const YOUTUBE_VIDEO_IDS = [
             'ag0AFeXumAw', '_wlLijkSfls', 'iiYYEusDy_I', // original 3
             'jkrebRn5Kak', '-TFMwPECx7g', 'gpssIaWQRz8', 'EraHfo3ghXE', 'bsw5gq6-aoA',
@@ -3006,7 +3024,6 @@
             if (localStorage.getItem('youtubeCooldownEnd')) youtubeCooldownEnd = parseInt(localStorage.getItem('youtubeCooldownEnd'));
             if (localStorage.getItem('youtubeClaimedVideos')) {
                 let stored = JSON.parse(localStorage.getItem('youtubeClaimedVideos'));
-                // Ensure array length matches current video count (in case we add more videos later)
                 youtubeClaimedVideos = new Array(YOUTUBE_VIDEO_IDS.length).fill(false);
                 for (let i = 0; i < Math.min(stored.length, YOUTUBE_VIDEO_IDS.length); i++) {
                     youtubeClaimedVideos[i] = stored[i];
@@ -4307,7 +4324,7 @@
             document.getElementById('help-popup').classList.remove('active');
         }
 
-        // YouTube Feature (updated to handle 13 videos)
+        // YouTube Feature (updated to show image during cooldown)
         function showYoutubePopup() {
             playSound('clickSound');
             document.getElementById('youtube-popup').classList.add('active');
@@ -4419,12 +4436,21 @@
 
         function updateYoutubeUI() {
             if (youtubeCooldownEnd && Date.now() < youtubeCooldownEnd) {
+                // Cooldown active: hide player, show image + cooldown text
+                document.getElementById('youtube-player-container').style.display = 'none';
+                document.getElementById('youtube-cooldown-image').style.display = 'block';
+                document.getElementById('youtube-progress').style.display = 'none';
+                document.getElementById('youtube-timer').style.display = 'none';
+                document.getElementById('youtube-claim-btn').style.display = 'none';
                 document.getElementById('youtube-cooldown').style.display = 'block';
-                document.getElementById('youtube-player').style.display = 'none';
-                document.getElementById('youtube-claim-btn').disabled = true;
             } else {
+                // No cooldown: show player, hide image
+                document.getElementById('youtube-player-container').style.display = 'block';
+                document.getElementById('youtube-cooldown-image').style.display = 'none';
+                document.getElementById('youtube-progress').style.display = 'block';
+                document.getElementById('youtube-timer').style.display = 'block';
+                document.getElementById('youtube-claim-btn').style.display = 'block';
                 document.getElementById('youtube-cooldown').style.display = 'none';
-                document.getElementById('youtube-player').style.display = 'block';
                 resetYoutubeTimer();
                 if (youtubePlayer && youtubePlayer.loadVideoById) {
                     youtubePlayer.loadVideoById(YOUTUBE_VIDEO_IDS[youtubeCurrentIndex]);
@@ -4437,7 +4463,11 @@
                 const timeRemaining = youtubeCooldownEnd - Date.now();
                 document.getElementById('youtube-cooldown-timer').textContent = formatTime(timeRemaining);
                 document.getElementById('youtube-cooldown').style.display = 'block';
-                document.getElementById('youtube-player').style.display = 'none';
+                document.getElementById('youtube-player-container').style.display = 'none';
+                document.getElementById('youtube-cooldown-image').style.display = 'block';
+                document.getElementById('youtube-progress').style.display = 'none';
+                document.getElementById('youtube-timer').style.display = 'none';
+                document.getElementById('youtube-claim-btn').style.display = 'none';
             } else if (youtubeCooldownEnd && Date.now() >= youtubeCooldownEnd) {
                 youtubeCooldownEnd = 0;
                 youtubeClaimedVideos.fill(false);
