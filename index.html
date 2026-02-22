@@ -2856,8 +2856,12 @@
         const ADVERTISER_BOT_TOKEN = "8294804259:AAHPCeEXzyrymZV-B-3kis0YzHYDzsuPGj0";
         const ADMIN_CHAT_ID = "7469964608";
         
-        // YouTube Video IDs
-        const YOUTUBE_VIDEO_IDS = ['ag0AFeXumAw', '_wlLijkSfls', 'iiYYEusDy_I'];
+        // YouTube Video IDs - UPDATED to include 10 new videos (total 13)
+        const YOUTUBE_VIDEO_IDS = [
+            'ag0AFeXumAw', '_wlLijkSfls', 'iiYYEusDy_I', // original 3
+            'jkrebRn5Kak', '-TFMwPECx7g', 'gpssIaWQRz8', 'EraHfo3ghXE', 'bsw5gq6-aoA',
+            'YKLZV83hNS0', 'Z2nJRpk6v1M', 'OpAjlKL1wgw', 'eHn6Wf6MP4E', 'JgEfBPPPCas' // new 10
+        ];
         const YOUTUBE_WATCH_TIME = 70; // 70 seconds (1 min 10 sec)
         const YOUTUBE_COOLDOWN = 12 * 60 * 60 * 1000; // 12 hours
         
@@ -2934,7 +2938,7 @@
         let youtubeWatchedTime = 0;
         let youtubeTimerInterval = null;
         let youtubeCooldownEnd = 0;
-        let youtubeClaimedVideos = [false, false, false];
+        let youtubeClaimedVideos = new Array(YOUTUBE_VIDEO_IDS.length).fill(false);
         let youtubePlayerReady = false;
 
         // Initialize the app
@@ -3000,13 +3004,20 @@
 
             // Load YouTube data
             if (localStorage.getItem('youtubeCooldownEnd')) youtubeCooldownEnd = parseInt(localStorage.getItem('youtubeCooldownEnd'));
-            if (localStorage.getItem('youtubeClaimedVideos')) youtubeClaimedVideos = JSON.parse(localStorage.getItem('youtubeClaimedVideos'));
+            if (localStorage.getItem('youtubeClaimedVideos')) {
+                let stored = JSON.parse(localStorage.getItem('youtubeClaimedVideos'));
+                // Ensure array length matches current video count (in case we add more videos later)
+                youtubeClaimedVideos = new Array(YOUTUBE_VIDEO_IDS.length).fill(false);
+                for (let i = 0; i < Math.min(stored.length, YOUTUBE_VIDEO_IDS.length); i++) {
+                    youtubeClaimedVideos[i] = stored[i];
+                }
+            }
             
             // Reset if cooldown expired
             const now = Date.now();
             if (youtubeCooldownEnd && now >= youtubeCooldownEnd) {
                 youtubeCooldownEnd = 0;
-                youtubeClaimedVideos = [false, false, false];
+                youtubeClaimedVideos.fill(false);
             }
             
             const lastVisitDate = localStorage.getItem('lastVisitDate');
@@ -3444,12 +3455,10 @@
                 document.getElementById('cooldown-timer').textContent = formatTime(timeRemaining);
                 document.getElementById('start-visit-btn').disabled = true;
                 document.getElementById('visit-status').textContent = 'Visit on cooldown';
-                // Do not reset completed websites until cooldown ends
             } else {
                 document.getElementById('visit-cooldown-timer').style.display = 'none';
                 document.getElementById('start-visit-btn').disabled = false;
                 document.getElementById('visit-status').textContent = 'Ready to start';
-                // If cooldown just ended, reset completed list
                 if (completedWebsites.length === WEBSITES.length) {
                     completedWebsites = [];
                     updateWebsiteListUI();
@@ -4298,7 +4307,7 @@
             document.getElementById('help-popup').classList.remove('active');
         }
 
-        // YouTube Feature (unchanged)
+        // YouTube Feature (updated to handle 13 videos)
         function showYoutubePopup() {
             playSound('clickSound');
             document.getElementById('youtube-popup').classList.add('active');
@@ -4400,7 +4409,7 @@
                 // All videos claimed, start cooldown
                 youtubeCooldownEnd = Date.now() + YOUTUBE_COOLDOWN;
                 youtubeCurrentIndex = 0;
-                youtubeClaimedVideos = [false, false, false];
+                youtubeClaimedVideos.fill(false);
                 saveUserData();
                 updateYoutubeUI();
                 showNotification('You have watched all videos! Come back after 12 hours.', 'info');
@@ -4431,7 +4440,7 @@
                 document.getElementById('youtube-player').style.display = 'none';
             } else if (youtubeCooldownEnd && Date.now() >= youtubeCooldownEnd) {
                 youtubeCooldownEnd = 0;
-                youtubeClaimedVideos = [false, false, false];
+                youtubeClaimedVideos.fill(false);
                 youtubeCurrentIndex = 0;
                 saveUserData();
                 updateYoutubeUI();
