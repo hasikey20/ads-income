@@ -2003,8 +2003,8 @@
         <i class="fas fa-play-circle"></i>
     </div>
 
-    <!-- YouTube Button -->
-    <div class="youtube-btn" onclick="showYoutubePopup()">
+    <!-- YouTube Button (behavior modified) -->
+    <div class="youtube-btn" onclick="handleYoutubeButtonClick()">
         <i class="fab fa-youtube"></i>
     </div>
     
@@ -2068,7 +2068,7 @@
         </div>
     </div>
 
-    <!-- YouTube Popup (modified to include cooldown image) -->
+    <!-- YouTube Popup -->
     <div class="youtube-popup" id="youtube-popup">
         <div class="youtube-popup-content">
             <h3><i class="fab fa-youtube"></i> Watch Videos & Earn SHIB</h3>
@@ -4324,9 +4324,20 @@
             document.getElementById('help-popup').classList.remove('active');
         }
 
-        // YouTube Feature (updated to show image during cooldown)
-        function showYoutubePopup() {
+        // YouTube Feature (modified button behavior)
+        function handleYoutubeButtonClick() {
             playSound('clickSound');
+            // Check if cooldown is active
+            if (youtubeCooldownEnd && Date.now() < youtubeCooldownEnd) {
+                // Cooldown active: show message and do not open popup
+                showNotification('12 ঘন্টা পর আবার চেষ্টা করুন', 'info');
+            } else {
+                // No cooldown: open popup normally
+                showYoutubePopup();
+            }
+        }
+
+        function showYoutubePopup() {
             document.getElementById('youtube-popup').classList.add('active');
             if (!youtubePlayer) {
                 loadYoutubePlayer();
